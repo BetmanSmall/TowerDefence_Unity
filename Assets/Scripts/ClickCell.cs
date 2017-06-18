@@ -6,20 +6,15 @@ public class ClickCell : MonoBehaviour {
 	public Color textureMaterial;
 	public Color texture;
 
-	void Start(){
+	void Start() {
 		textureMaterial = GetComponentInChildren<MeshRenderer> ().materials[1].color;
-
 	}
-	public void MouseEnter()
-	{
-		//GetComponent<MeshRenderer> ().material.color. = new Color (1, 0, 0);
+
+	public void MouseEnter() {
 		GetComponentInChildren<MeshRenderer> ().materials[1].color = texture;
-		//Debug.Log(GetComponentInChildren<MeshRenderer> ().sharedMaterials[1]);
-
 	}
 
-	public void MouseExit()
-	{
+	public void MouseExit() {
 		GetComponentInChildren<MeshRenderer> ().materials[1].color = textureMaterial;
 	}
 }

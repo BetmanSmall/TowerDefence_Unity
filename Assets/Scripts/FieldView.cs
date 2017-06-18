@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldView : MonoBehaviour {
-
 	int sizeFieldX, sizeFieldZ;
 	public Material lineMat;
 
@@ -13,7 +12,6 @@ public class FieldView : MonoBehaviour {
 	}
 
 	void DrawConnectingLines() {
-
 		for (int x = 0; x <= sizeFieldX; x++) {
 			drawLine(x, 0, x, sizeFieldX);
 		}
