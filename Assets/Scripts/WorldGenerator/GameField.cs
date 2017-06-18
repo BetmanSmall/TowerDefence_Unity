@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameField : MonoBehaviour {
 
-	public GameObject cellMesh;
-	public int xSize, zSize;
+	public GameObject gameObjectTerrain1;
+	public int sizeFieldX, sizeFieldZ;
+	private float sizeCellX, sizeCellY, sizeCellZ;
 	Cell[,] field;
 
 	// Use this for initialization
@@ -14,15 +15,29 @@ public class GameField : MonoBehaviour {
 	}
 
 	void Awake() {
-		field = new Cell[xSize, zSize];
 
-		for(int x = 0; x < xSize; x++){
-			for(int z = 0; z < zSize; z++){
-				field[x, z] = new Cell(x + (int)transform.position.x, 0, z + (int)transform.position.z);
-				GameObject copyMesh = Instantiate(cellMesh, cellMesh.transform.position, Quaternion.identity);
-				copyMesh.name = "Cell_" + field[x, z].x + "_" + field[x, z].z;
-				copyMesh.transform.position = new Vector3(field[x, z].x, 0, field[x, z].z);
-				copyMesh.transform.SetParent (this.transform, true);
+
+		//Debug.Log ("GameField::Awake(); -- gameObjectTerrain1:" + gameObjectTerrain1);
+		Mesh mesh = gameObjectTerrain1.GetComponentInChildren<MeshFilter>().sharedMesh;
+		//Debug.Log ("GameField::Awake(); -- mesh:" + mesh);
+		sizeCellX = mesh.bounds.size.x;
+		sizeCellY = mesh.bounds.size.y;
+		sizeCellZ = mesh.bounds.size.z;
+		//Debug.Log ("GameField::Awake(); -- sizeCellX:" + sizeCellX + " sizeCellY:" + sizeCellY + " sizeCellZ:" + sizeCellZ);
+
+		field = new Cell[sizeFieldX, sizeFieldZ];
+		for(int x = 0; x < sizeFieldX; x++) {
+			for(int z = 0; z < sizeFieldZ; z++) {
+//				field[x, z] = new Cell(x + (int)transform.position.x, 0, z + (int)transform.position.z);
+				//field[x, z] = new Cell(x + nextPositionX, 0, z + nextPositionZ);
+
+				Cell cell = new Cell(x, 0, z);
+				GameObject copyGameObject = Instantiate(gameObjectTerrain1, new Vector3(x*sizeCellX, 0, z*sizeCellZ), Quaternion.identity);
+				copyGameObject.name = "Cell_" + cell.x + "_" + cell.z;
+				copyGameObject.transform.SetParent(this.transform, true);
+				//Debug.Log ("GameField::Awake(); -- copyGameObject:" + copyGameObject);
+				//Debug.Log ("GameField::Awake(); -- copyGameObject.transform:" + copyGameObject.transform);
+				field[x, z] = cell;
 			}
 		}
 	}
