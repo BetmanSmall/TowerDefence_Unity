@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cell {
+	
 	public int x{ get; private set;}
 	public int y{ get; private set;}
 	public int z{ get; private set;}
