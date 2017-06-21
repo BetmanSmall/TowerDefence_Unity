@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
+	public float speed = 10.0f;
+	public float spaceMouseDetection = 5f;
 	Camera cameraGame;
 	ClickCell curCell;
 
@@ -29,6 +31,19 @@ public class CameraScript : MonoBehaviour {
 					curCell = click;
 				}
 			}
+		}
+
+		if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
+			transform.position -= new Vector3 (speed * Time.deltaTime, 0, 0);
+		}
+		if ((Screen.width-spaceMouseDetection) < Input.mousePosition.x && Input.mousePosition.x < Screen.width) {
+			transform.position += new Vector3 (speed * Time.deltaTime, 0, 0);
+		}
+		if (0f < Input.mousePosition.y && Input.mousePosition.y < spaceMouseDetection) {
+			transform.position -= new Vector3 (0, 0, speed * Time.deltaTime);
+		}
+		if ((Screen.height-spaceMouseDetection) < Input.mousePosition.y && Input.mousePosition.y < Screen.height) {
+			transform.position += new Vector3 (0, 0, speed * Time.deltaTime);
 		}
 	}
 }
