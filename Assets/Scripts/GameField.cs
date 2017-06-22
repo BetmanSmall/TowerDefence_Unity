@@ -4,24 +4,25 @@ using UnityEngine;
 using System.Xml;
 
 public class GameField : MonoBehaviour {
-	private Hashtable mapProperties;
-	private string modelsPath;
-	private Dictionary<int, GameObject> modelsDictionary;
-	public GameObject[] objectsTerrain;
+	public string mapPath = "maps/testMap";
+	public string modelsPath = "maps/textures/fieldModels";
+	public Dictionary<string, string> mapProperties;
+	public Dictionary<int, GameObject> objectsTerrain;
 
 	public int sizeFieldX, sizeFieldZ;
-	private float sizeCellX=3f, sizeCellY=0f, sizeCellZ=3f;
-	private Cell[,] field;
+	public float sizeCellX=3f, sizeCellY=0f, sizeCellZ=3f;
+	public Cell[,] field;
 
 	// Use this for initialization
 	void Start() {
 		Debug.Log("GameField::Start(); -- Start!");
-		mapProperties = new Hashtable ();
-//		string modelsPath = "maps/textures/fieldModels";
-		modelsDictionary = new Dictionary<int, GameObject> ();
-//		objectsTerrain = Resources.LoadAll<GameObject>(modelsPath);
-//		Debug.Log ("GameField::Start(); -- objectsTerrain.Length:" + objectsTerrain.Length);
-//
+//		mapPath = "maps/testMap";
+//		modelsPath = "maps/textures/fieldModels";
+		mapProperties = new Dictionary<string, string> ();
+		objectsTerrain = new Dictionary<int, GameObject> ();
+		Debug.Log ("GameField::Start(); -- objectsTerrain.Length:" + objectsTerrain.Count);
+		loadMap(mapPath);
+
 //		GameObject mainTerrain = (GameObject)objectsTerrain[0] as GameObject;
 ////		Debug.Log ("GameField::Start(); -- block1:" + block1);
 ////		Mesh mesh = block1.GetComponentInChildren<MeshFilter>().mesh;
@@ -46,8 +47,6 @@ public class GameField : MonoBehaviour {
 //					z = 0;
 //				}
 //			}
-//		}
-		loadMap("maps/arena0");
 ////		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Plane);//Resources.Load("modelsField/Materials/BackColor.mat")
 ////		Renderer rend = go.GetComponent<Renderer>();
 ////		rend.material.mainTexture = Resources.Load("modelsField/Materials/BackColor.mat") as Texture;
@@ -87,20 +86,21 @@ public class GameField : MonoBehaviour {
 		}
 		XmlDocument xmlDoc = new XmlDocument();
 		xmlDoc.LoadXml(textAsset.text);
-		readNodes (xmlDoc, 0);
+//		readNodes (xmlDoc, 0);
 		XmlNodeList docChilds = xmlDoc.ChildNodes;
 		foreach (XmlNode docChild in docChilds) {
 			if (docChild.LocalName.Equals ("map")) {
-				sizeFieldX = int.Parse(docChild.Attributes ["width"].Value);
-				sizeFieldZ = int.Parse(docChild.Attributes ["height"].Value);
+				mapProperties.Add ("width", docChild.Attributes ["width"].Value);
+				mapProperties.Add ("height", docChild.Attributes ["height"].Value);
+				sizeFieldX = int.Parse(mapProperties["width"]);
+				sizeFieldZ = int.Parse(mapProperties["height"]);
 				print ("GameField::loadMap(); -- sizeFieldX:" + sizeFieldX + " sizeFieldZ:" + sizeFieldZ);
-				mapProperties.Add ("width", sizeFieldX);
-				mapProperties.Add ("height", sizeFieldZ);
 				XmlNodeList mapNodeList = docChild.ChildNodes;
 				foreach (XmlNode mapChildNode in mapNodeList) {
 					if (mapChildNode.Name.Equals ("properties")) {
 						loadProperties (mapChildNode, mapProperties);
 					} else if (mapChildNode.Name.Equals ("tileset")) {
+						mapProperties.Add ("firstgid", mapChildNode.Attributes ["firstgid"].Value);
 						XmlNodeList tilesetNodeList = mapChildNode.ChildNodes;
 						foreach (XmlNode tilesetChildNode in tilesetNodeList) {
 							if (tilesetChildNode.Name.Equals ("properties")) {
@@ -111,13 +111,13 @@ public class GameField : MonoBehaviour {
 								XmlNodeList tileNodeList = tilesetChildNode.ChildNodes;
 								foreach (XmlNode tileChildNode in tileNodeList) {
 									if (tileChildNode.Name.Equals ("properties")) {
-										Hashtable tileProperty = new Hashtable ();
+										Dictionary<string, string> tileProperty = new Dictionary<string, string> ();
 										loadProperties (tileChildNode, tileProperty);
 										string modelName = (string)tileProperty ["modelName"];
 										print ("GameField::loadMap(); -- modelsPath:" + modelsPath + "/" + modelName);
 										GameObject modelObject = Resources.Load<GameObject> ("maps/" + modelsPath + "/" + modelName);
 										print ("GameField::loadMap(); -- modelObject:" + modelObject);
-										modelsDictionary.Add (tileId, modelObject);
+										objectsTerrain.Add (tileId, modelObject);
 									}
 								}
 							}
@@ -126,16 +126,17 @@ public class GameField : MonoBehaviour {
 						XmlNodeList layerNodeList = mapChildNode.ChildNodes;
 						foreach (XmlNode layerChildNode in layerNodeList) {
 							if (layerChildNode.Name.Equals ("properties")) {
-								Hashtable layerProperties = new Hashtable ();
+								Dictionary<string, string> layerProperties = new Dictionary<string, string> ();
 								loadProperties (layerChildNode, layerProperties);
 							} else if (layerChildNode.Name.Equals ("data")) {
 								string[] array = layerChildNode.InnerText.Split (',');
 								print (array.Length);
 								int x = 0, z = 0;
 								for (int k = 0; k < array.Length; k++) {
-									GameObject tmpGameObject = modelsDictionary [int.Parse(array [k])];
+									int localId = int.Parse (array [k]) - int.Parse(mapProperties ["firstgid"]);
+									GameObject tmpGameObject = objectsTerrain[localId];
 									GameObject realGameObject = (GameObject)Instantiate (tmpGameObject, new Vector3 (x*sizeCellX, 0, z*sizeCellZ), Quaternion.identity);
-									Debug.Log ("GameField::Start(); -- realGameObject:" + realGameObject);
+									Debug.Log ("GameField::Start(); -- realGameObject:" + realGameObject + " array[k]:" + array[k]);
 									realGameObject.transform.SetParent (this.transform);
 									x++;
 									if (x == sizeFieldX) {
@@ -150,14 +151,14 @@ public class GameField : MonoBehaviour {
 			}
 		}
 
-		foreach(DictionaryEntry de in mapProperties) {
+		foreach(KeyValuePair<string, string> de in mapProperties) {
 			print ("GameField::loadMap(); -- key:" + de.Key + " value:" + de.Value);
 		}
 		print ("GameField::loadMap(); -- End!");
 		return true;
 	}
 
-	public void loadProperties (XmlNode propertiesNode, Hashtable properties) {
+	public void loadProperties (XmlNode propertiesNode, Dictionary<string, string> properties) {
 		if(propertiesNode.Name.Equals("properties")) {
 			XmlNodeList nodeList = propertiesNode.ChildNodes;
 			foreach(XmlNode propertyNode in nodeList) {
