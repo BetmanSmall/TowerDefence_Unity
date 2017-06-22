@@ -5,32 +5,44 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour {
 	public float speed = 10.0f;
 	public float spaceMouseDetection = 5f;
-	Camera cameraGame;
-	ClickCell curCell;
+//	Camera cameraGame;
+//	ClickCell curCell;
+	public float mouseSensitivity = 1.0f;
+	private Vector3 lastPosition;
 
 	void Start() {
-		cameraGame = GetComponent<Camera>();
+//		cameraGame = GetComponent<Camera>();
 	}
 
 	void Update() {
-		Ray ray = cameraGame.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
+//		Ray ray = cameraGame.ScreenPointToRay(Input.mousePosition);
+//		RaycastHit hit;
+//
+//		if (Physics.Raycast(ray, out hit)) {
+//			bool isMouseDown = Input.GetMouseButtonDown(0);
+//			bool isMouseUp = Input.GetMouseButtonUp(0);
+//			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
+//			if (hit.collider.gameObject) {
+//				if (isMouseDown || isMouseUp) {
+//
+//				} else {
+//					if (curCell != null) {
+//						curCell.MouseExit();
+//					}
+//					click.MouseEnter();
+//					curCell = click;
+//				}
+//			}
+//		}
 
-		if (Physics.Raycast(ray, out hit)) {
-			bool isMouseDown = Input.GetMouseButtonDown(0);
-			bool isMouseUp = Input.GetMouseButtonUp(0);
-			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
-			if (hit.collider.gameObject) {
-				if (isMouseDown || isMouseUp) {
+		if (Input.GetMouseButtonDown(0)) {
+			lastPosition = Input.mousePosition;
+		}
 
-				} else {
-					if (curCell != null) {
-						curCell.MouseExit();
-					}
-					click.MouseEnter();
-					curCell = click;
-				}
-			}
+		if (Input.GetMouseButton(0)) {
+			Vector3 delta = Input.mousePosition - lastPosition;
+			transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
+			lastPosition = Input.mousePosition;
 		}
 
 		if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
