@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell {
+public class Cell : MonoBehaviour {
 	
 	public int x{ get; private set;}
 	public int y{ get; private set;}
