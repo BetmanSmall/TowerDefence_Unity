@@ -135,7 +135,7 @@ public class GameField : MonoBehaviour {
 								for (int k = 0; k < array.Length; k++) {
 									int localId = int.Parse (array [k]) - int.Parse(mapProperties ["firstgid"]);
 									GameObject tmpGameObject = objectsTerrain[localId];
-									GameObject realGameObject = (GameObject)Instantiate (tmpGameObject, new Vector3 (x*sizeCellX, 0, z*sizeCellZ), Quaternion.identity);
+									GameObject realGameObject = (GameObject)Instantiate (tmpGameObject, new Vector3 (x*sizeCellX+sizeCellX, 0, z*sizeCellZ+sizeCellZ), Quaternion.identity); // add shift for sizeCell
 									Debug.Log ("GameField::Start(); -- realGameObject:" + realGameObject + " array[k]:" + array[k]);
 									realGameObject.transform.SetParent (this.transform);
 									x++;
@@ -223,8 +223,11 @@ public class GameField : MonoBehaviour {
 //		}
 //	}
 
+	// Update is called once per frame
 	void Update() {
 //		if (Input.GetMouseButtonDown(0)) {
+//			print ("GameField::Update(); -- Input.GetMouseButtonDown(0);");
+//			print ("GameField::Update(); -- Input.mousePosition" + Input.mousePosition);
 //			Transform[] allTransforms = gameObject.GetComponentsInChildren<Transform>();
 //			foreach(Transform childObjects in allTransforms){
 //				if(gameObject.transform.IsChildOf(childObjects.transform) == false)
@@ -232,8 +235,13 @@ public class GameField : MonoBehaviour {
 //			}
 //			GenerateField();
 //		}
+		if (Input.GetButtonDown("Fire1")) {
+			print ("GameField::Update(); -- Input.GetButtonDown(Fire1);");
+			print ("GameField::Update(); -- Input.mousePosition" + Input.mousePosition);
+			Camera camera = GameObject.Find ("Main Camera").GetComponent<Camera> ();
+			print ("GameField::Update(); -- camera:" + camera);
+			Vector3 worldPos = camera.ScreenToWorldPoint (Input.mousePosition);
+			print ("GameField::Update(); -- worldPos:" + worldPos);
+		}
 	}
-
-	
-	// Update is called once per frame
 }

@@ -37,14 +37,14 @@ public class DrawCameraGrid : MonoBehaviour {
 	}
 
 	void drawGrid() {
-		print ("DrawCameraGrid::drawGrid(); -- gameField:" + gameField);
+//		print ("DrawCameraGrid::drawGrid(); -- gameField:" + gameField);
 		if (gameField != null) {
 			int sizeFieldX = gameField.sizeFieldX;
 			int sizeFieldZ = gameField.sizeFieldZ;
 			float sizeCellX = gameField.sizeCellX;
 			float sizeCellZ = gameField.sizeCellZ;
-			print ("DrawCameraGrid::drawGrid(); -- gameField.sizeFieldX:" + gameField.sizeFieldX + " gameField.sizeFieldZ:" + gameField.sizeFieldZ);
-			print ("DrawCameraGrid::drawGrid(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
+//			print ("DrawCameraGrid::drawGrid(); -- gameField.sizeFieldX:" + gameField.sizeFieldX + " gameField.sizeFieldZ:" + gameField.sizeFieldZ);
+//			print ("DrawCameraGrid::drawGrid(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
 			for (int x = 0; x <= sizeFieldX; x++) {
 				drawLine (x*sizeCellX, 0, x*sizeCellX, sizeFieldX*sizeCellZ);
 			}
