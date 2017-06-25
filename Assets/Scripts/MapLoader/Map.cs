@@ -17,14 +17,4 @@ public class Map {
 //		tileSetsOrModelsSets = new ArrayList();
 		mapLayers = new Dictionary<int, MapLayer>();
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -14,14 +14,4 @@ public class MapLayer {
 		this.properties = new Dictionary<string, string> ();
 		this.tileModels = new TileModel[width, height];
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

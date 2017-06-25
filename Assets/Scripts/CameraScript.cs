@@ -15,25 +15,29 @@ public class CameraScript : MonoBehaviour {
 	}
 
 	void Update() {
-//		Ray ray = cameraGame.ScreenPointToRay(Input.mousePosition);
-//		RaycastHit hit;
-//
-//		if (Physics.Raycast(ray, out hit)) {
-//			bool isMouseDown = Input.GetMouseButtonDown(0);
-//			bool isMouseUp = Input.GetMouseButtonUp(0);
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit)) {
+			
+			bool isMouseDown = Input.GetMouseButtonDown(0);
+			bool isMouseUp = Input.GetMouseButtonUp(0);
+
 //			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
-//			if (hit.collider.gameObject) {
-//				if (isMouseDown || isMouseUp) {
-//
-//				} else {
+
+			if (hit.collider.gameObject) {
+				if (isMouseDown) {
+					Debug.Log (hit.transform.position);
+				} 
+//				else {
 //					if (curCell != null) {
 //						curCell.MouseExit();
 //					}
 //					click.MouseEnter();
 //					curCell = click;
 //				}
-//			}
-//		}
+			}
+		}
 
 		if (Input.GetMouseButtonDown(0)) {
 			lastPosition = Input.mousePosition;

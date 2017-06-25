@@ -13,14 +13,4 @@ public class TileSetOrModelsSet {
 		this.tileModels = new Dictionary<int, TileModel>();
 		this.properties = new Dictionary<string, string>();
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

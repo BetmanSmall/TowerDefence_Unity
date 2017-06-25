@@ -43,13 +43,14 @@ public class GameField : MonoBehaviour {
 //			}
 //			GenerateField();
 //		}
-		if (Input.GetButtonDown("Fire1")) {
-			print ("GameField::Update(); -- Input.GetButtonDown(Fire1);");
-			print ("GameField::Update(); -- Input.mousePosition" + Input.mousePosition);
-			Camera camera = GameObject.Find ("Main Camera").GetComponent<Camera> ();
-			print ("GameField::Update(); -- camera:" + camera);
-			Vector3 worldPos = camera.ScreenToWorldPoint (Input.mousePosition);
-			print ("GameField::Update(); -- worldPos:" + worldPos);
-		}
+//		if (Input.GetButtonDown("Fire1")) {
+//			print ("GameField::Update(); -- Input.GetButtonDown(Fire1);");
+//			print ("GameField::Update(); -- Input.mousePosition" + Input.mousePosition);
+//			Camera camera = GameObject.Find ("Main Camera").GetComponent<Camera> ();
+//			print ("GameField::Update(); -- camera:" + camera);
+//			Vector3 worldPos = camera.ScreenToWorldPoint (Input.mousePosition);
+//			print ("GameField::Update(); -- worldPos:" + worldPos);
+//
+//		}
 	}
 }
