@@ -6,7 +6,7 @@ public class GameField : MonoBehaviour {
 	public string mapPath = "maps/testMap";
 
 	public int sizeFieldX, sizeFieldZ;
-	public float sizeCellX=3f, sizeCellY=0f, sizeCellZ=3f;
+	public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map
 //	public Cell[,] field;
 
 	// Use this for initialization
@@ -17,18 +17,44 @@ public class GameField : MonoBehaviour {
 		sizeFieldX = int.Parse(map.properties ["width"]);
 		sizeFieldZ = int.Parse(map.properties ["height"]);
 
-		foreach (MapLayer mapLayer in map.mapLayers.Values) {
-			for (int z = 0; z < sizeFieldZ; z++) {
-				for (int x = 0; x < sizeFieldX; x++) {
-					Object modelObject = mapLayer.tileModels [x, z].modelObject;
-					if(modelObject != null) {
-						GameObject gameObject = (GameObject)Instantiate (modelObject, new Vector3 (x*sizeCellX+sizeCellX, 0, z*sizeCellZ+sizeCellZ), Quaternion.identity);
-	//					gameObject.GetComponent<Renderer> ().material.color.a = mapLayer.opacity;
-						gameObject.transform.SetParent (this.transform);
+		createField (sizeFieldX, sizeFieldZ, map.mapLayers);
+		Debug.Log("GameField::Start(); -- End!");
+	}
+
+	private void createField(int sizeFieldX, int sizeFieldZ, Dictionary<int, MapLayer> mapLayers) {
+//		Debug.Log("GameField::createField(" + sizeFieldX + ", " + sizeFieldZ + ", " + mapLayers + "); -- field:" + field);
+//		if (field == null) {
+//			field = new Cell[sizeFieldX, sizeFieldZ];
+			for (int layerY = 0; layerY < mapLayers.Count; layerY++) {
+				MapLayer mapLayer = mapLayers [layerY];
+//			foreach (MapLayer mapLayer in mapLayers.Values) {
+				Debug.Log ("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
+				for (int z = 0; z < sizeFieldZ; z++) {
+					for (int x = 0; x < sizeFieldX; x++) {
+						TileModel tileModel = mapLayer.tileModels [x, z];
+						if (tileModel != null) {
+							Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
+							GameObject gameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform); // и передалть
+							MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
+							if (mapLayer.opacity == 0f) {
+								meshRenderer.enabled = false;
+							} else {
+								foreach (Material material in meshRenderer.materials) {
+	//							Debug.Log("GameField::Start(); -- material:" + material);
+									Color color = material.color;
+									color.a = mapLayer.opacity; // It is not WOKR!=(
+									material.color = color;
+	//							Debug.Log("GameField::Start(); -- material.color:" + material.color);
+								}
+							}
+//							Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
+//							gameObject.transform.SetParent (this.transform);
+//							field [x, z] = cell;
+						}
 					}
 				}
 			}
-		}
+//		}
 	}
 
 	// Update is called once per frame
@@ -50,7 +76,6 @@ public class GameField : MonoBehaviour {
 //			print ("GameField::Update(); -- camera:" + camera);
 //			Vector3 worldPos = camera.ScreenToWorldPoint (Input.mousePosition);
 //			print ("GameField::Update(); -- worldPos:" + worldPos);
-//
 //		}
 	}
 }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
-public class MapLoader : MonoBehaviour {
+public class MapLoader {
 
 	public MapLoader(/*WaveManager waveManager*/) {
-		print ("MapLoader::MapLoader(//*waveManager*//); -- Start!");
+		Debug.Log("MapLoader::MapLoader(//*waveManager*//); -- Start!");
 	}
 
 //	public void loadMaps(string mapsPath) {
-//		print ("MapLoader::loadMaps(" + mapsPath + "); -- Start!");
+//		Debug.Log("MapLoader::loadMaps(" + mapsPath + "); -- Start!");
 //		Object[] maps = Resources.LoadAll(mapsPath);
 //		Debug.Log ("MapLoader::loadMaps(); -- maps.Length:" + maps.Length);
 //		foreach (Object mapObject in maps) {
@@ -22,11 +22,11 @@ public class MapLoader : MonoBehaviour {
 //	}
 
 	public Map loadMap(string mapPath) {
-		print ("MapLoader::loadMap(" + mapPath + "); -- Start!");
+		Debug.Log("MapLoader::loadMap(" + mapPath + "); -- Start!");
 		TextAsset textAsset = Resources.Load<TextAsset>(mapPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
-		print ("MapLoader::loadMap(); -- textAsset:" + textAsset);
+		Debug.Log("MapLoader::loadMap(); -- textAsset:" + textAsset);
 		if (textAsset == null) {
-			print ("MapLoader::loadMap(); -- Can't load map:" + mapPath);
+			Debug.Log("MapLoader::loadMap(); -- Can't load map:" + mapPath);
 			return null;
 		}
 		Map map = new Map();
@@ -39,7 +39,7 @@ public class MapLoader : MonoBehaviour {
 				map.properties.Add ("height", docChild.Attributes ["height"].Value);
 //				sizeFieldX = int.Parse(mapProperties["width"]);
 //				sizeFieldZ = int.Parse(mapProperties["height"]);
-//				print ("MapLoader::loadMap(); -- sizeFieldX:" + sizeFieldX + " sizeFieldZ:" + sizeFieldZ);
+//				Debug.Log("MapLoader::loadMap(); -- sizeFieldX:" + sizeFieldX + " sizeFieldZ:" + sizeFieldZ);
 				XmlNodeList mapNodeList = docChild.ChildNodes;
 				foreach (XmlNode mapChildNode in mapNodeList) {
 					if (mapChildNode.Name.Equals ("properties")) {
@@ -53,10 +53,11 @@ public class MapLoader : MonoBehaviour {
 			}
 		}
 
-		foreach(KeyValuePair<string, string> de in map.properties) {
-			print ("MapLoader::loadMap(); -- key:" + de.Key + " value:" + de.Value);
+		Debug.Log("MapLoader::loadMap(); -- map.properties.Count:" + map.properties.Count);
+		foreach(KeyValuePair<string, string> property in map.properties) {
+			Debug.Log("MapLoader::loadMap(); -- property.Key[" + property.Key + "]:" + property.Value);
 		}
-		print ("MapLoader::loadMap(); -- End! return map:" + map);
+		Debug.Log("MapLoader::loadMap(); -- End! return map:" + map);
 		return map;
 	}
 
@@ -101,9 +102,9 @@ public class MapLoader : MonoBehaviour {
 							Dictionary<string, string> tileProperty = new Dictionary<string, string> ();
 							loadProperties (tileChildNode, tileProperty);
 							string modelName = (string)tileProperty ["modelName"];
-							print ("MapLoader::loadMap(); -- modelsPath:" + modelsPath + "/" + modelName);
+//							Debug.Log("MapLoader::loadMap(); -- modelsPath:" + modelsPath + "/" + modelName);
 							Object modelObject = Resources.Load<Object> ("maps/" + modelsPath + "/" + modelName); // or GameObject?
-							print ("MapLoader::loadMap(); -- modelObject:" + modelObject);
+//							Debug.Log("MapLoader::loadMap(); -- modelObject:" + modelObject);
 							TileModel tileModel = new TileModel (tileId, modelObject);
 							tileModel.properties = tileProperty;
 							tileSetOrModelsSet.tileModels.Add (tileId, tileModel);
@@ -111,6 +112,7 @@ public class MapLoader : MonoBehaviour {
 					}
 				}
 			}
+			Debug.Log("MapLoader::loadTileSet(); -- map.tileSetsOrModelsSets.Add(" + map.tileSetsOrModelsSets.Count + ", " + tileSetOrModelsSet + ");");
 			map.tileSetsOrModelsSets.Add (map.tileSetsOrModelsSets.Count, tileSetOrModelsSet);
 		}
 	}
@@ -121,16 +123,15 @@ public class MapLoader : MonoBehaviour {
 			int height = int.Parse(layerNode.Attributes["height"].Value);
 //			MapLayer mapLayer = new MapLayer(int.Parse(map.properties["width"]), int.Parse(map.properties["height"])); // diko, o4enb DiKo! need rewrite!
 			MapLayer mapLayer = new MapLayer(width, height);
-			mapLayer.name = layerNode.Attributes["name"].Value;
-//			mapLayer.opacity = layerNode.Attributes["opacity"].Value; // need implement true
-//			mapLayer.visible = layerNode.Attributes["visible"].Value; // need implement too
+			mapLayer.loadBasicLayerInfo (layerNode);
+			Debug.Log("MapLoader::loadMapLayer(); -- mapLayer:" + mapLayer);
 			XmlNodeList layerNodeList = layerNode.ChildNodes;
 			foreach (XmlNode layerChildNode in layerNodeList) {
 				if (layerChildNode.Name.Equals ("properties")) {
 					loadProperties (layerChildNode, mapLayer.properties);
 				} else if (layerChildNode.Name.Equals ("data")) {
 					string[] ids = layerChildNode.InnerText.Split (','); // need implement getTileIds();
-					print ("MapLoader::loadMapLayer(); -- ids.Length:" + ids.Length);
+//					Debug.Log("MapLoader::loadMapLayer(); -- ids.Length:" + ids.Length);
 //					int x = 0, z = 0;
 //					for (int k = 0; k < array.Length; k++) {
 					for(int z = 0; z < height; z++) {
@@ -138,25 +139,17 @@ public class MapLoader : MonoBehaviour {
 							int id = int.Parse(ids[z * width + x]) - int.Parse(map.tileSetsOrModelsSets[0].properties["firstgid"]); // not good | in future not only one!
 							if (id >= 0) {
 								TileModel tileModel = map.tileSetsOrModelsSets [0].tileModels [id]; // need create TileSets class and getTile();
-								print ("MapLoader::loadMapLayer(); -- tileModels[" + x + "," + z + "]:" + tileModel);
+//								Debug.Log("MapLoader::loadMapLayer(); -- tileModels[" + x + "," + z + "]:" + tileModel);
 								mapLayer.tileModels [x, z] = tileModel;
-							} else {
-								print ("MapLoader::loadMapLayer(); -- Empte cell tileModels[" + x + "," + z + "]:id:" + id );
+//							} else {
+//								Debug.Log("MapLoader::loadMapLayer(); -- In " + mapLayer.name + "[" + x + "," + z + "] not set tileModel!");
 							}
-//							GameObject tmpGameObject = objectsTerrain [localId];
-//							GameObject realGameObject = (GameObject)Instantiate (tmpGameObject, new Vector3 (x * sizeCellX + sizeCellX, 0, z * sizeCellZ + sizeCellZ), Quaternion.identity); // add shift for sizeCell
-//							Debug.Log ("MapLoader::Start(); -- realGameObject:" + realGameObject + " array[k]:" + array [k]);
-//							realGameObject.transform.SetParent (this.transform);
-//							x++;
-//							if (x == sizeFieldX) {
-//								x = 0;
-//								z++;
-//							}
 						}
 					}
 				}
 			}
-			map.mapLayers.Add (map.mapLayers.Count, mapLayer);
+			Debug.Log("MapLoader::loadMapLayer(); -- map.mapLayers.Add(" + map.mapLayers.Count + ", " + mapLayer + ");");
+			map.mapLayers.Add(map.mapLayers.Count, mapLayer);
 		}
 	}
 
@@ -165,20 +158,10 @@ public class MapLoader : MonoBehaviour {
 		for (int s = 0; s < space; s++) {
 			spaces += "  ";
 		}
-		print (spaces + xmlNode.Name + " : " + xmlNode.LocalName);
+		Debug.Log(spaces + xmlNode.Name + " : " + xmlNode.LocalName);
 		XmlNodeList childs = xmlNode.ChildNodes;
 		foreach (XmlNode xmlChildNode in childs) {
 			readNodes (xmlChildNode, space++);
 		}
-	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

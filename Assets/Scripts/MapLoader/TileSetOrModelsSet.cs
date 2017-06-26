@@ -13,4 +13,12 @@ public class TileSetOrModelsSet {
 		this.tileModels = new Dictionary<int, TileModel>();
 		this.properties = new Dictionary<string, string>();
 	}
+
+	public override string ToString() {
+		string str = "TileSetOrModelsSet[" + name + ",";
+		str += tileModels + ",";
+		str += properties + ",";
+		str += "];";
+		return str;
+	}
 }

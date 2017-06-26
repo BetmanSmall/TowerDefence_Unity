@@ -30,23 +30,23 @@ public class MainPanel : MonoBehaviour {
 
 
 
-		for (int x = 0; x < mapHeight; x++) {
-			for (int z = 0; z < mapWidth; z++) {
-				
-				Cell cell = new Cell(x, 0, z);
-
-				defaultTerrain = Instantiate(Resources.Load<GameObject>(ModelPath), new Vector3(x * sizeCellX, 0, z * sizeCellZ), Quaternion.identity);
-
-				cell.setTerrain ();
-
-				defaultTerrain.name = "Cell_" + cell.x + "_" + cell.z;
-
-				defaultTerrain.transform.SetParent(this.transform, true);
-
-				field[x, z] = cell;
-
-			}
-		}
+//		for (int x = 0; x < mapHeight; x++) {
+//			for (int z = 0; z < mapWidth; z++) {
+//				
+//				Cell cell = new Cell(x, 0, z);
+//
+//				defaultTerrain = Instantiate(Resources.Load<GameObject>(ModelPath), new Vector3(x * sizeCellX, 0, z * sizeCellZ), Quaternion.identity);
+//
+//				cell.setTerrain ();
+//
+//				defaultTerrain.name = "Cell_" + cell.x + "_" + cell.z;
+//
+//				defaultTerrain.transform.SetParent(this.transform, true);
+//
+//				field[x, z] = cell;
+//
+//			}
+//		}
 	}
 
 	// Update is called once per frame
