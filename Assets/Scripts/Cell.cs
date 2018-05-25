@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell /*: MonoBehaviour*/ { // пиздеЦЦЦ!!!
-	public int gameX, layerY, gameZ;
+public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
+	public int gameX;
+	public int layerY;
+	public int gameZ;
 	TileModel tileModel;
 	GameObject gameObjectModel;
+	Vector3 graphicCoordinates;
 
-	public bool empty, terrain;
+	public bool empty;
+	public bool terrain;
 
-	public Cell(int gameX, int layerY, int gameZ, TileModel tileModel, Vector3 graphicCoordinates) { 
-		this.gameX = gameX;
-		this.layerY = layerY;
-		this.gameZ = gameZ;
-		this.tileModel = tileModel;
+	public Cell() {
+
+	}
+
+	public Cell(int gameX, int layerY, int gameZ, TileModel tileModel, Vector3 graphicCoordinates) {
+		setBasicValues(gameX, layerY, gameZ, tileModel, graphicCoordinates);
 //		this.gameObjectModel = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
 //		MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> ();
 //		foreach (Material material in meshRenderer.materials) {
@@ -21,11 +26,16 @@ public class Cell /*: MonoBehaviour*/ { // пиздеЦЦЦ!!!
 //			Color color = material.color;
 //			color.a = mapLayer.opacity; // It is not WOKR!=(
 //			material.color = color;
-//			//							Debug.Log("GameField::Start(); -- material.color:" + material.color);
+//			Debug.Log("GameField::Start(); -- material.color:" + material.color);
 //		}
+	}
 
-		empty = true;
-		terrain = false;
+	public void setBasicValues(int gameX, int layerY, int gameZ, TileModel tileModel, Vector3 graphicCoordinates) {
+		this.gameX = gameX;
+		this.layerY = layerY;
+		this.gameZ = gameZ;
+		this.tileModel = tileModel;
+		this.graphicCoordinates = graphicCoordinates;
 	}
 
 	public bool setTerrain() {

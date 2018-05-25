@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainPanel : MonoBehaviour {
 
 	public int mapHeight, mapWidth;
-	public Cell[,] field;
+//	public Cell[,] field;
 	public Material lineMat;
 	public Camera gameCamera;
 
@@ -15,7 +15,7 @@ public class MainPanel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//defaultTerrain = Instantiate (Resources.Load<GameObject>(ModelPath));
-		field = new Cell[mapHeight, mapWidth];
+	//	field = new Cell[mapHeight, mapWidth];
 
 		//LoadDefailtTerrain ();
 	}

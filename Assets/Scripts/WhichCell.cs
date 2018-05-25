@@ -20,9 +20,10 @@ public class WhichCell : MonoBehaviour {
 //			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
 //			Debug.Log ("WhichCell::Update(); -- hit.collider:" + hit.collider);
 			if (hit.collider.gameObject) {
-//				Debug.Log ("WhichCell::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+				Debug.Log ("WhichCell::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
 				if (isMouseDown) {
 					Debug.Log ("WhichCell::Update(); -- hit.transform.position:" + hit.transform.position);
+					
 				} 
 //				else {
 //					if (curCell != null) {
