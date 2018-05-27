@@ -25,9 +25,9 @@ public class GameField : MonoBehaviour {
 	Debug.Log("GameField::createField(" + sizeFieldX + ", " + sizeFieldZ + ", " + mapLayers + "); -- field:" + field);
 		if (field == null) {
 			field = new Cell[sizeFieldX, sizeFieldZ];
-			for (int layerY = 0; layerY < mapLayers.Count; layerY++) {
+			//foreach (MapLayer mapLayer in mapLayers.Values) {
+            for (int layerY = 0; layerY < mapLayers.Count; layerY++) {
 				MapLayer mapLayer = mapLayers [layerY];
-//			foreach (MapLayer mapLayer in mapLayers.Values) {
 				Debug.Log ("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
 				for (int z = 0; z < sizeFieldZ; z++) {
 					for (int x = 0; x < sizeFieldX; x++) {
@@ -38,23 +38,25 @@ public class GameField : MonoBehaviour {
 							gameObject.AddComponent<Cell>();  ///УРЯ!
 							//Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
 							Cell cell = gameObject.GetComponent<Cell>();
-							cell.setBasicValues(x, layerY, z, tileModel, graphicCoordinates);
-							field[x, z] = cell;
-
-							MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
-							if (mapLayer.opacity == 0f) {
-								meshRenderer.enabled = false;
-							} else {
-								foreach (Material material in meshRenderer.materials) {
-	//							Debug.Log("GameField::Start(); -- material:" + material);
-									Color color = material.color;    
-									/// Прозрачность
-									color.a = mapLayer.opacity; // It is not WOKR!=(
-									material.color = color;
-	//							Debug.Log("GameField::Start(); -- material.color:" + material.color);
-								}
+							cell.setBasicValues(x, layerY, z, /*tileModel,*/ graphicCoordinates);
+							if(tileModel.properties.ContainsKey("terrain")) {
+								cell.setTerrain();
 							}
-							gameObject.transform.SetParent (this.transform);
+							field[x, z] = cell;
+	// 						MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
+	// 						if (mapLayer.opacity == 0f) {
+	// 							meshRenderer.enabled = false;
+	// 						} else {
+	// 							foreach (Material material in meshRenderer.materials) {
+	// //							Debug.Log("GameField::Start(); -- material:" + material);
+	// 								Color color = material.color;    
+	// 								/// Прозрачность
+	// 								color.a = mapLayer.opacity; // It is not WOKR!=(
+	// 								material.color = color;
+	// //							Debug.Log("GameField::Start(); -- material.color:" + material.color);
+	// 							}
+	// 						}
+							// gameObject.transform.SetParent (this.transform);
 						}
 					}
 				}
