@@ -166,8 +166,6 @@ GameObject:
   - component: {fileID: 1248742521}
   - component: {fileID: 1248742520}
   - component: {fileID: 1248742525}
-  - component: {fileID: 1248742526}
-  - component: {fileID: 1248742527}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -253,35 +251,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1248742519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92122191e7e53c4ba544851aad06581, type: 3}
+  m_Script: {fileID: 11500000, guid: a62d562f63e2fd04ba613f40932bc2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawOnY: 0.4
---- !u!114 &1248742526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1248742519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6873bd0af15cf4ab8b7821a242b54e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   spaceMouseDetection: 5
   cameraSpeed: 5
   mouseSensitivity: 0.05
---- !u!114 &1248742527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1248742519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43cfd773a5f53de4fb44c25ba82190c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1286031412
 GameObject:
   m_ObjectHideFlags: 0
