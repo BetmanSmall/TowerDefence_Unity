@@ -66,10 +66,6 @@ public class GameField : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-
-	
-
-
 //		if (Input.GetMouseButtonDown(0)) {
 //			print ("GameField::Update(); -- Input.GetMouseButtonDown(0);");
 //			print ("GameField::Update(); -- Input.mousePosition" + Input.mousePosition);
