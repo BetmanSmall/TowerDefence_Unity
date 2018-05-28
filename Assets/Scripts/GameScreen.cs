@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameScreen : MonoBehaviour, IPointerClickHandler {
+public class GameScreen : MonoBehaviour  {
 	// DrawCameraGrid  && WhichCell
 	private Material gridLineMaterial; // = Resources.Load<Material>("Materials/GridLineMaterial"); // this not work!=(
 	public float drawOnY = 0.4f; // Приподнять отрисовку сетки над GameField'ом
@@ -96,10 +96,15 @@ public class GameScreen : MonoBehaviour, IPointerClickHandler {
 			transform.Translate(new Vector3(0, cameraSpeed*Time.deltaTime, 0));
 		}
 
-		if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0)) { // Что лучше?
-			lastPosition = Input.mousePosition;
+
+
+//      Управление камерой при нажатой клавиши мыши           -------------------------------------------------------------------------------- 
+		if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0)) { // Работает только вместе
+			 lastPosition = Input.mousePosition;
+			 Debug.Log ("Нажали0");
 		}
-		if (Input.GetButton("Fire1") || Input.GetMouseButton(0)) { // Что лучше?
+		if (Input.GetButton("Fire1") || Input.GetMouseButton(0)) { // Работает только вместе
+			
 			Vector3 delta = Input.mousePosition - lastPosition;
 //			Debug.Log ("GameScreen::Update(); -- delta:" + delta);
 //			transform.Translate(delta.x * mouseSensitivity, 0f, delta.y * mouseSensitivity);
@@ -107,6 +112,42 @@ public class GameScreen : MonoBehaviour, IPointerClickHandler {
 			Vector3 newPos = new Vector3 (olsPos.x - (delta.x * mouseSensitivity), olsPos.y, olsPos.z - (delta.y * mouseSensitivity));
 			transform.position = newPos;
 			lastPosition = Input.mousePosition;
+		}
+//----------------------------------------------------------------------------------------------------------------------------------------------
+
+        if (Input.GetMouseButtonUp(0)) { 
+		Debug.Log ("Нажали1");
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (Physics.Raycast(ray, out hit)) {
+//			Debug.Log ("GameScreen::Update(); -- hit:" + hit);
+			//bool isMouseDown = Input.GetKeyUp(0);
+//			bool isMouseUp = Input.GetMouseButtonUp(0);
+//			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
+//			Debug.Log ("GameScreen::Update(); -- hit.collider:" + hit.collider);
+		//	if (hit.collider.gameObject) {
+				//if (isMouseDown) {
+					Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+					Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+					Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+					if(cell != null) {
+						Debug.Log ("GameScreen::Update(); -- cell:" + cell + " cell.setTerrain();");
+						if(cell.isTerrain()) {
+							cell.setTerrain(); // need reWrite in future! All codes need reWrite!
+						} else {
+							cell.removeTerrain();
+						}
+					}
+				} 
+//				else {
+//					if (curCell != null) {
+//						curCell.MouseExit();
+//					}
+//					click.MouseEnter();
+//					curCell = click;
+//				}
+			//}
+		//}
 		}
 
 		float scrollDelta = Input.mouseScrollDelta.y;
@@ -127,38 +168,38 @@ public class GameScreen : MonoBehaviour, IPointerClickHandler {
 //		transform.LookAt(v, Vector3.up);
 	}
 
-	public void OnPointerClick(PointerEventData pointerEventData) {
-		Debug.Log ("GameScreen::OnPointerClick(); -- pointerEventData:" + pointerEventData);
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit)) {
-//			Debug.Log ("GameScreen::Update(); -- hit:" + hit);
-			bool isMouseDown = Input.GetButtonDown("Fire1");
-//			bool isMouseUp = Input.GetMouseButtonUp(0);
-//			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
-//			Debug.Log ("GameScreen::Update(); -- hit.collider:" + hit.collider);
-			if (hit.collider.gameObject) {
-				if (isMouseDown) {
-					Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
-					Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
-					Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
-					if(cell != null) {
-						Debug.Log ("GameScreen::Update(); -- cell:" + cell + " cell.setTerrain();");
-						if(cell.isTerrain()) {
-							cell.setTerrain(); // need reWrite in future! All codes need reWrite!
-						} else {
-							cell.removeTerrain();
-						}
-					}
-				} 
-//				else {
-//					if (curCell != null) {
-//						curCell.MouseExit();
-//					}
-//					click.MouseEnter();
-//					curCell = click;
-//				}
-			}
-		}
-	}
+// 	public void OnPointerClick(PointerEventData pointerEventData) {
+// 		Debug.Log ("GameScreen::OnPointerClick(); -- pointerEventData:" + pointerEventData);
+// 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+// 		RaycastHit hit;
+// 		if (Physics.Raycast(ray, out hit)) {
+// //			Debug.Log ("GameScreen::Update(); -- hit:" + hit);
+// 			bool isMouseDown = Input.GetButtonDown("Fire1");
+// //			bool isMouseUp = Input.GetMouseButtonUp(0);
+// //			ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
+// //			Debug.Log ("GameScreen::Update(); -- hit.collider:" + hit.collider);
+// 			if (hit.collider.gameObject) {
+// 				if (isMouseDown) {
+// 					Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+// 					Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+// 					Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+// 					if(cell != null) {
+// 						Debug.Log ("GameScreen::Update(); -- cell:" + cell + " cell.setTerrain();");
+// 						if(cell.isTerrain()) {
+// 							cell.setTerrain(); // need reWrite in future! All codes need reWrite!
+// 						} else {
+// 							cell.removeTerrain();
+// 						}
+// 					}
+// 				} 
+// //				else {
+// //					if (curCell != null) {
+// //						curCell.MouseExit();
+// //					}
+// //					click.MouseEnter();
+// //					curCell = click;
+// //				}
+// 			}
+// 		}
+// 	}
 }
