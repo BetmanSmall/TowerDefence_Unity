@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameField : MonoBehaviour {
-	public string mapPath = "maps/testMap";
+	public string mapPath = "maps/arena0";
 
 	public int sizeFieldX, sizeFieldZ;
 	public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map

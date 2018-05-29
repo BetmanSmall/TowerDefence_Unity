@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Xml;
 
 public class MapLoader {
+	string mapPath;
 
 	public MapLoader(/*WaveManager waveManager*/) {
 		Debug.Log("MapLoader::MapLoader(//*waveManager*//); -- Start!");
@@ -23,6 +24,7 @@ public class MapLoader {
 
 	public Map loadMap(string mapPath) {
 		Debug.Log("MapLoader::loadMap(" + mapPath + "); -- Start!");
+		this.mapPath = mapPath;
 		TextAsset textAsset = Resources.Load<TextAsset>(mapPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
 		Debug.Log("MapLoader::loadMap(); -- textAsset:" + textAsset);
 		if (textAsset == null) {
@@ -61,7 +63,7 @@ public class MapLoader {
 		return map;
 	}
 
-	public void loadProperties (XmlNode propertiesNode, Dictionary<string, string> properties) {
+	public void loadProperties(XmlNode propertiesNode, Dictionary<string, string> properties) {
 		if(propertiesNode.Name.Equals("properties")) {
 			XmlNodeList nodeList = propertiesNode.ChildNodes;
 			foreach(XmlNode propertyNode in nodeList) {
@@ -76,11 +78,21 @@ public class MapLoader {
 
 	private void loadTileSet(Map map, XmlNode tileSetNode) { // in future need change "tileset" to "modelsSet" or another
 		if (tileSetNode.Name.Equals ("tileset")) {
-//			string source = tileSetNode.Attributes["source"].Value;
-//			if (source != null) {
-//				Debug.Log("MapLoader::loadTileSet(); -- need implement this peace of code! found source:" + source);
-//				return;
-//			}
+			string source;
+			if(tileSetNode.Attributes["source"] != null) {
+			// if (source != null) {
+				source = tileSetNode.Attributes["source"].Value;
+				string tsxPath = findFile(mapPath, source);
+				TextAsset textAsset = Resources.Load<TextAsset>(tsxPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
+				Debug.Log("MapLoader::loadTileSet(); -- textAsset:" + textAsset);
+				if (textAsset == null) {
+					Debug.Log("MapLoader::loadTileSet(); -- Can't load:" + tsxPath);
+					return;
+				}
+				XmlDocument tsxDoc = new XmlDocument();
+				tsxDoc.LoadXml(textAsset.text);
+				tileSetNode = tsxDoc.ChildNodes[1]; // XML is Bad. In xmlDox first child in not index 0 / tsxDoc.firstChild() not work!
+			}
 			string modelsPath = null;
 			string name = tileSetNode.Attributes ["name"].Value;
 			TileSetOrModelsSet tileSetOrModelsSet = new TileSetOrModelsSet(name);
@@ -118,19 +130,19 @@ public class MapLoader {
 	}
 
 	public void loadMapLayer(Map map, XmlNode layerNode) {
-		if (layerNode.Name.Equals ("layer")) {
+		if (layerNode.Name.Equals("layer")) {
 			int width = int.Parse(layerNode.Attributes["width"].Value);
 			int height = int.Parse(layerNode.Attributes["height"].Value);
 //			MapLayer mapLayer = new MapLayer(int.Parse(map.properties["width"]), int.Parse(map.properties["height"])); // diko, o4enb DiKo! need rewrite!
 			MapLayer mapLayer = new MapLayer(width, height);
-			mapLayer.loadBasicLayerInfo (layerNode);
+			mapLayer.loadBasicLayerInfo(layerNode);
 			Debug.Log("MapLoader::loadMapLayer(); -- mapLayer:" + mapLayer);
 			XmlNodeList layerNodeList = layerNode.ChildNodes;
 			foreach (XmlNode layerChildNode in layerNodeList) {
-				if (layerChildNode.Name.Equals ("properties")) {
+				if (layerChildNode.Name.Equals("properties")) {
 					loadProperties (layerChildNode, mapLayer.properties);
-				} else if (layerChildNode.Name.Equals ("data")) {
-					string[] ids = layerChildNode.InnerText.Split (','); // need implement getTileIds();
+				} else if (layerChildNode.Name.Equals("data")) {
+					string[] ids = layerChildNode.InnerText.Split(','); // need implement getTileIds();
 //					Debug.Log("MapLoader::loadMapLayer(); -- ids.Length:" + ids.Length);
 //					int x = 0, z = 0;
 //					for (int k = 0; k < array.Length; k++) {
@@ -163,5 +175,28 @@ public class MapLoader {
 		foreach (XmlNode xmlChildNode in childs) {
 			readNodes (xmlChildNode, space++);
 		}
+	}
+
+	private string findFile(string mapPath, string filePath) {
+		Debug.Log("MapLoader::findFile(" + mapPath + ", " + filePath + "); -- ");
+		string result = mapPath.Substring(0, mapPath.LastIndexOf("/"));
+		bool finished = false;
+		do {
+			int slashIndex = filePath.IndexOf("/");
+			if(slashIndex == -1) {
+				result = result + "/" + filePath;
+				finished = true;
+			} else {
+				string token = filePath.Substring(0, slashIndex);
+				filePath = filePath.Substring(slashIndex+1);
+				if(token == "..") {
+					result = result.Substring(0, result.LastIndexOf("/"));
+				} else {
+					result = result + "/" + token;
+				}
+			}
+		} while (!finished);
+		Debug.Log("MapLoader::findFile(); -- result:" + result);
+		return result;
 	}
 }
