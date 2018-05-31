@@ -169,7 +169,8 @@ public class GameField : MonoBehaviour {
                         pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
                         // Vector3 scal = gameObject.transform.localScale;
                         // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
-                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, this.transform); 
+                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, this.transform);
+                        gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
                         // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
                         tower.gameObject = gameObject;
                         Debug.Log("GameField::createTower(); -- Instantiate gameObject:" + gameObject);
