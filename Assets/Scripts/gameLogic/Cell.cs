@@ -4,54 +4,55 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     // public ArrayList<Tree> trees;
-	public bool empty;
-	public bool terrain;
-	// public Tower tower;
-	// public ArrayList<Creep> creeps;
-	public int gameX, layerY, gameZ;
-	Vector3 graphicCoordinates;
-	// TileModel tileModel;
-	// GameObject gameObjectModel;
+    public bool empty;
+    public bool terrain;
+    public Tower tower;
+    // public ArrayList<Creep> creeps;
+    public int gameX, layerY, gameZ;
+    public Vector3 graphicCoordinates;
+    // TileModel tileModel;
+    // GameObject gameObjectModel;
 
-	public Cell() {
-		Debug.Log("Cell::Cell(); -- ");
-		// this.trees = ;
+    public Cell() {
+        Debug.Log("Cell::Cell(); -- ");
+        // this.trees = ;
         this.empty = true;
         this.terrain = false;
-        // this.tower = null;
+        this.tower = null;
         // this.creeps = null;
-	}
+    }
 
-	public Cell(int gameX, int layerY, int gameZ, Vector3 graphicCoordinates) {
-		Debug.Log("Cell::Cell(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
-		setBasicValues(gameX, layerY, gameZ, graphicCoordinates);
-//		this.gameObjectModel = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
-//		MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> ();
-//		foreach (Material material in meshRenderer.materials) {
-//			//							Debug.Log("GameField::Start(); -- material:" + material);
-//			Color color = material.color;
-//			color.a = mapLayer.opacity; // It is not WOKR!=(
-//			material.color = color;
-//			Debug.Log("GameField::Start(); -- material.color:" + material.color);
-//		}
-	}
+    public Cell(int gameX, int layerY, int gameZ, Vector3 graphicCoordinates) {
+        Debug.Log("Cell::Cell(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
+        setBasicValues(gameX, layerY, gameZ, graphicCoordinates);
+//        this.gameObjectModel = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
+//        MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> ();
+//        foreach (Material material in meshRenderer.materials) {
+//            //                            Debug.Log("GameField::Start(); -- material:" + material);
+//            Color color = material.color;
+//            color.a = mapLayer.opacity; // It is not WOKR!=(
+//            material.color = color;
+//            Debug.Log("GameField::Start(); -- material.color:" + material.color);
+//        }
+    }
 
-	public void setBasicValues(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
-		Debug.Log("Cell::setBasicValues(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
-		this.gameX = gameX;
-		this.layerY = layerY;
-		this.gameZ = gameZ;
-		// this.tileModel = tileModel;
-		this.graphicCoordinates = graphicCoordinates;
-	}
+    public void setBasicValues(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
+        Debug.Log("Cell::setBasicValues(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
+        this.gameX = gameX;
+        this.layerY = layerY;
+        this.gameZ = gameZ;
+        // this.tileModel = tileModel;
+        this.graphicCoordinates = graphicCoordinates;
+    }
 
-	// public void setGraphicCoordinates();
+    // public void setGraphicCoordinates();
 
     public Vector3 getGraphicCoordinates() {
-		return graphicCoordinates;
+        return graphicCoordinates;
     }
 
     public bool isEmpty() {
+        Debug.Log("Cell::isEmpty(); -- empty:" + empty);
         return empty;
     }
 
@@ -59,15 +60,15 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         return terrain;
     }
 
-	public bool setTerrain() {
-		if (empty) {
-			terrain = true;
-			empty = false;
-			return true;
-		}
-		return false;
-	}
-	
+    public bool setTerrain() {
+        if (empty) {
+            terrain = true;
+            empty = false;
+            return true;
+        }
+        return false;
+    }
+    
     public bool removeTerrain() {
         if (terrain) {
             terrain = false;
@@ -84,27 +85,27 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         return false;
     }
 
-    // public Tower getTower() {
-    //     return tower;
-    // }
+    public Tower getTower() {
+        return tower;
+    }
 
-    // public bool setTower(Tower tower) {
-    //     if (empty) {
-    //         this.tower = tower;
-    //         empty = false;
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    public bool setTower(Tower tower) {
+        if (empty) {
+            this.tower = tower;
+            empty = false;
+            return true;
+        }
+        return false;
+    }
 
-    // public bool removeTower() {
-    //     if (tower != null) {
-    //         tower = null;
-    //         empty = true;
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    public bool removeTower() {
+        if (tower != null) {
+            tower = null;
+            empty = true;
+            return true;
+        }
+        return false;
+    }
 
     // public Array<Creep> getCreeps() {
     //     return creeps;

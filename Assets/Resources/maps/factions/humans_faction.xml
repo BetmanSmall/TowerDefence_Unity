@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faction name="Humans_Faction">
+	<templateForUnit source="units/unit3_footman.tsx"/>
+	<templateForUnit source="units/unit10_ballista.tsx"/>
+	<templateForUnit source="units/unit11_elven_archer.tsx"/>
+	<templateForUnit source="units/unit12_gryphon_rider.tsx"/>
+	<templateForUnit source="units/unit13_knight.tsx"/>
+	<templateForUnit source="units/unit14_mage.tsx"/>
+	<templateForUnit source="units/unit15_peasant.tsx"/>
+	<templateForTower source="towers/tower1_turret_1"/>
+	<templateForTower source="towers/tower1_turret_2"/>
+	<templateForTower source="towers/tower1_turret_3"/>
+	<templateForTower source="towers/tower1_turret_4"/>
+	<templateForTower source="towers/tower1_turret_5"/>
+	<templateForTower source="towers/tower1_turret_6"/>
+</faction>

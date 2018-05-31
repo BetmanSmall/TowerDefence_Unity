@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower {
-    private Vector2 position;
+    private Vector2Int position;
     private float elapsedReloadTime;
     private TemplateForTower templateForTower;
 
@@ -13,7 +13,9 @@ public class Tower {
     // public Circle radiusDetectionСircle;
     // public Circle radiusFlyShellСircle;
 
-    public Tower(Vector2 position, TemplateForTower templateForTower, int player){
+    public GameObject gameObject;
+
+    public Tower(Vector2Int position, TemplateForTower templateForTower, int player){
         Debug.Log("Tower::Tower(" + position + ", " + templateForTower + "); -- ");
         this.position = position;
         this.elapsedReloadTime = templateForTower.reloadTime;
@@ -27,12 +29,12 @@ public class Tower {
             // this.radiusFlyShellСircle = new Circle(getCenterGraphicCoord(1), templateForTower.radiusFlyShell);
         // }
     }
-	
-	// // Update is called once per frame
-	// void Update () {
-		
-	// }
-	
+    
+    // // Update is called once per frame
+    // void Update () {
+        
+    // }
+    
 
     public bool recharge(float delta) {
         elapsedReloadTime += delta;
@@ -94,7 +96,7 @@ public class Tower {
 //         return getCenterGraphicCoord(GameField.isDrawableTowers);
 //     }
 
-    public Vector2 getPosition() {
+    public Vector2Int getPosition() {
         return position;
     }
 
