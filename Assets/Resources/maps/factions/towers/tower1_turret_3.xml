@@ -15,5 +15,5 @@
   <property name="shellAttackType" value="AutoTarget"/>
   <!-- <property name="shellEffectType" value="None"/> -->
  </properties>
- <model source="../../textures/turretsPack/turret_3"/>
+ <model source="../../../Towers/turretsPack/turret_3"/>
 </tileset>
