@@ -4,15 +4,15 @@ using UnityEngine;
 using System.Xml;
 
 public class TemplateForTower {
-    private Faction faction;
-    private string templateName;
+    public Faction faction;
+    public string templateName;
 
     // public Dictionary<string, string> properties; // mb? why not?
     public string   factionName;
     public string   name;
     public int      radiusDetection;
     public float    radiusFlyShell;
-    public int      damage;
+    public int      damage = 0;
     public int      size;
     public int      cost;
     public float    ammoSize;
@@ -160,33 +160,33 @@ public class TemplateForTower {
         //     Debug.Log("TemplateForTower::validate(); -- Can't get 'ammo'! Check the file");
     }
 
-    // public string toString() {
-    //     return toString(false);
-    // }
+    public string toString() {
+        return toString(false);
+    }
 
-    // public string toString(boolean full) {
-    //     StringBuilder sb = new StringBuilder();
-    //     sb.append("TemplateForTower[");
-    //     sb.append("templateName:" + templateName);
-    //     if(full) {
-    //         sb.append("," + "factionName:" + factionName);
-    //         sb.append("," + "name:" + name);
-    //         sb.append("," + "radiusDetection:" + radiusDetection);
-    //         sb.append("," + "radiusFlyShell:" + radiusFlyShell);
-    //         sb.append("," + "damage:" + damage);
-    //         sb.append("," + "size:" + size);
-    //         sb.append("," + "cost:" + cost);
-    //         sb.append("," + "ammoSize:" + ammoSize);
-    //         sb.append("," + "ammoSpeed:" + ammoSpeed);
-    //         sb.append("," + "reloadTime:" + reloadTime);
-    //         sb.append("," + "towerAttackType:" + towerAttackType);
-    //         sb.append("," + "shellAttackType:" + shellAttackType);
-    //         sb.append("," + "shellEffectEnum:" + shellEffectType);
-    //         sb.append("," + "capacity:" + capacity);
-    //     }
-    //     sb.append("]");
-    //     return sb.toString();
-    // }
+    public string toString(bool full) {
+        string sb = "";
+        sb += ("TemplateForTower[");
+        sb += ("templateName:" + templateName);
+        if(full) {
+            sb += ("," + "factionName:" + factionName);
+            sb += ("," + "name:" + name);
+            sb += ("," + "radiusDetection:" + radiusDetection);
+            sb += ("," + "radiusFlyShell:" + radiusFlyShell);
+            sb += ("," + "damage:" + damage);
+            sb += ("," + "size:" + size);
+            sb += ("," + "cost:" + cost);
+            sb += ("," + "ammoSize:" + ammoSize);
+            sb += ("," + "ammoSpeed:" + ammoSpeed);
+            sb += ("," + "reloadTime:" + reloadTime);
+            // sb += ("," + "towerAttackType:" + towerAttackType);
+            // sb += ("," + "shellAttackType:" + shellAttackType);
+            // sb += ("," + "shellEffectEnum:" + shellEffectType);
+            sb += ("," + "capacity:" + capacity);
+        }
+        sb += ("]");
+        return sb;
+    }
 
     public void setFaction(Faction faction) {
         this.faction = faction;
@@ -195,18 +195,4 @@ public class TemplateForTower {
     public string getFactionName() {
         return factionName;
     }
-
-    // protected static FileHandle getRelativeFileHandle(FileHandle file, String path) {
-    //     StringTokenizer tokenizer = new StringTokenizer(path, "\\/");
-    //     FileHandle result = file.parent();
-    //     while (tokenizer.hasMoreElements()) {
-    //         String token = tokenizer.nextToken();
-    //         if (token.equals(".."))
-    //             result = result.parent();
-    //         else {
-    //             result = result.child(token);
-    //         }
-    //     }
-    //     return result;
-    // }
 }

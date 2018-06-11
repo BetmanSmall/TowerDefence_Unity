@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameField : MonoBehaviour {
-    // public WaveManager waveManager; // ALL public for all || we are friendly :)
-    // public static CreepsManager creepsManager; // For Shell
+    public WaveManager waveManager; // ALL public for all || we are friendly :)
+    public static CreepsManager creepsManager; // For Shell
     private TowersManager towersManager;
     private FactionsManager factionsManager;
     public string mapPath = "maps/arena0";
@@ -28,8 +28,8 @@ public class GameField : MonoBehaviour {
     void Start() {
         Debug.Log("GameField::Start(); -- Start!");
         
-        // waveManager = new WaveManager();
-        // creepsManager = new CreepsManager();
+        waveManager = new WaveManager();
+        creepsManager = new CreepsManager();
         towersManager = new TowersManager();
         factionsManager = new FactionsManager(1f);
         factionsManager.loadFactions();
@@ -50,7 +50,7 @@ public class GameField : MonoBehaviour {
             //foreach (MapLayer mapLayer in mapLayers.Values) {
             for (int layerY = 0; layerY < mapLayers.Count; layerY++) {
                 MapLayer mapLayer = mapLayers [layerY];
-                Debug.Log ("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
+                Debug.Log("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
                 for (int z = 0; z < sizeFieldZ; z++) {
                     for (int x = 0; x < sizeFieldX; x++) {
                         TileModel tileModel = mapLayer.tileModels [x, z];
@@ -107,7 +107,98 @@ public class GameField : MonoBehaviour {
 //            print ("GameField::Update(); -- worldPos:" + worldPos);
 //        }
     }
-    
+
+    // ___!0!___ Creeps Section ____!!!___
+    public void setExitPoint(int x, int y) {
+        Debug.Log("GameField::setExitPoint(); -- ");
+        waveManager.setExitPoint(new Vector2Int(x, y));
+        // rerouteForAllCreeps(new Vector2Int(x, y));
+    }
+
+    // ___!1!___ Creeps Section ____!!!___
+    public void spawnCreepFromUser(TemplateForUnit templateForUnit) {
+        Debug.Log("GameField::spawnCreepFromUser(); -- templateForUnit:" + templateForUnit);
+        if (gamerGold >= templateForUnit.cost) {
+            gamerGold -= templateForUnit.cost;
+            foreach (Wave wave in waveManager.wavesForUser) {
+                createCreep(wave.spawnPoint, templateForUnit, wave.exitPoint, 1); // create Player1 Creep
+            }
+        }
+    }
+
+    private void spawnCreeps(float delta) {
+        List<WaveManager.TemplateNameAndPoints> allCreepsForSpawn = waveManager.getAllCreepsForSpawn(delta);
+        foreach (WaveManager.TemplateNameAndPoints templateNameAndPoints in allCreepsForSpawn) {
+            spawnCreep(templateNameAndPoints);
+        }
+    }
+
+    private void spawnCreep(WaveManager.TemplateNameAndPoints templateNameAndPoints) {
+        if (templateNameAndPoints != null) {
+            TemplateForUnit templateForUnit = factionsManager.getTemplateForUnitByName(templateNameAndPoints.templateName);
+            if (templateForUnit != null) {
+                createCreep(templateNameAndPoints.spawnPoint, templateForUnit, templateNameAndPoints.exitPoint, 0); // create Computer0 Creep
+            } else {
+                Debug.Log("GameField::spawnCreep(); -- templateForUnit == null | templateName:" + templateNameAndPoints.templateName);
+            }
+        }
+    }
+
+    public void createCreep(int x, int z) {
+        Debug.Log("GameField::createCreep(); -- x:" + x + " z:" + z);
+        createCreep(new Vector2Int(x, z), factionsManager.getRandomTemplateForUnitFromAllFaction(), Vector2Int.zero, 0); // create computer0 Creep
+    }
+
+    private void createCreep(Vector2Int spawnPoint, TemplateForUnit templateForUnit, Vector2Int exitPoint, int player) {
+        Debug.Log("GameField::createCreep(" + spawnPoint + ", " + templateForUnit.toString() + ", " + exitPoint + ", " + player + "); -- ");
+        if (exitPoint == Vector2Int.zero) {
+            // exitPoint = waveManager.lastExitPoint;
+            exitPoint = spawnPoint; // need change in future! TODO
+        }
+        if (spawnPoint != null && exitPoint != Vector2Int.zero) { // && pathFinder != null) {
+//            pathFinder.loadCharMatrix(getCharMatrix());
+            // List<Vector2Int> route = pathFinder.route(spawnPoint.x, spawnPoint.y, exitPoint.x, exitPoint.y);
+            List<Vector2Int> route = new List<Vector2Int>();
+            route.Add(new Vector2Int(spawnPoint.x, spawnPoint.y));
+            route.Add(new Vector2Int(exitPoint.x, exitPoint.y));
+            Debug.Log("GameField::createCreep(); -- route:" + route);
+            if (route != null) {
+                Creep creep = creepsManager.createCreep(route, templateForUnit, player);
+                field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
+                Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
+                pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
+                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelObject, pos, Quaternion.identity, this.transform);
+                gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                creep.gameObject = gameObject;
+                Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject);
+            } else {
+                Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");
+                if(towersManager.amountTowers() > 0) {
+                    Debug.Log("GameField::createCreep(); -- Remove one last tower! And retry call createCreep()");
+                    removeLastTower();
+                    createCreep(spawnPoint, templateForUnit, exitPoint, player);
+                }
+            }
+        } else {
+            Debug.Log("GameField::createCreep(); -- Bad spawnPoint:" + spawnPoint + " || exitPoint:" + exitPoint); //  + " || pathFinder:" + pathFinder);
+        }
+    }
+    // ___!2!___ Creeps Section ____!!!___
+
+    // ___!1!___ Towers Section ____!!!___
+//     public void buildTowersWithUnderConstruction(int x, int y) {
+//         if (underConstruction != null) {
+//             underConstruction.setEndCoors(x, y);
+//             createTower(underConstruction.startX, underConstruction.startY, underConstruction.templateForTower, 1);
+//             for (int k = 0; k < underConstruction.coorsX.size; k++) {
+// //            for(int k = underConstruction.coorsX.size-1; k >= 0; k--) {
+//                 createTower(underConstruction.coorsX.get(k), underConstruction.coorsY.get(k), underConstruction.templateForTower, 1);
+//             }
+//             underConstruction.clearStartCoors();
+//             rerouteForAllCreeps();
+//         }
+//     }
+
     public void towerActions(int x, int z) {
         Debug.Log("GameField::towerActions(); -- x:" + x + " z:" + z);
         if (field[x, z].isEmpty()) {
@@ -229,6 +320,7 @@ public class GameField : MonoBehaviour {
             gamerGold += tower.getTemplateForTower().cost;//*0.5;
         }
     }
+    // ___!2!___ Towers Section ____!!!___
 
     private bool cellIsEmpty(int x, int z) {
         if (x >= 0 && z >= 0) {

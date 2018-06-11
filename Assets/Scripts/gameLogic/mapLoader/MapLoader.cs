@@ -177,24 +177,24 @@ public class MapLoader {
     }
 
     public static string findFile(string mapPath, string filePath) {
-        Debug.Log("MapLoader::findFile(" + mapPath + ", " + filePath + "); -- ");
+        // Debug.Log("MapLoader::findFile(" + mapPath + ", " + filePath + "); -- ");
         try {
             // mapPath = mapPath.ReplaceAll need =(
             string result = mapPath.Substring(0, mapPath.LastIndexOf("/"));
             bool finished = false;
             do {
-                Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " finished:" + finished);
+                // Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " finished:" + finished);
                 if(result.Length == 0) {
                     result = filePath;
                     break;
                 }
                 int slashIndex = filePath.IndexOf("/");
                 if(slashIndex == -1) {
-                    Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
+                    // Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
                     result = result + "/" + filePath;
                     finished = true;
                 } else {
-                    Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
+                    // Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
                     string token = filePath.Substring(0, slashIndex);
                     filePath = filePath.Substring(slashIndex+1);
                     if(token == "..") {
@@ -208,7 +208,7 @@ public class MapLoader {
                         result = result + "/" + token;
                     }
                 }
-                Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " finished:" + finished);
+                // Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " finished:" + finished);
             } while (!finished);
             Debug.Log("MapLoader::findFile(); -- Exit result:" + result);
             return result;

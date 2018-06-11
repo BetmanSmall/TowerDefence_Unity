@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset name="unit3_skeleton_Lying" tilewidth="72" tileheight="72" tilecount="95" columns="5">
+ <properties>
+  <property name="factionName" value="Humans_Faction"/>
+  <property name="name" value="skeleton_Lying"/>
+  <property name="healthPoints" value="165"/>
+  <property name="bounty" value="30"/>
+  <property name="cost" value="30"/>
+  <property name="speed" value="0.5"/>
+  <property name="type" value="unit"/>
+ </properties>
+ <model source="../../../Creeps/skeletonsPack/skeleton_Lying"/>
+</tileset>

@@ -7,7 +7,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     public bool empty;
     public bool terrain;
     public Tower tower;
-    // public ArrayList<Creep> creeps;
+    public List<Creep> creeps;
     public int gameX, layerY, gameZ;
     public Vector3 graphicCoordinates;
     // TileModel tileModel;
@@ -107,42 +107,42 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         return false;
     }
 
-    // public Array<Creep> getCreeps() {
-    //     return creeps;
-    // }
+    public List<Creep> getCreeps() {
+        return creeps;
+    }
 
-    // public Creep getCreep() {
-    //     if (creeps != null) {
-    //         return creeps.first();
-    //     }
-    //     return null;
-    // }
+    public Creep getCreep() {
+        if (creeps != null && creeps.Count != 0) {
+            return creeps[0];
+        }
+        return null;
+    }
 
-    // public bool setCreep(Creep creep) {
-    //     if (empty) {
-    //         creeps = new Array<Creep>();
-    //         creeps.add(creep);
-    //         empty = false;
-    //         return true;
-    //     } else if (creeps != null) {
-    //         creeps.add(creep);
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    public bool setCreep(Creep creep) {
+        if (empty) {
+            creeps = new List<Creep>();
+            creeps.Add(creep);
+            empty = false;
+            return true;
+        } else if (creeps != null) {
+            creeps.Add(creep);
+            return true;
+        }
+        return false;
+    }
 
-    // public int removeCreep(Creep creep) {
-    //     if (creeps != null) {
-    //         creeps.removeValue(creep, false);
-    //         if (creeps.size == 0) {
-    //             creeps = null;
-    //             empty = true;
-    //             return 0;
-    //         }
-    //         return creeps.size;
-    //     }
-    //     return -1;
-    // }
+    public int removeCreep(Creep creep) {
+        if (creeps != null) {
+            creeps.Remove(creep);
+            if (creeps.Count == 0) {
+                creeps = null;
+                empty = true;
+                return 0;
+            }
+            return creeps.Count;
+        }
+        return -1;
+    }
 
     // public void dispose() {
     //     backgroundTiles.clear();

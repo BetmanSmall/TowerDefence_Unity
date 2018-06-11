@@ -13,20 +13,21 @@ public class FactionsManager {
         this.levelOfDifficulty = levelOfDifficulty;
     }
 
-    // public void addUnitToFaction(TemplateForUnit unit) {
-    //     String newFactionName = unit.getFactionName();
-    //     for (Faction faction : factions) {
-    //         if (faction.getName().equals(newFactionName)) {
-    //             faction.getTemplateForUnits().add(unit);
-    //             unit.setFaction(faction);
-    //             return;
-    //         }
-    //     }
-    //     Faction faction = new Faction(newFactionName);
-    //     faction.getTemplateForUnits().add(unit);
-    //     unit.setFaction(faction);
-    //     factions.add(faction);
-    // }
+    public void addUnitToFaction(TemplateForUnit unit) {
+        Debug.Log("FactionsManager::addUnitToFaction(); -- Unit name:" + unit.name);
+        string newFactionName = unit.getFactionName();
+        foreach (Faction faction in factions) {
+            if (faction.getName().Equals(newFactionName)) {
+                faction.getTemplateForUnits().Add(unit);
+                unit.setFaction(faction);
+                return;
+            }
+        }
+        Faction newFaction = new Faction(newFactionName);
+        newFaction.getTemplateForUnits().Add(unit);
+        unit.setFaction(newFaction);
+        factions.Add(newFaction);
+    }
 
     public void addTowerToFaction(TemplateForTower tower) {
         Debug.Log("FactionsManager::addTowerToFaction(); -- Tower name:" + tower.name);
@@ -44,16 +45,18 @@ public class FactionsManager {
         factions.Add(newFaction);
     }
 
-    // public TemplateForUnit getRandomTemplateForUnitFromFirstFaction() {
-    //     Faction faction = factions.first();
-    //     if (faction != null) {
-    //         TemplateForUnit templateForUnit = faction.getTemplateForUnits().random();
-    //         if (templateForUnit != null) {
-    //             return templateForUnit;
-    //         }
-    //     }
-    //     return null;
-    // }
+    public TemplateForUnit getRandomTemplateForUnitFromFirstFaction() {
+        Debug.Log("TemplateForUnit::getRandomTemplateForUnitFromFirstFaction(); -- factions:" + factions.Count);
+        Faction faction = factions[0];
+        if (faction != null) {
+            List<TemplateForUnit> templateForUnits = faction.getTemplateForUnits();
+            TemplateForUnit templateForUnit = templateForUnits[Random.Range(0, templateForUnits.Count-1)];
+            if (templateForUnit != null) {
+                return templateForUnit;
+            }
+        }
+        return null;
+    }
 
     public TemplateForTower getRandomTemplateForTowerFromFirstFaction() {
         Faction faction = factions[0];
@@ -69,51 +72,57 @@ public class FactionsManager {
 
     public TemplateForTower getRandomTemplateForTowerFromAllFaction() {
         List<TemplateForTower> allTowers = getAllTemplateForTowers();
-    //    int r = 0 + (int) (Math.random() * allTowers.size);
-    //    return allTowers.get(r);
         TemplateForTower template = allTowers[Random.Range(0, allTowers.Count-1)];
         Debug.Log("FactionsManager::getRandomTemplateForTowerFromAllFaction(); -- template" + template);
         return template;
     }
-    // public TemplateForUnit getTemplateForUnitFromFirstFactionByIndex(int index) {
-    //     Faction faction = factions.first();
-    //     if (faction != null) {
-    //         TemplateForUnit templateForUnit = faction.getTemplateForUnits().get(index);
-    //         if (templateForUnit != null) {
-    //             return templateForUnit;
-    //         }
-    //     }
-    //     return null;
-    // }
 
-    // public TemplateForUnit getTemplateForUnitFromFirstFactionByName(String templateName) {
-    //     Faction faction = factions.first();
-    //     if (faction != null) {
-    //         for (TemplateForUnit templateForUnit : faction.getTemplateForUnits()) {
-    //             if (templateForUnit != null) {
-    //                 if (templateForUnit.getTemplateName().equals(templateName)) {
-    //                     return templateForUnit;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return null;
-    // }
+    public TemplateForUnit getRandomTemplateForUnitFromAllFaction() {
+        List<TemplateForUnit> allUnits = getAllTemplateForUnits();
+        TemplateForUnit template = allUnits[Random.Range(0, allUnits.Count-1)];
+        Debug.Log("FactionsManager::getRandomTemplateForUnitFromAllFaction(); -- template" + template);
+        return template;
+    }
 
-    // public TemplateForUnit getTemplateForUnitByName(String templateName) {
-    //     for (Faction faction : factions) {
-    //         if (faction != null) {
-    //             for (TemplateForUnit templateForUnit : faction.getTemplateForUnits()) {
-    //                 if (templateForUnit != null) {
-    //                     if (templateForUnit.getTemplateName().equals(templateName)) {
-    //                         return templateForUnit;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return null;
-    // }
+    public TemplateForUnit getTemplateForUnitFromFirstFactionByIndex(int index) {
+        Faction faction = factions[0];
+        if (faction != null) {
+            TemplateForUnit templateForUnit = faction.getTemplateForUnits()[index];
+            if (templateForUnit != null) {
+                return templateForUnit;
+            }
+        }
+        return null;
+    }
+
+    public TemplateForUnit getTemplateForUnitFromFirstFactionByName(string templateName) {
+        Faction faction = factions[0];
+        if (faction != null) {
+            foreach (TemplateForUnit templateForUnit in faction.getTemplateForUnits()) {
+                if (templateForUnit != null) {
+                    if (templateForUnit.templateName.Equals(templateName)) {
+                        return templateForUnit;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public TemplateForUnit getTemplateForUnitByName(string templateName) {
+        foreach (Faction faction in factions) {
+            if (faction != null) {
+                foreach (TemplateForUnit templateForUnit in faction.getTemplateForUnits()) {
+                    if (templateForUnit != null) {
+                        if (templateForUnit.templateName.Equals(templateName)) {
+                            return templateForUnit;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     public List<TemplateForTower> getAllFirstTowersFromFirstFaction() {
         return factions[0].getTemplateForTowers();
@@ -129,25 +138,25 @@ public class FactionsManager {
         return allTowers;
     }
 
-    // public Array<TemplateForUnit> getAllTemplateForUnits() {
-    //     Array<TemplateForUnit> allTowers = new Array<TemplateForUnit>();
-    //     for (Faction faction : factions) {
-    //         for (TemplateForUnit template : faction.getTemplateForUnits()) {
-    //             allTowers.add(template);
-    //         }
-    //     }
-    //     return allTowers;
-    // }
+    public List<TemplateForUnit> getAllTemplateForUnits() {
+        List<TemplateForUnit> allTowers = new List<TemplateForUnit>();
+        foreach (Faction faction in factions) {
+            foreach (TemplateForUnit template in faction.getTemplateForUnits()) {
+                allTowers.Add(template);
+            }
+        }
+        return allTowers;
+    }
 
     public void loadFactions() {
         List<FileInfo> factions = new List<FileInfo>();
         DirectoryInfo info = new DirectoryInfo("Assets/Resources/maps/factions");
         FileInfo[] fileInfo = info.GetFiles();
         foreach (FileInfo file in fileInfo) {
-            Debug.Log("FactionsManager::loadFactions(); -- file:" + file);
+            // Debug.Log("FactionsManager::loadFactions(); -- file:" + file);
             factions.Add(file);
         }
-        Debug.Log("FactionsManager::loadFactions(); -- factions.Count:" + factions.Count);
+        // Debug.Log("FactionsManager::loadFactions(); -- factions.Count:" + factions.Count);
         foreach (FileInfo factionFileInfo in factions) {
         Debug.Log("FactionsManager::loadFactions(); -- factionFileInfo.Extension:" + factionFileInfo.Extension);
             if (factionFileInfo.Extension.Equals(".xml")) { // need Equals("fac")
@@ -176,8 +185,8 @@ public class FactionsManager {
     }
 
     private void loadFaction(FileInfo factionFile) {
+        Debug.Log("FactionsManager::loadFaction(" + factionFile + "); -- ");
         if(factionFile != null/* && !factionFile.isDirectory()*/) {
-            Debug.Log("FactionsManager::loadFaction(" + factionFile + "); -- ");
             try {
                 string factionFilePath = subPathToResources(factionFile.FullName);
                 TextAsset textAsset = Resources.Load<TextAsset>(factionFilePath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
@@ -192,17 +201,19 @@ public class FactionsManager {
                 string factionName = (root.Attributes["name"]!=null)?root.Attributes["name"].Value:null;
                 if (factionName != null) {
                     Faction faction = new Faction(factionName);
-                    // XmlNodeList templateForUnitElements = root.GetElementsByTagName("templateForUnit");
-                    // foreach (XmlElement templateForUnitElement in templateForUnitElements) {
-                    //     string source = (templateForUnitElement.Attributes["source"]!=null)?templateForUnitElement.Attributes["source"].Value:null;
-                    //     if (source != null) {
-                    //         FileHandle templateFile = getRelativeFileHandle(factionFile, source);
-                    //         TemplateForUnit templateForUnit = new TemplateForUnit(templateFile);
-                    //         templateForUnit.setFaction(faction);
-                    //         templateForUnit.healthPoints = (int)(templateForUnit.healthPoints*levelOfDifficulty); // simple level of difficulty
-                    //         faction.getTemplateForUnits().add(templateForUnit);
-                    //     }
-                    // }
+                    XmlNodeList templateForUnitElements = root.GetElementsByTagName("templateForUnit");
+                    foreach (XmlElement templateForUnitElement in templateForUnitElements) {
+                        string source = (templateForUnitElement.Attributes["source"]!=null)?templateForUnitElement.Attributes["source"].Value:null;
+                        if (source != null) {
+                            string templateFile = MapLoader.findFile(factionFilePath, source);
+                            TemplateForUnit templateForUnit = new TemplateForUnit(templateFile);
+                            templateForUnit.setFaction(faction);
+                            templateForUnit.healthPoints = (int)(templateForUnit.healthPoints*levelOfDifficulty); // simple level of difficulty
+                            Debug.Log("FactionsManager::loadFaction(); -1- faction.getTemplateForUnits().Count:" + faction.getTemplateForUnits().Count);
+                            faction.getTemplateForUnits().Add(templateForUnit);
+                            Debug.Log("FactionsManager::loadFaction(); -2- faction.getTemplateForUnits().Count:" + faction.getTemplateForUnits().Count);
+                        }
+                    }
                     XmlNodeList templateForTowerElements = root.GetElementsByTagName("templateForTower");
                     foreach (XmlElement templateForTowerElement in templateForTowerElements) {
                         string source = (templateForTowerElement.Attributes["source"]!=null)?templateForTowerElement.Attributes["source"].Value:null;

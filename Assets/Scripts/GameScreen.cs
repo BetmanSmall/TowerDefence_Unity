@@ -115,40 +115,33 @@ public class GameScreen : MonoBehaviour  {
         }
 //----------------------------------------------------------------------------------------------------------------------------------------------
 
-        if (Input.GetMouseButtonUp(0)) { 
-        Debug.Log ("Нажали1");
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit)) {
-//            Debug.Log ("GameScreen::Update(); -- hit:" + hit);
-            //bool isMouseDown = Input.GetKeyUp(0);
-//            bool isMouseUp = Input.GetMouseButtonUp(0);
-//            ClickCell click = hit.collider.gameObject.GetComponent<ClickCell>();
-//            Debug.Log ("GameScreen::Update(); -- hit.collider:" + hit.collider);
-        //    if (hit.collider.gameObject) {
-                //if (isMouseDown) {
-                    Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
-                    Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
-                    Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
-                    if(cell != null) {
-                        Debug.Log ("GameScreen::Update(); -- cell:" + cell.empty);
-                        gameField.towerActions(cell.gameX, cell.gameZ);
-                        // if(cell.isTerrain()) {
-                        //     cell.setTerrain(); // need reWrite in future! All codes need reWrite!
-                        // } else {
-                        //     cell.removeTerrain();
-                        // }
-                    }
-                } 
-//                else {
-//                    if (curCell != null) {
-//                        curCell.MouseExit();
-//                    }
-//                    click.MouseEnter();
-//                    curCell = click;
-//                }
-            //}
-        //}
+        if (Input.GetMouseButtonUp(0)) {
+            Debug.Log ("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(0));
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit)) {
+                Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+                Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+                Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+                if(cell != null) {
+                    Debug.Log ("GameScreen::Update(); -- cell:" + ((!cell.empty) ? ("[" + cell.gameX + ", " + cell.gameZ + "])") : ("cell.empty == true")) );
+                    gameField.towerActions(cell.gameX, cell.gameZ);
+                }
+            }
+        }
+        if (Input.GetMouseButtonUp(1)) {
+            Debug.Log ("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(1));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+                Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+                Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+                if(cell != null) {
+                    Debug.Log ("GameScreen::Update(); -- cell:" + ((!cell.empty) ? ("[" + cell.gameX + ", " + cell.gameZ + "])") : ("cell.empty == true")) );
+                    gameField.createCreep(cell.gameX, cell.gameZ);
+                }
+            }
         }
 
         float scrollDelta = Input.mouseScrollDelta.y;

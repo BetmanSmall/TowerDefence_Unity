@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset name="unit9_Skeleton_warlord" tilewidth="72" tileheight="72" tilecount="100" columns="5">
+ <properties>
+  <property name="factionName" value="Orcs_Faction"/>
+  <property name="name" value="Skeleton_warlord"/>
+  <property name="healthPoints" value="1"/>
+  <property name="bounty" value="0"/>
+  <property name="cost" value="1"/>
+  <property name="speed" value="0.1"/>
+  <property name="size" value="0.1"/>
+  <property name="type" value="unit"/>
+ </properties>
+ <model source="../../../Creeps/skeletonsPack/Skeleton_warlord"/>
+</tileset>
