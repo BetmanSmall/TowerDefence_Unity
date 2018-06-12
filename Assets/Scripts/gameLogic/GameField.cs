@@ -167,17 +167,17 @@ public class GameField : MonoBehaviour {
                 field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
                 Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
                 pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
-                Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelObject + " templateForUnit:" + templateForUnit.toString());
-                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelObject, pos, Quaternion.identity, this.transform);
+                Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelGameObject + " templateForUnit:" + templateForUnit.toString());
+                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, this.transform);
                 gameObject.name = templateForUnit.toString(); // mb comment!
-                RuntimeAnimatorController runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(templateForUnit.modelSource + "_Controller");
-                Debug.Log("GameField::createCreep(); -- templateForUnit.modelSource:" + templateForUnit.modelSource + " runtimeAnimatorController:" + runtimeAnimatorController);
-                gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                // RuntimeAnimatorController runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(templateForUnit.modelSource + "_Controller");
+                // Debug.Log("GameField::createCreep(); -- templateForUnit.modelSource:" + templateForUnit.modelSource + " runtimeAnimatorController:" + runtimeAnimatorController);
+                // gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
 
                 // gameObject.AddComponent<Animator>();
                 // gameObject.AddComponent<Animation>();
                 // runtimeAnimatorController.animationClips = templateForUnit.animationClips;
-                creep.setGameObjectAndAnimation(gameObject, runtimeAnimatorController);
+                creep.setGameObjectAndAnimation(gameObject);//, runtimeAnimatorController);
                 Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject);
             } else {
                 Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");

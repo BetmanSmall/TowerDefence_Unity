@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEditor;
 
 /**
  * Created by betmansmall on 09.02.2016.
@@ -18,10 +19,12 @@ public class TemplateForUnit {
     public int      cost;
     public int      bounty;
     public string   type;
-    public Object   modelObject;
     public string   modelSource;
+    public GameObject modelGameObject;
     public AnimationClip[] animationClips;
+    public Animation[] animations;
     public Motion[] motions;
+    public Object[] allObjects;
 
     public TemplateForUnit(string templateFilePath) {
         Debug.Log("TemplateForUnit::TemplateForUnit(" + templateFilePath + "); -- ");
@@ -111,17 +114,32 @@ public class TemplateForUnit {
                     Debug.Log("TemplateForUnit::TemplateForUnit(); -- relativeModelSource:" + relativeModelSource);
                     if(relativeModelSource != null) {
                         string modelSource = MapLoader.findFile(templateFilePath, relativeModelSource);
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
                         this.modelSource = modelSource;
-                        modelObject = Resources.Load<Object>(modelSource); // or GameObject?
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelObject);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
+
+                        allObjects = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/" + modelSource + ".fbx");
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- allObjects.Length:" + allObjects.Length);
+
+                        modelGameObject = Resources.Load<GameObject>(modelSource); // or GameObject?
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelGameObject);
+                        // modelGameObject.
+
                         animationClips = Resources.LoadAll<AnimationClip>(modelSource);
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClips.Length:" + animationClips.Length);
-                        // foreach(AnimationClip animationClip in animationClips) {
-                        //     Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip:" + animationClip.name);
-                        //     // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip.ToString():" + animationClip.);
-                        // }
+                        foreach(AnimationClip animationClip in animationClips) {
+                            Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip:" + animationClip.name);
+
+                            // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip.ToString():" + animationClip.);
+                        }
                         // Resources.LoadAssetAtPath(modelSource, typeof(Motion[]));
+
+                        foreach (Object oneObject in allObjects) {
+                            Debug.Log("TemplateForUnit::TemplateForUnit(); -- oneObject.name:" + oneObject.name);
+                            if (oneObject.GetType() == typeof(AnimationClip)) {
+                        //         // animationClips.
+                            }
+                        }
+
                         motions = Resources.LoadAll<Motion>(modelSource);
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- motions.Length:" + motions.Length);
                     }
