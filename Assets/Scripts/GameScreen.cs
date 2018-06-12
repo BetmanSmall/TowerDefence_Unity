@@ -20,7 +20,7 @@ public class GameScreen : MonoBehaviour  {
 //        camera = GetComponent<Camera>();
         print ("GameScreen::Start(); -- Start!");
         gridLineMaterial = Resources.Load<Material>("Materials/GridLineMaterial");
-        print ("GameScreen::Start(); -- gridLineMaterial:" + gridLineMaterial);
+        // print ("GameScreen::Start(); -- gridLineMaterial:" + gridLineMaterial);
         gameFieldObject = GameObject.Find ("GameField");
         print ("GameScreen::Start(); -- gameFieldObject:" + gameFieldObject);
         if (gameFieldObject == null) {

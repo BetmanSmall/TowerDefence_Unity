@@ -166,7 +166,7 @@ public class FactionsManager {
     }
 
     private string subPathToResources(string filePath) {
-        Debug.Log("FactionsManager::subPathToResources(); -- filePath:" + filePath);
+        // Debug.Log("FactionsManager::subPathToResources(); -- filePath:" + filePath);
         string exitStr = "";
         string[] strs = filePath.Split('\\');
         for(int k = 0; k < strs.Length; k++) {
@@ -209,9 +209,8 @@ public class FactionsManager {
                             TemplateForUnit templateForUnit = new TemplateForUnit(templateFile);
                             templateForUnit.setFaction(faction);
                             templateForUnit.healthPoints = (int)(templateForUnit.healthPoints*levelOfDifficulty); // simple level of difficulty
-                            Debug.Log("FactionsManager::loadFaction(); -1- faction.getTemplateForUnits().Count:" + faction.getTemplateForUnits().Count);
                             faction.getTemplateForUnits().Add(templateForUnit);
-                            Debug.Log("FactionsManager::loadFaction(); -2- faction.getTemplateForUnits().Count:" + faction.getTemplateForUnits().Count);
+                            Debug.Log("FactionsManager::loadFaction(); -- faction.getTemplateForUnits().Count:" + faction.getTemplateForUnits().Count);
                         }
                     }
                     XmlNodeList templateForTowerElements = root.GetElementsByTagName("templateForTower");
@@ -221,9 +220,8 @@ public class FactionsManager {
                             string templateFile = MapLoader.findFile(factionFilePath, source);
                             TemplateForTower templateForTower = new TemplateForTower(templateFile);
                             templateForTower.setFaction(faction);
-                            Debug.Log("FactionsManager::loadFaction(); -1- faction.getTemplateForTowers().Count:" + faction.getTemplateForTowers().Count);
                             faction.getTemplateForTowers().Add(templateForTower);
-                            Debug.Log("FactionsManager::loadFaction(); -2- faction.getTemplateForTowers().Count:" + faction.getTemplateForTowers().Count);
+                            Debug.Log("FactionsManager::loadFaction(); -- faction.getTemplateForTowers().Count:" + faction.getTemplateForTowers().Count);
                         }
                     }
                     Debug.Log("FactionsManager::loadFaction(); -- faction:" + faction);

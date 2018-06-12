@@ -155,7 +155,7 @@ public class GameField : MonoBehaviour {
             // exitPoint = waveManager.lastExitPoint;
             exitPoint = spawnPoint; // need change in future! TODO
         }
-        if (spawnPoint != null && exitPoint != Vector2Int.zero) { // && pathFinder != null) {
+        if (spawnPoint != Vector2Int.zero && exitPoint != Vector2Int.zero) { // && pathFinder != null) {
 //            pathFinder.loadCharMatrix(getCharMatrix());
             // List<Vector2Int> route = pathFinder.route(spawnPoint.x, spawnPoint.y, exitPoint.x, exitPoint.y);
             List<Vector2Int> route = new List<Vector2Int>();
@@ -166,7 +166,7 @@ public class GameField : MonoBehaviour {
                 Creep creep = creepsManager.createCreep(route, templateForUnit, player);
                 field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
                 Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
-                pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
+                pos.Set(pos.x-1.5f, pos.y+0.5f, pos.z-1.5f);
                 Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelGameObject + " templateForUnit:" + templateForUnit.toString());
                 GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, this.transform);
                 gameObject.name = templateForUnit.toString(); // mb comment!
