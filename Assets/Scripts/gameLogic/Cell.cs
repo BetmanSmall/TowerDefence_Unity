@@ -14,7 +14,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     // GameObject gameObjectModel;
 
     public Cell() {
-        Debug.Log("Cell::Cell(); -- ");
+        // Debug.Log("Cell::Cell(); -- ");
         // this.trees = ;
         this.empty = true;
         this.terrain = false;
@@ -23,7 +23,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     }
 
     public Cell(int gameX, int layerY, int gameZ, Vector3 graphicCoordinates) {
-        Debug.Log("Cell::Cell(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
+        // Debug.Log("Cell::Cell(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
         setBasicValues(gameX, layerY, gameZ, graphicCoordinates);
 //        this.gameObjectModel = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
 //        MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> ();
@@ -37,7 +37,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     }
 
     public void setBasicValues(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
-        Debug.Log("Cell::setBasicValues(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
+        // Debug.Log("Cell::setBasicValues(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
         this.gameX = gameX;
         this.layerY = layerY;
         this.gameZ = gameZ;

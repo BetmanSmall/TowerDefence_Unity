@@ -147,6 +147,7 @@ public class GameScreen : MonoBehaviour  {
         float scrollDelta = Input.mouseScrollDelta.y;
         if (scrollDelta != 0) {
             Debug.Log ("GameScreen::Update(); -- scrollDelta:" + scrollDelta + " Need implement zoom!");
+            transform.position.Scale(transform.position*scrollDelta);
         }
         
 //        Vector3 vp = camera.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));

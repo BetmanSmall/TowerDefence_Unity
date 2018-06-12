@@ -18,7 +18,10 @@ public class TemplateForUnit {
     public int      cost;
     public int      bounty;
     public string   type;
-    public Object modelObject;
+    public Object   modelObject;
+    public string   modelSource;
+    public AnimationClip[] animationClips;
+    public Motion[] motions;
 
     public TemplateForUnit(string templateFilePath) {
         Debug.Log("TemplateForUnit::TemplateForUnit(" + templateFilePath + "); -- ");
@@ -109,8 +112,18 @@ public class TemplateForUnit {
                     if(relativeModelSource != null) {
                         string modelSource = MapLoader.findFile(templateFilePath, relativeModelSource);
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
+                        this.modelSource = modelSource;
                         modelObject = Resources.Load<Object>(modelSource); // or GameObject?
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelObject);
+                        animationClips = Resources.LoadAll<AnimationClip>(modelSource);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClips.Length:" + animationClips.Length);
+                        // foreach(AnimationClip animationClip in animationClips) {
+                        //     Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip:" + animationClip.name);
+                        //     // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip.ToString():" + animationClip.);
+                        // }
+                        // Resources.LoadAssetAtPath(modelSource, typeof(Motion[]));
+                        motions = Resources.LoadAll<Motion>(modelSource);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- motions.Length:" + motions.Length);
                     }
                 }
             }

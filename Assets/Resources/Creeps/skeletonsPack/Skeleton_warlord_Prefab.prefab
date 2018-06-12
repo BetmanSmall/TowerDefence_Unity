@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 400084}
   - component: {fileID: 9500000}
   m_Layer: 0
-  m_Name: Skeleton_warlordPrefab
+  m_Name: Skeleton_warlord_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,6 +1301,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5b75db5cface3e14da6de01973fa2afc, type: 2}
   m_StaticBatchInfo:
@@ -1335,6 +1336,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5b75db5cface3e14da6de01973fa2afc, type: 2}
   m_StaticBatchInfo:
@@ -1387,6 +1389,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1400,6 +1403,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: f9b6dae4cb841134e864c51a8bf407ba, type: 2}
   m_StaticBatchInfo:
@@ -1481,6 +1485,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2420e5242a1356847b5788c53686d2b1, type: 2}
   m_StaticBatchInfo:
@@ -1531,6 +1536,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: b7758f27c83ca24429c8d906440a199a, type: 2}
   m_StaticBatchInfo:

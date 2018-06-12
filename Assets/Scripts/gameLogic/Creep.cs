@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Creep {
     private List<Vector2Int> route;
@@ -26,6 +27,7 @@ public class Creep {
     // private Animation animation;
     // public Array<ShellEffectType> shellEffectTypes;
     public GameObject gameObject;
+    // public CreepAnimatorClipInfo сreepAnimatorClipInfo;
 
     public Creep(List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
         if(route != null) {
@@ -55,7 +57,72 @@ public class Creep {
             Debug.LogError("Creep::Creep(); -- route == null");
         }
     }
-    
+
+    public bool setGameObjectAndAnimation(GameObject gameObject, RuntimeAnimatorController runtimeAnimatorController) {
+        Debug.Log("Creep::setGameObjectAndAnimation(); -- gameObject:" + gameObject + " runtimeAnimatorController:" + runtimeAnimatorController);
+        if(this.gameObject == null) {
+            this.gameObject = gameObject;
+
+            AnimationClip[] animations1 = AnimationUtility.GetAnimationClips(gameObject);
+            Debug.Log("Creep::setGameObjectAndAnimation(); -1- animations1:" + animations1 + " animations1.Length:" + animations1.Length);
+
+            Animator animator = gameObject.GetComponent<Animator>();
+            Debug.Log("Creep::setGameObjectAndAnimation(); -- animator:" + animator);
+            animator.runtimeAnimatorController = runtimeAnimatorController;
+            Debug.Log("Creep::setGameObjectAndAnimation(); -1- animator.runtimeAnimatorController:" + animator.runtimeAnimatorController);
+
+            // AnimationClip[] animations2 = AnimationUtility.GetAnimationClips(gameObject);
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -2- animations2:" + animations2 + " animations2.Length:" + animations2.Length);
+
+            // AnimationClip animationClip0 = templateForUnit.animationClips[0];
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip0:" + animationClip0);
+            // if(animationClip0) {
+                // animator.runtimeAnimatorController = new RuntimeAnimatorController();//emplateForUnit.animationClips;
+                AnimatorOverrideController aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
+                Debug.Log("Creep::setGameObjectAndAnimation(); -1- aoc.clips.Length:" + aoc.clips.Length);
+                var newAnimsList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+                Debug.Log("Creep::setGameObjectAndAnimation(); -1- newAnimsList.Count):" + newAnimsList.Count);
+                // foreach (AnimationClip animationClip in aoc.animationClips) {
+                Debug.Log("Creep::setGameObjectAndAnimation(); -- templateForUnit.animationClips.Length:" + templateForUnit.animationClips.Length);
+                foreach (AnimationClip animationClip in templateForUnit.animationClips) {
+                    Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip:" + animationClip);
+                    newAnimsList.Add(new KeyValuePair<AnimationClip, AnimationClip>(animationClip, animationClip));
+                }
+                Debug.Log("Creep::setGameObjectAndAnimation(); -2- newAnimsList.Count:" + newAnimsList.Count);
+                aoc.ApplyOverrides(newAnimsList);
+                aoc.GetOverrides(newAnimsList);
+                Debug.Log("Creep::setGameObjectAndAnimation(); -2.5- newAnimsList.Count:" + newAnimsList.Count);
+                Debug.Log("Creep::setGameObjectAndAnimation(); -2- aoc.clips.Length:" + aoc.clips.Length);
+                animator.runtimeAnimatorController = aoc;
+                Debug.Log("Creep::setGameObjectAndAnimation(); -2- animator.runtimeAnimatorController:" + animator.runtimeAnimatorController);
+                // gameObject.SetComponent<Animator>(animator);
+            // }
+
+            // Animation animation = gameObject.GetComponent<Animation>();
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -1- animation:" + animation);
+            // if(animation == null) {
+            //     animation = gameObject.AddComponent<Animation>();
+            // }
+            // foreach (AnimationClip animationClip in templateForUnit.animationClips) {
+            //     animation.AddClip(animationClip, animationClip.name);
+            // }
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -2- animation:" + animation);
+            
+            // this.сreepAnimatorClipInfo = new CreepAnimatorClipInfo(gameObject);
+            AnimationClip[] animations = AnimationUtility.GetAnimationClips(gameObject);
+            Debug.Log("Creep::setGameObjectAndAnimation(); -3- animations:" + animations + " animations.Length:" + animations.Length);
+            foreach (AnimationClip animationClip in animations) {
+                Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip:" + animationClip);
+            }
+            int randomInt = Random.Range(0, animations.Length);
+            string playAnimCurr = animations[randomInt].name;
+            Debug.Log("Creep::setGameObjectAndAnimation(); -- playAnimCurr:" + playAnimCurr + " randomInt:" + randomInt);
+            animator.Play(playAnimCurr);
+            return true;
+        }
+        return false;
+    }
+
     public void dispose() {
         route = null;
         oldPosition = Vector2Int.zero; // ?? LOL
@@ -64,7 +131,7 @@ public class Creep {
         // direction = null;
         // animation = null;
     }
-
+    
     // // Update is called once per frame
     // void Update () {
     // }

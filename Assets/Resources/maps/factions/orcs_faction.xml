@@ -2,12 +2,12 @@
 <faction name="Orcs_Faction">
 	<templateForUnit source="units/unit1_Skeleton_archer"/>
 	<templateForUnit source="units/unit2_Skeleton_footman"/>
-	<templateForUnit source="units/unit3_skeleton_Lying"/>
+	<!-- <templateForUnit source="units/unit3_skeleton_Lying"/> -->
 	<!-- <templateForUnit source="units/unit4_catapult.tsx"/> -->
-	<templateForUnit source="units/unit5_skeleton_Sitting"/>
+	<!-- <templateForUnit source="units/unit5_skeleton_Sitting"/> -->
 	<templateForUnit source="units/unit6_Skeleton_Sorcerer"/>
-	<templateForUnit source="units/unit7_skeleton_Standing"/>
-	<templateForUnit source="units/unit8_skeleton_T_pose"/>
+	<!-- <templateForUnit source="units/unit7_skeleton_Standing"/> -->
+	<!-- <templateForUnit source="units/unit8_skeleton_T_pose"/> -->
 	<templateForUnit source="units/unit9_Skeleton_warlord"/>
 	<!-- <templateForUnit source="unitPs_heaveKnight.tsx"/> -->
 	<!-- <templateForTower source="towers/tower3_cannon.tsx"/> -->

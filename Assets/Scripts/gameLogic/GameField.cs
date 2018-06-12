@@ -56,7 +56,7 @@ public class GameField : MonoBehaviour {
                         TileModel tileModel = mapLayer.tileModels [x, z];
                         if (tileModel != null) {
                             Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
-                            GameObject gameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform); 
+                            GameObject gameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
                             gameObject.AddComponent<Cell>();  ///УРЯ!
                             //Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
                             Cell cell = gameObject.GetComponent<Cell>();
@@ -167,9 +167,17 @@ public class GameField : MonoBehaviour {
                 field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
                 Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
                 pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
+                Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelObject + " templateForUnit:" + templateForUnit.toString());
                 GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelObject, pos, Quaternion.identity, this.transform);
+                gameObject.name = templateForUnit.toString(); // mb comment!
+                RuntimeAnimatorController runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(templateForUnit.modelSource + "_Controller");
+                Debug.Log("GameField::createCreep(); -- templateForUnit.modelSource:" + templateForUnit.modelSource + " runtimeAnimatorController:" + runtimeAnimatorController);
                 gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
-                creep.gameObject = gameObject;
+
+                // gameObject.AddComponent<Animator>();
+                // gameObject.AddComponent<Animation>();
+                // runtimeAnimatorController.animationClips = templateForUnit.animationClips;
+                creep.setGameObjectAndAnimation(gameObject, runtimeAnimatorController);
                 Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject);
             } else {
                 Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");
@@ -240,17 +248,17 @@ public class GameField : MonoBehaviour {
 //                    finishZ = (towerSize / 2);
 //                }
             }
-        Debug.Log("GameField::createTower(); -- test1");
+        // Debug.Log("GameField::createTower(); -- test1");
             for (int tmpX = startX; tmpX <= finishX; tmpX++)
                 for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++)
                     if (!cellIsEmpty(buildX + tmpX, buildZ + tmpZ))
                         return false;
 
-        Debug.Log("GameField::createTower(); -- test2");
+        // Debug.Log("GameField::createTower(); -- test2");
             // GOVNO CODE
             Vector2Int position = new Vector2Int(buildX, buildZ);
             Tower tower = towersManager.createTower(position, templateForTower, player);
-        Debug.Log("GameField::createTower(); -- test3 tower:" + tower);
+        // Debug.Log("GameField::createTower(); -- test3 tower:" + tower);
             // Debug.Log("GameField::createTower()", "-- templateForTower.towerAttackType:" + templateForTower.towerAttackType);
             // if (templateForTower.towerAttackType != TowerAttackType.Pit) {
                 for (int tmpX = startX; tmpX <= finishX; tmpX++) {
