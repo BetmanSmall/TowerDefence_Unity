@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEditor;
 
 /**
  * Created by betmansmall on 09.02.2016.
@@ -18,10 +19,14 @@ public class TemplateForUnit {
     public int      cost;
     public int      bounty;
     public string   type;
-    public Object   modelObject;
     public string   modelSource;
-    public AnimationClip[] animationClips;
-    public Motion[] motions;
+    public GameObject modelGameObject;
+    public Object[] allObjects;
+    public List<string> animationsName;
+    public Animation mainAnimation;
+    // public Animation[] animations;
+    // public AnimationClip[] animationClips;
+    // public Motion[] motions;
 
     public TemplateForUnit(string templateFilePath) {
         Debug.Log("TemplateForUnit::TemplateForUnit(" + templateFilePath + "); -- ");
@@ -111,19 +116,49 @@ public class TemplateForUnit {
                     Debug.Log("TemplateForUnit::TemplateForUnit(); -- relativeModelSource:" + relativeModelSource);
                     if(relativeModelSource != null) {
                         string modelSource = MapLoader.findFile(templateFilePath, relativeModelSource);
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
                         this.modelSource = modelSource;
-                        modelObject = Resources.Load<Object>(modelSource); // or GameObject?
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelObject);
-                        animationClips = Resources.LoadAll<AnimationClip>(modelSource);
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClips.Length:" + animationClips.Length);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
+                        animationsName = new List<string>();
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -1- animationsName:" + (animationsName!=null) );
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -1- animationsName.Count:" + animationsName.Count);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -1- mainAnimation:" + (mainAnimation!=null) );
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -1- mainAnimation.GetClipCount():" + ( (mainAnimation!=null)?(mainAnimation.GetClipCount()):0 ) );
+
+                        modelGameObject = Resources.Load<GameObject>(modelSource); // or GameObject?
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelGameObject);
+                        // modelGameObject.
+
+                        allObjects = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/" + modelSource + ".fbx");
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- allObjects.Length:" + allObjects.Length);
+                        int count = 0;
+                        foreach (Object oneObject in allObjects) {
+                            Debug.Log("TemplateForUnit::TemplateForUnit(); -- oneObject.GetType():" + oneObject.GetType() + " oneObject.name:" + oneObject.name);
+                            if (oneObject.GetType() == typeof(AnimationClip)) {
+                                AnimationClip clip = oneObject as AnimationClip;
+                                string animName = oneObject.name.ToString();
+                                // ( (mainAnimation!=null) ? (mainAnimation.AddClip(clip, animName)) : (false));
+                                Debug.Log("Creep::setGameObjectAndAnimation(); -- animationsName[" + count + "]:" + animName);
+                                if(!animName.Equals("__preview__Take 001")) { // ???WTF???
+                                    animationsName.Add(animName);
+                                    count++;
+                                }
+                            } else if (oneObject.GetType() == typeof(Animation)) {
+                                this.mainAnimation = oneObject as Animation;
+                            }
+                        }
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -2- animationsName:" + (animationsName!=null) );
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -2- animationsName.Count:" + animationsName.Count);
+                        Debug.Log("TemplateForUnit::TemplateForUnit(); -2- mainAnimation.GetClipCount():" + mainAnimation.GetClipCount());
+
+                        // animationClips = Resources.LoadAll<AnimationClip>(modelSource);
+                        // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClips.Length:" + animationClips.Length);
                         // foreach(AnimationClip animationClip in animationClips) {
-                        //     Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip:" + animationClip.name);
-                        //     // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip.ToString():" + animationClip.);
+                            // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip:" + animationClip.name);
+                            // Debug.Log("TemplateForUnit::TemplateForUnit(); -- animationClip.ToString():" + animationClip.);
                         // }
                         // Resources.LoadAssetAtPath(modelSource, typeof(Motion[]));
-                        motions = Resources.LoadAll<Motion>(modelSource);
-                        Debug.Log("TemplateForUnit::TemplateForUnit(); -- motions.Length:" + motions.Length);
+                        // motions = Resources.LoadAll<Motion>(modelSource);
+                        // Debug.Log("TemplateForUnit::TemplateForUnit(); -- motions.Length:" + motions.Length);
                     }
                 }
             }
