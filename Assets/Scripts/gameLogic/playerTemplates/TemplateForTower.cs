@@ -10,18 +10,18 @@ public class TemplateForTower {
     // public Dictionary<string, string> properties; // mb? why not?
     public string   factionName;
     public string   name;
-    public int      radiusDetection;
-    public float    radiusFlyShell;
-    public int      damage = 0;
-    public int      size;
-    public int      cost;
-    public float    ammoSize;
-    public float    ammoSpeed;
-    public float    reloadTime;
+    // public int      radiusDetection;
+    // public float    radiusFlyShell;
+    public int      damage = int.MinValue;
+    public int      size = int.MinValue;
+    public int      cost = int.MinValue;
+    // public float    ammoSize = float.MinValue;
+    // public float    ammoSpeed = float.MinValue;
+    // public float    reloadTime = float.MinValue;
     // public TowerAttackType towerAttackType;
     // public ShellAttackType shellAttackType;
     // public ShellEffectType shellEffectType;
-    public int      capacity;
+    // public int      capacity == int.MinValue;
 //    public int ammoDistance;
 
     // public TiledMapTile idleTile;
@@ -59,22 +59,22 @@ public class TemplateForTower {
                                 this.factionName = value;
                             } else if (key.Equals("name")) {
                                 this.name = value;
-                            } else if (key.Equals("radiusDetection")) {
-                                this.radiusDetection = int.Parse(value);
-                            } else if (key.Equals("radiusFlyShell")) {
-                                this.radiusFlyShell = float.Parse(value);
+                            // } else if (key.Equals("radiusDetection")) {
+                            //     this.radiusDetection = int.Parse(value);
+                            // } else if (key.Equals("radiusFlyShell")) {
+                            //     this.radiusFlyShell = float.Parse(value);
                             } else if (key.Equals("damage")) {
                                 this.damage = int.Parse(value);
                             } else if (key.Equals("size")) {
                                 this.size = int.Parse(value);
                             } else if (key.Equals("cost")) {
                                 this.cost = int.Parse(value);
-                            } else if (key.Equals("ammoSize")) {
-                                this.ammoSize = float.Parse(value);
-                            } else if (key.Equals("ammoSpeed")) {
-                                this.ammoSpeed = float.Parse(value);
-                            } else if (key.Equals("reloadTime")) {
-                                this.reloadTime = float.Parse(value);
+                            // } else if (key.Equals("ammoSize")) {
+                            //     this.ammoSize = float.Parse(value);
+                            // } else if (key.Equals("ammoSpeed")) {
+                            //     this.ammoSpeed = float.Parse(value);
+                            // } else if (key.Equals("reloadTime")) {
+                            //     this.reloadTime = float.Parse(value);
                             // } else if (key.Equals("towerAttackType")) {
                             //     this.towerAttackType = TowerAttackType.getType(value);
                             // } else if (key.Equals("shellAttackType")) {
@@ -133,25 +133,25 @@ public class TemplateForTower {
         // else if(this.radiusFlyShell == null && this.shellAttackType != ShellAttackType.FirstTarget)
         //     Debug.Log("TemplateForTower::validate(); -- Can't get 'radiusFlyShell'! Check the file");
 //            this.radiusFlyShell = 0f;
-        else if(this.damage == null)
+        else if(this.damage == int.MinValue)
             Debug.Log("TemplateForTower::validate(); -- Can't get 'damage'! Check the file");
-        else if(this.size == null)
+        else if(this.size == int.MinValue)
             Debug.Log("TemplateForTower::validate(); -- Can't get 'size'! Check the file");
-        else if(this.cost == null)
+        else if(this.cost == int.MinValue)
             Debug.Log("TemplateForTower::validate(); -- Can't get 'cost'! Check the file");
-        else if(this.ammoSize == null)
-            Debug.Log("TemplateForTower::validate(); -- Can't get 'ammoSize'! Check the file");
-        else if(this.ammoSpeed == null)
-            Debug.Log("TemplateForTower::validate(); -- Can't get 'ammoSpeed'! Check the file");
-        else if(this.reloadTime == null)
-            Debug.Log("TemplateForTower::validate(); -- Can't get 'reloadTime'! Check the file");
+        // else if(this.ammoSize == float.MinValue)
+        //     Debug.Log("TemplateForTower::validate(); -- Can't get 'ammoSize'! Check the file");
+        // else if(this.ammoSpeed == float.MinValue)
+        //     Debug.Log("TemplateForTower::validate(); -- Can't get 'ammoSpeed'! Check the file");
+        // else if(this.reloadTime == float.MinValue)
+        //     Debug.Log("TemplateForTower::validate(); -- Can't get 'reloadTime'! Check the file");
         // else if(this.towerAttackType == null)
         //     Debug.Log("TemplateForTower::validate(); -- Can't get 'towerAttackType'! Check the file");
         // else if(this.shellAttackType == null && this.towerAttackType != TowerAttackType.Pit)
         //     Debug.Log("TemplateForTower::validate(); -- Can't get 'shellAttackType'! Check the file");
 //        else if(this.shellEffectType == null)
 //            Debug.Log("TemplateForTower::validate(); -- Can't get 'shellEffectEnum'! Check the file");
-        // else if(this.towerAttackType == TowerAttackType.Pit && this.capacity == null)
+        // else if(this.towerAttackType == TowerAttackType.Pit && this.capacity == int.MinValue)
         //     Debug.Log("TemplateForTower::validate(); -- Can't get 'capacity'! When towerAttackType==Pit");
 
         // if(idleTile == null)
@@ -171,18 +171,18 @@ public class TemplateForTower {
         if(full) {
             sb += ("," + "factionName:" + factionName);
             sb += ("," + "name:" + name);
-            sb += ("," + "radiusDetection:" + radiusDetection);
-            sb += ("," + "radiusFlyShell:" + radiusFlyShell);
+            // sb += ("," + "radiusDetection:" + radiusDetection);
+            // sb += ("," + "radiusFlyShell:" + radiusFlyShell);
             sb += ("," + "damage:" + damage);
             sb += ("," + "size:" + size);
             sb += ("," + "cost:" + cost);
-            sb += ("," + "ammoSize:" + ammoSize);
-            sb += ("," + "ammoSpeed:" + ammoSpeed);
-            sb += ("," + "reloadTime:" + reloadTime);
+            // sb += ("," + "ammoSize:" + ammoSize);
+            // sb += ("," + "ammoSpeed:" + ammoSpeed);
+            // sb += ("," + "reloadTime:" + reloadTime);
             // sb += ("," + "towerAttackType:" + towerAttackType);
             // sb += ("," + "shellAttackType:" + shellAttackType);
             // sb += ("," + "shellEffectEnum:" + shellEffectType);
-            sb += ("," + "capacity:" + capacity);
+            // sb += ("," + "capacity:" + capacity);
         }
         sb += ("]");
         return sb;

@@ -71,7 +71,7 @@ public class WaveManager {
         foreach (Wave wave in wavesForUser) {
             points.Add(wave.exitPoint);
         }
-        if (lastExitPoint != null) {
+        if (lastExitPoint != Vector2Int.zero) {
             points.Add(lastExitPoint);
         }
         return points;

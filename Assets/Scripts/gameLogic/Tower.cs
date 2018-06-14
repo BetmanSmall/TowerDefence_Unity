@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower {
     private Vector2Int position;
-    private float elapsedReloadTime;
+    // private float elapsedReloadTime;
     private TemplateForTower templateForTower;
 
     public int player; // In Future need change to enumPlayers {Computer0, Player1, Player2} and etc
@@ -18,7 +18,7 @@ public class Tower {
     public Tower(Vector2Int position, TemplateForTower templateForTower, int player){
         Debug.Log("Tower::Tower(" + position + ", " + templateForTower + "); -- ");
         this.position = position;
-        this.elapsedReloadTime = templateForTower.reloadTime;
+        // this.elapsedReloadTime = templateForTower.reloadTime;
         this.templateForTower = templateForTower;
 
         this.player = player;
@@ -37,10 +37,10 @@ public class Tower {
     
 
     public bool recharge(float delta) {
-        elapsedReloadTime += delta;
-        if(elapsedReloadTime >= templateForTower.reloadTime) {
-            return true;
-        }
+        // elapsedReloadTime += delta;
+        // if(elapsedReloadTime >= templateForTower.reloadTime) {
+        //     return true;
+        // }
         return false;
     }
 
@@ -114,9 +114,9 @@ public class Tower {
 //    public void setRadiusDetection(int radiusDetection) {
 //        this.radiusDetection = radiusDetection;
 //    }
-    public int getRadiusDetection() {
-        return templateForTower.radiusDetection;
-    }
+    // public int getRadiusDetection() {
+    //     return templateForTower.radiusDetection;
+    // }
 
 //    public void setReloadTime(float reloadTime) {
 //        this.reloadTime = reloadTime;

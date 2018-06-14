@@ -23,6 +23,7 @@ public class GameField : MonoBehaviour {
     // public int maxOfMissedCreepsForPlayer1;
     // public int missedCreepsForPlayer1;
     // GAME INTERFACE ZONE2
+    // LineRenderer lineRenderer;
 
     // Use this for initialization
     void Start() {
@@ -39,7 +40,9 @@ public class GameField : MonoBehaviour {
         sizeFieldX = int.Parse(map.properties ["width"]);
         sizeFieldZ = int.Parse(map.properties ["height"]);
 
-        createField (sizeFieldX, sizeFieldZ, map.mapLayers);
+        // lineRenderer = gameObject.AddComponent<LineRenderer>();
+        createField(sizeFieldX, sizeFieldZ, map.mapLayers);
+        WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
     }
 
@@ -53,14 +56,14 @@ public class GameField : MonoBehaviour {
                 Debug.Log("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
                 for (int z = 0; z < sizeFieldZ; z++) {
                     for (int x = 0; x < sizeFieldX; x++) {
-                        TileModel tileModel = mapLayer.tileModels [x, z];
+                        TileModel tileModel = mapLayer.tileModels[x, z];
                         if (tileModel != null) {
                             Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
-                            GameObject gameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
-                            gameObject.AddComponent<Cell>();  ///УРЯ!
+                            GameObject newCellGameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
                             //Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
-                            Cell cell = gameObject.GetComponent<Cell>();
+                            Cell cell = newCellGameObject.AddComponent<Cell>();
                             cell.setBasicValues(x, layerY, z, /*tileModel,*/ graphicCoordinates);
+                            // cell.setDebugLineRender(lineRenderer);
                             if(tileModel.properties.ContainsKey("terrain")) {
                                 cell.setTerrain();
                             }

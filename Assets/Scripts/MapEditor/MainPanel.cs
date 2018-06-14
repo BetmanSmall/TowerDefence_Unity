@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MainPanel : MonoBehaviour {
-
     public int mapHeight, mapWidth;
 //    public Cell[,] field;
     public Material lineMat;
@@ -16,19 +15,15 @@ public class MainPanel : MonoBehaviour {
     void Start () {
         //defaultTerrain = Instantiate (Resources.Load<GameObject>(ModelPath));
     //    field = new Cell[mapHeight, mapWidth];
-
         //LoadDefailtTerrain ();
     }
 
-    void LoadDefailtTerrain(){
-        
+    void LoadDefailtTerrain() {
         Mesh mesh = Resources.Load<GameObject>(ModelPath).GetComponentInChildren<MeshFilter>().sharedMesh;
 
-        int sizeCellX = (int)mesh.bounds.size.x;
-        int sizeCellY = (int)mesh.bounds.size.y;
-        int sizeCellZ = (int)mesh.bounds.size.z;
-
-
+        // int sizeCellX = (int)mesh.bounds.size.x;
+        // int sizeCellY = (int)mesh.bounds.size.y;
+        // int sizeCellZ = (int)mesh.bounds.size.z;
 
 //        for (int x = 0; x < mapHeight; x++) {
 //            for (int z = 0; z < mapWidth; z++) {

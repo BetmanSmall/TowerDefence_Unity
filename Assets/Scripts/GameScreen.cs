@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class GameScreen : MonoBehaviour  {
     // DrawCameraGrid  && WhichCell
@@ -18,44 +19,54 @@ public class GameScreen : MonoBehaviour  {
 
     void Start() {
 //        camera = GetComponent<Camera>();
-        print ("GameScreen::Start(); -- Start!");
+        Debug.Log("GameScreen::Start(); -- Start!");
         gridLineMaterial = Resources.Load<Material>("Materials/GridLineMaterial");
-        // print ("GameScreen::Start(); -- gridLineMaterial:" + gridLineMaterial);
-        gameFieldObject = GameObject.Find ("GameField");
-        print ("GameScreen::Start(); -- gameFieldObject:" + gameFieldObject);
+        // Debug.Log("GameScreen::Start(); -- gridLineMaterial:" + gridLineMaterial);
+        gameFieldObject = GameObject.Find("GameField");
+        Debug.Log("GameScreen::Start(); -- gameFieldObject:" + gameFieldObject);
         if (gameFieldObject == null) {
             Debug.LogError ("GameScreen::Start(); -- Not found GameField<GameObject> in hierarchy");
             return;
         } else {
             gameField = gameFieldObject.GetComponent<GameField>();
-            print ("GameScreen::Start(); -- gameField:" + gameField);
+            Debug.Log("GameScreen::Start(); -- gameField:" + gameField);
         }
     }
 
     void OnPostRender() {
-//        print ("GameScreen::OnPostRender(); -- Start!");
+        // Debug.Log("GameScreen::OnPostRender(); -- Start!");
         drawGrid();
+        // Debug.Log("GameScreen::OnPostRender(); -- test1!");
+        drawWaveAlgorithmNumbers();
     }
 
     void OnDrawGizmos() {
-//        print ("GameScreen::OnDrawGizmos(); -- Start!");
+        // Debug.Log("GameScreen::OnDrawGizmos(); -- Start!");
         drawGrid();
+        // Debug.Log("GameScreen::OnDrawGizmos(); -- test1!");
+        drawWaveAlgorithmNumbers();
     }
 
     void drawGrid() {
-//        print ("GameScreen::drawGrid(); -- gameField:" + gameField);
+    //    Debug.Log("GameScreen::drawGrid(); -- gameField:" + gameField);
         if (gameField != null) {
             int sizeFieldX = gameField.sizeFieldX;
             int sizeFieldZ = gameField.sizeFieldZ;
             float sizeCellX = gameField.sizeCellX;
             float sizeCellZ = gameField.sizeCellZ;
-//            print ("GameScreen::drawGrid(); -- gameField.sizeFieldX:" + gameField.sizeFieldX + " gameField.sizeFieldZ:" + gameField.sizeFieldZ);
-//            print ("GameScreen::drawGrid(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
+        //    Debug.Log("GameScreen::drawGrid(); -- gameField.sizeFieldX:" + gameField.sizeFieldX + " gameField.sizeFieldZ:" + gameField.sizeFieldZ);
+        //    Debug.Log("GameScreen::drawGrid(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
+            for (int z = 0; z <= sizeFieldZ; z++) {
+                drawLine (0, z*sizeCellZ, sizeFieldZ*sizeCellX, z*sizeCellZ);
+            }
             for (int x = 0; x <= sizeFieldX; x++) {
                 drawLine (x*sizeCellX, 0, x*sizeCellX, sizeFieldX*sizeCellZ);
             }
             for (int z = 0; z <= sizeFieldZ; z++) {
-                drawLine (0, z*sizeCellZ, sizeFieldZ*sizeCellX, z*sizeCellZ);
+                for (int x = 0; x <= sizeFieldX; x++) {
+                    drawLine (0, z*sizeCellZ, sizeFieldZ*sizeCellX, z*sizeCellZ);
+                    // drawLine (x*sizeCellX, 0, x*sizeCellX, sizeFieldX*sizeCellZ);
+                }
             }
         }
     }
@@ -68,8 +79,33 @@ public class GameScreen : MonoBehaviour  {
         GL.End();
     }
 
+    void drawWaveAlgorithmNumbers() {
+    //    Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField:" + gameField);
+        if (gameField != null) {
+            int sizeFieldX = gameField.sizeFieldX;
+            int sizeFieldZ = gameField.sizeFieldZ;
+            float sizeCellX = gameField.sizeCellX;
+            float sizeCellZ = gameField.sizeCellZ;
+            // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField.sizeFieldX:" + gameField.sizeFieldX + " gameField.sizeFieldZ:" + gameField.sizeFieldZ);
+            // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
+            for (int x = 0; x < sizeFieldX; x++) {
+                for (int z = 0; z < sizeFieldZ; z++) {
+                    Vector3 pos = new Vector3(x * sizeCellX + sizeCellX/2, 0f, z * sizeCellZ + sizeCellZ/2); // все тут нужно понять
+                    // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- x:" + x + " z:" + z + " pos:" + pos + " gameField:" + gameField);
+                    // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField.field:" + gameField.field);
+                    Cell cell = gameField.field[x, z];
+                    // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- x:" + x + " z:" + z + " pos:" + pos + " cell:" + cell);
+                    if(cell != null) {
+                        int numberByWaveAlgorithm = gameField.field[x, z].numberByWaveAlgorithm;
+                        Handles.Label(pos, numberByWaveAlgorithm.ToString());
+                    }
+                }
+            }
+        }
+    }
+
     void Update() {
-//        Debug.Log ("GameScreen::Update(); -- Start!");
+//        Debug.Log("GameScreen::Update(); -- Start!");
         if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
             transform.position -= new Vector3 (cameraSpeed * Time.deltaTime, 0, 0);
         }
@@ -106,7 +142,7 @@ public class GameScreen : MonoBehaviour  {
         if (Input.GetButton("Fire1") || Input.GetMouseButton(0)) { // Работает только вместе
             
             Vector3 delta = Input.mousePosition - lastPosition;
-//            Debug.Log ("GameScreen::Update(); -- delta:" + delta);
+//            Debug.Log("GameScreen::Update(); -- delta:" + delta);
 //            transform.Translate(delta.x * mouseSensitivity, 0f, delta.y * mouseSensitivity);
             Vector3 olsPos = transform.position;
             Vector3 newPos = new Vector3 (olsPos.x - (delta.x * mouseSensitivity), olsPos.y, olsPos.z - (delta.y * mouseSensitivity));
