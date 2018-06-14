@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// [RequireComponent(typeof(LineRenderer))]
 public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     // public ArrayList<Tree> trees;
     public bool empty;
@@ -12,6 +13,17 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     public Vector3 graphicCoordinates;
     // TileModel tileModel;
     // GameObject gameObjectModel;
+    public int numberByWaveAlgorithm;
+    
+    // LineRenderer lineRenderer;
+    // [Range(0.1f, 100f)]
+    // public float radius = 1.0f;
+    // [Range(0,5)]
+    // public float xRadius = 5;
+    // [Range(0,5)]
+    // public float yRadius = 5;
+    // [Range(0, 256)]
+    // public int numSegments = 128;
 
     public Cell() {
         // Debug.Log("Cell::Cell(); -- ");
@@ -19,7 +31,13 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         this.empty = true;
         this.terrain = false;
         this.tower = null;
-        // this.creeps = null;
+        this.creeps = null;
+        // gameX = 0, layerY = 0, gameZ = 0;
+        this.graphicCoordinates = Vector3.zero;
+        // this.tileModel = null;
+        // this.gameObjectModel = null;
+        // this.numberByWaveAlgorithm;
+        // setDebugLineRender();
     }
 
     public Cell(int gameX, int layerY, int gameZ, Vector3 graphicCoordinates) {
@@ -34,6 +52,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
 //            material.color = color;
 //            Debug.Log("GameField::Start(); -- material.color:" + material.color);
 //        }
+        // setDebugLineRender();
     }
 
     public void setBasicValues(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
@@ -45,6 +64,51 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         this.graphicCoordinates = graphicCoordinates;
     }
 
+    // public void setDebugLineRender(LineRenderer lineRenderer) {
+    //     // this.gameObject.AddComponent<LineRenderer>();
+    //     // lineRenderer = gameObject.GetComponentInParent<LineRenderer>();
+    //     this.lineRenderer = lineRenderer;
+    //     // lineRenderer.SetVertexCount(numSegments + 1);
+    //     lineRenderer.useWorldSpace = true;
+    //     CreatePoints();
+    //     // DoRenderer();
+    // }
+
+    // void CreatePoints() {
+    //     float x;
+    //     float y;
+    //     float z;
+    //     float angle = 20f;
+    //     for (int i = 0; i < (numSegments + 1); i++) {
+    //         x = Mathf.Sin (Mathf.Deg2Rad * angle) * radius;
+    //         z = Mathf.Cos (Mathf.Deg2Rad * angle) * radius;
+    //         lineRenderer.SetPosition (i,new Vector3(x,0,z) );
+    //         angle += (360f / numSegments);
+    //     }
+    // }
+
+    // public void DoRenderer() {
+    //     LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
+    //     Color c1 = new Color(1f, 0f, 0f, 1f);
+    //     Color c2 = new Color(0f, 1f, 0f, 1f);
+    //     lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+    //     lineRenderer.SetColors(c1, c2);
+    //     lineRenderer.SetWidth(0.1f, 0.9f);
+    //     // lineRenderer.SetVertexCount(numSegments + 1);
+    //     lineRenderer.useWorldSpace = true;
+
+    //     float deltaTheta = (float) (2.0 * Mathf.PI) / numSegments;
+    //     float theta = 0f;
+
+    //     for (int i = 0 ; i < numSegments + 1 ; i++) {
+    //         float x = radius * Mathf.Cos(theta);
+    //         float z = radius * Mathf.Sin(theta);
+    //         Vector3 pos = new Vector3(x, 0, z);
+    //         lineRenderer.SetPosition(i, pos);
+    //         theta += deltaTheta;
+    //     }
+    // }
+
     // public void setGraphicCoordinates();
 
     public Vector3 getGraphicCoordinates() {
@@ -52,7 +116,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     }
 
     public bool isEmpty() {
-        Debug.Log("Cell::isEmpty(); -- empty:" + empty);
+        // Debug.Log("Cell::isEmpty(); -- empty:" + empty);
         return empty;
     }
 

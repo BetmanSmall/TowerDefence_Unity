@@ -14,10 +14,10 @@ public class TemplateForUnit {
     // public Dictionary<string, string> properties; // mb? why not?
     public string   factionName;
     public string   name;
-    public float    speed;
-    public int      healthPoints;
-    public int      cost;
-    public int      bounty;
+    public float    speed = float.MinValue;
+    public int      healthPoints = int.MinValue;
+    public int      cost = int.MinValue;
+    public int      bounty = int.MinValue;
     public string   type;
     public string   modelSource;
     public GameObject modelGameObject;
@@ -134,13 +134,13 @@ public class TemplateForUnit {
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- allObjects.Length:" + allObjects.Length);
                         int count = 0;
                         foreach (Object oneObject in allObjects) {
-                            Debug.Log("TemplateForUnit::TemplateForUnit(); -- oneObject.GetType():" + oneObject.GetType() + " oneObject.name:" + oneObject.name);
+                            // Debug.Log("TemplateForUnit::TemplateForUnit(); -- oneObject.GetType():" + oneObject.GetType() + " oneObject.name:" + oneObject.name);
                             if (oneObject.GetType() == typeof(AnimationClip)) {
-                                AnimationClip clip = oneObject as AnimationClip;
+                                // AnimationClip clip = oneObject as AnimationClip;
                                 string animName = oneObject.name.ToString();
                                 animationClip.AddClip(clip, animName);
                                 // ( (mainAnimation!=null) ? (mainAnimation.AddClip(clip, animName)) : (false));
-                                Debug.Log("Creep::setGameObjectAndAnimation(); -- animationsName[" + count + "]:" + animName);
+                                // Debug.Log("Creep::setGameObjectAndAnimation(); -- animationsName[" + count + "]:" + animName);
                                 if(!animName.Equals("__preview__Take 001")) { // ???WTF???
                                     animationsName.Add(animName);
                                     count++;
@@ -181,13 +181,13 @@ public class TemplateForUnit {
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'factionName'! Check the file");
         else if(this.name == null)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'name'! Check the file");
-        else if(this.speed == null)
+        else if(this.speed == float.MinValue)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'speed'! Check the file");
-        else if(this.healthPoints == null)
+        else if(this.healthPoints == int.MinValue)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'healthPoints'! Check the file");
-        else if(this.cost == null)
+        else if(this.cost == int.MinValue)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'cost'! Check the file");
-        else if(this.bounty == null)
+        else if(this.bounty == int.MinValue)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'bounty'! Check the file");
         else if(this.type == null)
             Debug.Log("TemplateForUnit::validate(); -- Can't get 'type'! Check the file");
