@@ -116,6 +116,7 @@ public class TemplateForUnit {
                     Debug.Log("TemplateForUnit::TemplateForUnit(); -- relativeModelSource:" + relativeModelSource);
                     if(relativeModelSource != null) {
                         string modelSource = MapLoader.findFile(templateFilePath, relativeModelSource);
+               
                         this.modelSource = modelSource;
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelSource:" + modelSource);
                         animationsName = new List<string>();
@@ -124,11 +125,12 @@ public class TemplateForUnit {
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -1- mainAnimation:" + (mainAnimation!=null) );
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -1- mainAnimation.GetClipCount():" + ( (mainAnimation!=null)?(mainAnimation.GetClipCount()):0 ) );
 
-                        modelGameObject = Resources.Load<GameObject>(modelSource); // or GameObject?
+                        modelGameObject = Resources.Load(modelSource) as GameObject; // or GameObject?
+                        modelGameObject.AddComponent<Animation>();
+                        Animation animationClip = modelGameObject.GetComponent<Animation>();                                     
+                        string modelSourceFBX = modelSource.Replace("_Prefab","");
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelGameObject);
-                        // modelGameObject.
-
-                        allObjects = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/" + modelSource + ".fbx");
+                        allObjects = AssetDatabase.LoadAllAssetsAtPath("Assets/Resources/" + modelSourceFBX + ".fbx");
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- allObjects.Length:" + allObjects.Length);
                         int count = 0;
                         foreach (Object oneObject in allObjects) {
@@ -136,6 +138,7 @@ public class TemplateForUnit {
                             if (oneObject.GetType() == typeof(AnimationClip)) {
                                 AnimationClip clip = oneObject as AnimationClip;
                                 string animName = oneObject.name.ToString();
+                                animationClip.AddClip(clip, animName);
                                 // ( (mainAnimation!=null) ? (mainAnimation.AddClip(clip, animName)) : (false));
                                 Debug.Log("Creep::setGameObjectAndAnimation(); -- animationsName[" + count + "]:" + animName);
                                 if(!animName.Equals("__preview__Take 001")) { // ???WTF???

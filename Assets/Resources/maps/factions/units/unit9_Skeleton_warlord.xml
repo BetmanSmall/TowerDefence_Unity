@@ -10,5 +10,5 @@
   <property name="size" value="0.1"/>
   <property name="type" value="unit"/>
  </properties>
- <model source="../../../Creeps/skeletonsPack/Skeleton_warlord"/>
+ <model source="../../../Creeps/skeletonsPack/Skeleton_warlord_Prefab"/>
 </tileset>

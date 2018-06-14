@@ -74,6 +74,8 @@ GameObject:
   m_Component:
   - component: {fileID: 400008}
   - component: {fileID: 9500000}
+  - component: {fileID: 65588737164909770}
+  - component: {fileID: 111049308023303110}
   m_Layer: 0
   m_Name: Skeleton_archer_Prefab
   m_TagString: Untagged
@@ -1032,7 +1034,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.738, y: -1.8527572, z: 0.89222956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400110}
@@ -1874,7 +1876,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: eaeba2f3150de6a4a879e60ff378d1d9, type: 2}
   m_StaticBatchInfo:
@@ -1909,7 +1910,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -1944,7 +1944,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -1979,7 +1978,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2014,7 +2012,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2049,7 +2046,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2084,7 +2080,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2119,7 +2114,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2154,7 +2148,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2d28bc4ca66a2aa4b8cab3e3a89d82e1, type: 2}
   m_StaticBatchInfo:
@@ -2189,7 +2182,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2d28bc4ca66a2aa4b8cab3e3a89d82e1, type: 2}
   m_StaticBatchInfo:
@@ -2224,7 +2216,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2340,7 +2331,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2354,7 +2344,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: fdc3d530b07201f4d9f91d764df51d7b, type: 2}
   m_StaticBatchInfo:
@@ -2418,7 +2407,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: c66dd5e1e9e2b4447af6194a028e8f85, type: 2}
   m_StaticBatchInfo:
@@ -2479,7 +2467,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: f9b6dae4cb841134e864c51a8bf407ba, type: 2}
   m_StaticBatchInfo:
@@ -2561,7 +2548,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34f7d55ece4d73f49970571ad21816a4, type: 2}
   m_StaticBatchInfo:
@@ -2608,3 +2594,78 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100008}
   m_IsPrefabParent: 1
+--- !u!65 &65588737164909770
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.45, y: 2.45, z: 1.45}
+  m_Center: {x: -0.22036982, y: 1.1468008, z: 0.22807693}
+--- !u!111 &111049308023303110
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400058, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400060, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400062, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400064, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400066, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400068, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400070, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400072, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400074, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400076, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400078, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400080, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400082, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400006, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400090, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400088, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400084, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400096, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400086, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400094, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400092, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400030, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400040, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400042, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400008, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400056, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400044, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400032, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400010, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400012, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400002, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400054, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400014, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400046, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400048, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400016, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400052, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400018, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400026, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400028, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400034, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400050, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400020, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400022, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400024, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400004, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400036, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 7400038, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  - {fileID: 110800000, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -9,5 +9,5 @@
   <property name="speed" value="0.8"/>
   <property name="type" value="fly"/>
  </properties>
- <model source="../../../Creeps/skeletonsPack/skeleton_Standing"/>
+ <model source="../../../Creeps/skeletonsPack/skeleton_Standing_Prefab"/>
 </tileset>

@@ -9,5 +9,5 @@
   <property name="speed" value="0.5"/>
   <property name="type" value="unit"/>
  </properties>
- <model source="../../../Creeps/skeletonsPack/skeleton_Lying"/>
+ <model source="../../../Creeps/skeletonsPack/skeleton_Lying_Prefab"/>
 </tileset>

@@ -25,7 +25,7 @@ public class TemplateForTower {
 //    public int ammoDistance;
 
     // public TiledMapTile idleTile;
-    public Object modelObject;
+    public GameObject modelObject;
     // public ObjectMap<string, TiledMapTile> ammunitionPictures;
 
     public TemplateForTower(string templateFilePath) /*throws Exception*/ {
@@ -107,7 +107,9 @@ public class TemplateForTower {
                     if(relativeModelSource != null) {
                         string modelSource = MapLoader.findFile(templateFilePath, relativeModelSource);
                         Debug.Log("TemplateForTower::TemplateForTower(); -- modelSource:" + modelSource);
-                        modelObject = Resources.Load<Object>(modelSource); // or GameObject?
+                        modelObject = Resources.Load(modelSource) as GameObject;
+                        modelObject.AddComponent<Animation>();
+                        Animation animationClip = modelObject.GetComponent<Animation>();       
                         Debug.Log("TemplateForTower::TemplateForTower(); -- modelObject:" + modelObject);
                     }
                 }

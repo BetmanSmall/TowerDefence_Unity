@@ -274,28 +274,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Bip01 Spine' has translation animation that
-      will be discarded.\n\t'Bip01 Spine2' is inbetween humanoid transforms and has
-      rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftUpperArm
-      average position error 17.7 mm and maximum position error 56.7 mm at time 42:19
-      (48.8%) Frame 1279\n\tLeftLowerArm average position error 13.3 mm and maximum
-      position error 58.9 mm at time 42:19 (48.8%) Frame 1279\n\tLeftHand average
-      position error 13.2 mm and maximum position error 58.7 mm at time 42:19 (48.8%)
-      Frame 1279\n\tRightUpperArm average position error 17.4 mm and maximum position
-      error 57.8 mm at time 42:19 (48.8%) Frame 1279\n\tRightLowerArm average position
-      error 13.7 mm and maximum position error 52.9 mm at time 8:24 (10.1%) Frame
-      264\n\tRightHand average position error 13.3 mm and maximum position error 52.3
-      mm at time 42:19 (48.8%) Frame 1279\n\tHead average position error 21.7 mm and
-      maximum position error 65.2 mm at time 62:21 (71.7%) Frame 1881\n\tLeftFoot
-      average orientation error 0.0 deg and maximum orientation error 1.8 deg at time
-      69:24 (79.9%) Frame 2094\n\tRightFoot average orientation error 0.1 deg and
-      maximum orientation error 1.4 deg at time 65: 0 (74.4%) Frame 1950\n"
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
