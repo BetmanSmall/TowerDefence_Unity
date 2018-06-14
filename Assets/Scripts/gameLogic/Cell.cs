@@ -116,7 +116,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     }
 
     public bool isEmpty() {
-        Debug.Log("Cell::isEmpty(); -- empty:" + empty);
+        // Debug.Log("Cell::isEmpty(); -- empty:" + empty);
         return empty;
     }
 

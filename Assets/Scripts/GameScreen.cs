@@ -90,15 +90,17 @@ public class GameScreen : MonoBehaviour  {
             // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField.sizeCellX:" + gameField.sizeCellX + " gameField.sizeCellZ:" + gameField.sizeCellZ);
             for (int x = 0; x < sizeFieldX; x++) {
                 for (int z = 0; z < sizeFieldZ; z++) {
-                    Vector3 pos = new Vector3(x * sizeCellX + sizeCellX/2, 0f, z * sizeCellZ + sizeCellZ/2); // все тут нужно понять
+                    Cell cell = gameField.field[x, z];
+                    if(cell != null) {
+                        Vector3 pos = new Vector3(x * sizeCellX + sizeCellX/3f, 0f, z * sizeCellZ + sizeCellZ/1.5f); // все тут нужно понять | magic numbers forever
+                        int numberByWaveAlgorithm = gameField.field[x, z].numberByWaveAlgorithm;
+                        // string outStr = "(" + x + "," + z + "):" + numberByWaveAlgorithm.ToString();
+                        string outStr = numberByWaveAlgorithm.ToString();
+                        Handles.Label(pos, outStr);
+                    }
                     // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- x:" + x + " z:" + z + " pos:" + pos + " gameField:" + gameField);
                     // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- gameField.field:" + gameField.field);
-                    Cell cell = gameField.field[x, z];
                     // Debug.Log("GameScreen::drawWaveAlgorithmNumbers(); -- x:" + x + " z:" + z + " pos:" + pos + " cell:" + cell);
-                    if(cell != null) {
-                        int numberByWaveAlgorithm = gameField.field[x, z].numberByWaveAlgorithm;
-                        Handles.Label(pos, numberByWaveAlgorithm.ToString());
-                    }
                 }
             }
         }
