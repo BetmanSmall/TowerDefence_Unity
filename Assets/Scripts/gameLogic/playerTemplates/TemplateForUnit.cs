@@ -136,9 +136,9 @@ public class TemplateForUnit {
                         foreach (Object oneObject in allObjects) {
                             // Debug.Log("TemplateForUnit::TemplateForUnit(); -- oneObject.GetType():" + oneObject.GetType() + " oneObject.name:" + oneObject.name);
                             if (oneObject.GetType() == typeof(AnimationClip)) {
-                                // AnimationClip clip = oneObject as AnimationClip;
+                                //AnimationClip clip = oneObject as AnimationClip;
                                 string animName = oneObject.name.ToString();
-                                animationClip.AddClip(clip, animName);
+                               // animationClip.AddClip(clip, animName);
                                 // ( (mainAnimation!=null) ? (mainAnimation.AddClip(clip, animName)) : (false));
                                 // Debug.Log("Creep::setGameObjectAndAnimation(); -- animationsName[" + count + "]:" + animName);
                                 if(!animName.Equals("__preview__Take 001")) { // ???WTF???
