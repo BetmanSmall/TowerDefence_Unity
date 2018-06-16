@@ -41,10 +41,12 @@ public class WaveAlgorithm {
         if(found) {
             if (x >= 0 && x < sizeX) {
                 if (y >= 0 && y < sizeY) {
-                    if (cellIsEmpty(x, y)) {
+                    Debug.Log("WaveAlgorithm::getNumStep(); -- getStepCellWithOutIfs x:" + x + " y:" + y + " empty:" + cellIsEmpty(x, y));
+                    // if (cellIsEmpty(x, y)) {
                         return getStepCellWithOutIfs(x, y);
-                    }
-                    return 0;
+                    // }
+                    // Debug.Log("WaveAlgorithm::getNumStep(); -- return 0!");
+                    // return 0;
                 }
             }
         }
@@ -68,6 +70,7 @@ public class WaveAlgorithm {
     public void Run() {
         Debug.Log("WaveAlgorithm::Run(); -- Thread Start! " + Thread.CurrentThread);
         waveStep(exitPointX, exitPointX, 1);
+        found = true;
         Debug.Log("WaveAlgorithm::Run(); -- Thread END! " + Thread.CurrentThread);
     }
 
@@ -151,6 +154,7 @@ public class WaveAlgorithm {
 
     private bool cellIsEmpty(int x, int y) {
         Cell cell = field[x, y];
+        // Debug.Log("WaveAlgorithm::cellIsEmpty(); -- x:" + x + " y:" + y + " cell:" + (cell!=null));
         if (cell != null && !cell.isEmpty()) {
             return false;
         } else {

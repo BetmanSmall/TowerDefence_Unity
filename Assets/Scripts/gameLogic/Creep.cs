@@ -111,6 +111,17 @@ public class Creep {
     // void Update () {
     // }
 
+    // TMP bad moveTo | good move simple | old code for WaveAlghoritm
+    public Vector2Int moveTo(Vector2Int position, float delta) {
+        stepsInTime += delta;
+        if (stepsInTime >= speed) {
+            stepsInTime = 0f;
+            oldPosition = newPosition;
+            newPosition = position;
+        }
+        return newPosition;
+    }
+
     // что бы ефекты не стакались на крипах
     public Vector2Int move(float delta) {
 //        Gdx.app.log("Creep", "move(); -- Creep status:" + this.toString());
