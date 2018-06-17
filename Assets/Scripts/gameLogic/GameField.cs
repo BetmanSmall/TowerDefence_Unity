@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameField : MonoBehaviour {
+
+    public GameObject Creeps;
+    public GameObject Towers;
+    public GameObject Cell1;
+
+    public NavMeshSurface surface;
     public WaveManager waveManager; // ALL public for all || we are friendly :)
     public static CreepsManager creepsManager; // For Shell
     private TowersManager towersManager;
@@ -12,7 +19,6 @@ public class GameField : MonoBehaviour {
     public int sizeFieldX, sizeFieldZ;
     public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map
     public Cell[,] field;
-    WaveAlgorithm waveAlgorithm;
 
     // GAME INTERFACE ZONE1
     // private WhichCell whichCell;
@@ -42,8 +48,26 @@ public class GameField : MonoBehaviour {
         sizeFieldZ = int.Parse(map.properties ["height"]);
 
         // lineRenderer = gameObject.AddComponent<LineRenderer>();
-        createField(sizeFieldX, sizeFieldZ, map.mapLayers);
-        waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
+        createField(sizeFieldX, sizeFieldZ, map.mapLayers); 
+        Creeps = new GameObject("Creeps");
+        Creeps.transform.position = new Vector3(0,10,0);
+
+        GameObject gamefield = GameObject.Find("GameField");
+        Towers = new GameObject("Towers");
+        Towers.transform.parent = gamefield.transform;
+
+       
+
+        GameObject NavMesh = new GameObject("NavMesh");
+        NavMesh.AddComponent<NavMeshSurface>();
+        surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
+        surface.BuildNavMesh();
+
+      //  surface.BuildNavMesh();
+      //  Object gamefield = GameObject.Find("GameField");
+       //surface[1] = gamefield;
+       //surface[1].BuildNavMesh();
+        WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
     }
 
@@ -110,90 +134,6 @@ public class GameField : MonoBehaviour {
 //            Vector3 worldPos = camera.ScreenToWorldPoint (Input.mousePosition);
 //            print ("GameField::Update(); -- worldPos:" + worldPos);
 //        }
-        stepAllCreeps();
-    }
-
-    /**
-     * @brief Говорит всем криппам ходить
-     * @return 2 - Все криппы мертвы
-     * @return 1 - Eсли колличество криппов в точке @exitPoint превышено $gameOverLimitCreeps
-     * @return 0 - Все криппы сходили успешно
-     * @return -1 - Какому-либо криппу перекрыли путь до $exitPoint
-     */
-    private int stepAllCreeps() {
-        bool allDead = true;
-        for(int k = 0; k < creepsManager.amountCreeps(); k++) {
-            int result = stepOneCreep(k);
-            if(result != -2)
-                allDead = false;
-
-            if(result == 1) {
-//                currentFinishedCreeps++;
-//                if(currentFinishedCreeps >= gameOverLimitCreeps)
-//                    return 1;
-            }
-            else if(result == -1)
-                return -1;
-        }
-
-        if(allDead)
-            return 2;
-        else
-            return 0;
-    }
-
-    private int stepOneCreep(int creepId) {
-        Debug.Log("GameField::stepOneCreep(); -- creepId:" + creepId);
-        Creep tmpCreep = creepsManager.getCreep(creepId);
-        if(tmpCreep.isAlive()) {
-            int currX = tmpCreep.getNewPosition().x;
-            int currY = tmpCreep.getNewPosition().y;
-
-            int exitX = currX, exitY = currY;
-
-            int min = waveAlgorithm.getNumStep(currX, currY);
-            Debug.Log("GameField::stepOneCreep(); -- currX:" + currX + " currY:" + currY + " min:" + min);
-
-            if(min == 1)
-                return 1;
-            if(min == 0)
-                return -1;
-
-            int defaultStep = min;
-            //--------------Looking specific cell-----------------------
-            for(int tmpY = -1; tmpY < 2; tmpY++)
-                for(int tmpX = -1; tmpX < 2; tmpX++)
-                    if(!(tmpX == 0 && tmpY == 0)) {
-                        int num = waveAlgorithm.getNumStep(currX + tmpX, currY + tmpY);
-//                        Gdx.app.log("GameField::stepOneCreep()", "-- num:" + num);
-                        if(num <= min && num != 0) {
-                            if(num == min) {
-                                if( (Random.Range(0, 1) == 1) ) {
-                                    exitX = currX + tmpX;
-                                    exitY = currY + tmpY;
-                                }
-                            } else if(num == defaultStep-1) {
-                                exitX = currX + tmpX;
-                                exitY = currY + tmpY;
-                                min = num;
-                            }
-                        }
-                    }
-            //-----------------------------------------------------------
-
-            if(exitX != currX || exitY != currY) {
-                Debug.Log("GameField::stepOneCreep(); -- Creep move to X:" + exitX + " Y:" + exitY);
-                field[currX, currY].removeCreep(tmpCreep);
-                field[exitX, exitY].setCreep(tmpCreep);
-                tmpCreep.moveTo(new Vector2Int(exitX, exitY), Time.deltaTime);
-                Vector3 pos = field[exitX, exitY].graphicCoordinates;
-                pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
-                tmpCreep.gameObject.transform.SetPositionAndRotation(pos, Quaternion.identity);
-            } else {
-                return 0;
-            }
-        }
-        return 0;
     }
 
     // ___!0!___ Creeps Section ____!!!___
@@ -256,8 +196,11 @@ public class GameField : MonoBehaviour {
                 Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
                 pos.Set(pos.x-1.5f, pos.y+0.5f, pos.z-1.5f);
                 Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelGameObject + " templateForUnit:" + templateForUnit.toString());
-                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, this.transform);
+                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, Creeps.transform);
                 gameObject.name = templateForUnit.toString(); // mb comment!
+                gameObject.AddComponent<NavMeshAgent>();
+                NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+                agent.SetDestination(new Vector3(96,0,96));
                 // RuntimeAnimatorController runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(templateForUnit.modelSource + "_Controller");
                 // Debug.Log("GameField::createCreep(); -- templateForUnit.modelSource:" + templateForUnit.modelSource + " runtimeAnimatorController:" + runtimeAnimatorController);
                 // gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -356,10 +299,14 @@ public class GameField : MonoBehaviour {
                         pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
                         // Vector3 scal = gameObject.transform.localScale;
                         // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
-                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, this.transform);
+                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, Towers.transform);
                         gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
                         // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
                         tower.gameObject = gameObject;
+                        surface.BuildNavMesh();
+                        foreach(var agents in  Creeps.GetComponentsInChildren<NavMeshAgent>()){
+                            agents.SetDestination(new Vector3(96,0,96));
+                        }
                         Debug.Log("GameField::createTower(); -- Instantiate gameObject:" + gameObject);
                     }
                 }
