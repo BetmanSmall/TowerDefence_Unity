@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4753904633336750}
   - component: {fileID: 95055217612675522}
   - component: {fileID: 111918833847622072}
+  - component: {fileID: 65071863834119456}
   m_Layer: 0
   m_Name: turret_3_Prefab
   m_TagString: Untagged
@@ -257,6 +258,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719383512652010}
   m_Mesh: {fileID: 4300004, guid: e20eef04072013840ac9face8c94f1d4, type: 3}
+--- !u!65 &65071863834119456
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664478423649196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9739448, z: 1}
+  m_Center: {x: 0, y: 0.45983267, z: 0.053141713}
 --- !u!95 &95055217612675522
 Animator:
   serializedVersion: 3

@@ -60,7 +60,10 @@ public class GameField : MonoBehaviour {
 
         GameObject NavMesh = new GameObject("NavMesh");
         NavMesh.AddComponent<NavMeshSurface>();
+        var geo = NavMesh.GetComponent<NavMeshSurface>();
+        geo.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
+
         surface.BuildNavMesh();
 
       //  surface.BuildNavMesh();

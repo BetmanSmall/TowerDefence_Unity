@@ -346,7 +346,7 @@ MonoBehaviour:
   Towers: {fileID: 0}
   Cell1: {fileID: 0}
   surface: {fileID: 0}
-  mapPath: maps/testMap2
+  mapPath: maps/testMap
   sizeFieldX: 0
   sizeFieldZ: 0
   sizeCellX: 3

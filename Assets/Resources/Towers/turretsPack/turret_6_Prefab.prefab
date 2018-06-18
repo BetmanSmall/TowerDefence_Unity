@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4545096047814602}
   - component: {fileID: 95413722068852516}
   - component: {fileID: 111351027593311710}
+  - component: {fileID: 65827491797120762}
   m_Layer: 0
   m_Name: turret_6_Prefab
   m_TagString: Untagged
@@ -112,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869686906412398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.090572, y: -2.5196035, z: 0.7205999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4536782083936702}
@@ -257,6 +258,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806145399711488}
   m_Mesh: {fileID: 4300004, guid: 3978bef29b5fad34ea64c9ab7fd1526e, type: 3}
+--- !u!65 &65827491797120762
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869686906412398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9845915, y: 1.3587644, z: 1}
+  m_Center: {x: 0.007704258, y: 0.6525053, z: 0}
 --- !u!95 &95413722068852516
 Animator:
   serializedVersion: 3
