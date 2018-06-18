@@ -147,9 +147,14 @@ public class MapLoader {
 //                    for (int k = 0; k < array.Length; k++) {
                     for(int z = 0; z < height; z++) {
                         for (int x = 0; x < width; x++) {
-                            int id = int.Parse(ids[z * width + x]) - int.Parse(map.tileSetsOrModelsSets[0].properties["firstgid"]); // not good | in future not only one!
+                            int firstgid = 0;
+                            if(map.tileSetsOrModelsSets[0].properties["firstgid"] != null) {
+                                firstgid = int.Parse(map.tileSetsOrModelsSets[0].properties["firstgid"]);
+                            }
+                            int id = int.Parse(ids[z * width + x]) - firstgid; // not good | in future not only one!
                             if (id >= 0) {
-                                TileModel tileModel = map.tileSetsOrModelsSets [0].tileModels [id]; // need create TileSets class and getTile();
+                                // Debug.Log("MapLoader::loadMapLayer(); -- id:" + id + " firstgid:" + firstgid);
+                                TileModel tileModel = map.tileSetsOrModelsSets[0].tileModels[id]; // need create TileSets class and getTile();
 //                                Debug.Log("MapLoader::loadMapLayer(); -- tileModels[" + x + "," + z + "]:" + tileModel);
                                 mapLayer.tileModels [x, z] = tileModel;
 //                            } else {
@@ -210,6 +215,10 @@ public class MapLoader {
                 }
                 // Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " finished:" + finished);
             } while (!finished);
+            if(result.Contains(".xml")) {
+                result = result.Replace(".xml", "");
+                // result = result.Substring(0, result.LastIndexOf(".xml"));
+            }
             Debug.Log("MapLoader::findFile(); -- Exit result:" + result);
             return result;
         } catch(System.Exception exp) {

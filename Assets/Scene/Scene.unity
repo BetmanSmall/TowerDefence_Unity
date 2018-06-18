@@ -344,8 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Creeps: {fileID: 0}
   Towers: {fileID: 0}
+  Cell1: {fileID: 0}
   surface: {fileID: 0}
-  mapPath: maps/testMap
+  mapPath: maps/testMap2
   sizeFieldX: 0
   sizeFieldZ: 0
   sizeCellX: 3

@@ -37,14 +37,14 @@ public class GameScreen : MonoBehaviour  {
         // Debug.Log("GameScreen::OnPostRender(); -- Start!");
         drawGrid();
         // Debug.Log("GameScreen::OnPostRender(); -- test1!");
-        drawWaveAlgorithmNumbers();
+        // drawWaveAlgorithmNumbers();
     }
 
     void OnDrawGizmos() {
         // Debug.Log("GameScreen::OnDrawGizmos(); -- Start!");
         drawGrid();
         // Debug.Log("GameScreen::OnDrawGizmos(); -- test1!");
-        drawWaveAlgorithmNumbers();
+        // drawWaveAlgorithmNumbers();
     }
 
     void drawGrid() {
