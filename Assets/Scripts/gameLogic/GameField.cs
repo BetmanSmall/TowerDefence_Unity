@@ -6,14 +6,13 @@ using UnityEngine.AI;
 public class GameField : MonoBehaviour {
 
     public GameObject Creeps;
-    public GameObject Towers;
     public GameObject Cell1;
 
     public NavMeshSurface surface;
     public WaveManager waveManager; // ALL public for all || we are friendly :)
-    public static CreepsManager creepsManager; // For Shell
-    private TowersManager towersManager;
-    private FactionsManager factionsManager;
+    public CreepsManager creepsManager; // For Shell
+    public FactionsManager factionsManager;
+    public TowersManager towersManager;
     public string mapPath = "maps/arena0";
 
     public int sizeFieldX, sizeFieldZ;
@@ -21,7 +20,7 @@ public class GameField : MonoBehaviour {
     public Cell[,] field;
 
     // GAME INTERFACE ZONE1
-    // private WhichCell whichCell;
+    // public WhichCell whichCell;
     public bool gamePaused;
     public float gameSpeed;
     public static int gamerGold = 1000000; // For Shell
@@ -52,12 +51,6 @@ public class GameField : MonoBehaviour {
         Creeps = new GameObject("Creeps");
         Creeps.transform.position = new Vector3(0,10,0);
 
-        GameObject gamefield = GameObject.Find("GameField");
-        Towers = new GameObject("Towers");
-        Towers.transform.parent = gamefield.transform;
-
-       
-
         GameObject NavMesh = new GameObject("NavMesh");
         NavMesh.AddComponent<NavMeshSurface>();
         var geo = NavMesh.GetComponent<NavMeshSurface>();
@@ -65,11 +58,6 @@ public class GameField : MonoBehaviour {
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
 
         surface.BuildNavMesh();
-
-      //  surface.BuildNavMesh();
-      //  Object gamefield = GameObject.Find("GameField");
-       //surface[1] = gamefield;
-       //surface[1].BuildNavMesh();
         WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
     }
@@ -178,6 +166,7 @@ public class GameField : MonoBehaviour {
     public void createCreep(int x, int z) {
         Debug.Log("GameField::createCreep(); -- x:" + x + " z:" + z);
         createCreep(new Vector2Int(x, z), factionsManager.getRandomTemplateForUnitFromAllFaction(), Vector2Int.zero, 0); // create computer0 Creep
+        // rerouteForAllCreeps(); // BAD need Another! i don't know, need this OR not?
     }
 
     private void createCreep(Vector2Int spawnPoint, TemplateForUnit templateForUnit, Vector2Int exitPoint, int player) {
@@ -204,15 +193,9 @@ public class GameField : MonoBehaviour {
                 gameObject.AddComponent<NavMeshAgent>();
                 NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
                 agent.SetDestination(new Vector3(96,0,96));
-                // RuntimeAnimatorController runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(templateForUnit.modelSource + "_Controller");
-                // Debug.Log("GameField::createCreep(); -- templateForUnit.modelSource:" + templateForUnit.modelSource + " runtimeAnimatorController:" + runtimeAnimatorController);
-                // gameObject.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
 
-                // gameObject.AddComponent<Animator>();
-                // gameObject.AddComponent<Animation>();
-                // runtimeAnimatorController.animationClips = templateForUnit.animationClips;
-                creep.setGameObjectAndAnimation(gameObject);//, runtimeAnimatorController);
-                Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject);
+                creep.setGameObjectAndAnimation(gameObject);
+                Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject + " 4_ThisCrep:" + creep);
             } else {
                 Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");
                 if(towersManager.amountTowers() > 0) {
@@ -245,10 +228,12 @@ public class GameField : MonoBehaviour {
         Debug.Log("GameField::towerActions(); -- x:" + x + " z:" + z);
         if (field[x, z].isEmpty()) {
             createTower(x, z, factionsManager.getRandomTemplateForTowerFromAllFaction(), 1);
-            // rerouteForAllCreeps();
+            rerouteForAllCreeps();
         } else if (field[x, z].getTower() != null) {
             removeTower(x, z);
+            rerouteForAllCreeps();
         }
+        // rerouteForAllCreeps(); // bad idea MB???
     }
 
     public bool createTower(int buildX, int buildZ, TemplateForTower templateForTower, int player) {
@@ -297,17 +282,18 @@ public class GameField : MonoBehaviour {
             // if (templateForTower.towerAttackType != TowerAttackType.Pit) {
                 for (int tmpX = startX; tmpX <= finishX; tmpX++) {
                     for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++) {
-                        field[buildX + tmpX, buildZ + tmpZ].setTower(tower);
+                        Cell cell = field[buildX + tmpX, buildZ + tmpZ];
+                        cell.setTower(tower);
                         Vector3 pos = field[buildX + tmpX, buildZ + tmpZ].graphicCoordinates;
                         pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
                         // Vector3 scal = gameObject.transform.localScale;
                         // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
-                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, Towers.transform);
+                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, cell.transform);
                         gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
                         // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
                         tower.gameObject = gameObject;
                         surface.BuildNavMesh();
-                        foreach(var agents in  Creeps.GetComponentsInChildren<NavMeshAgent>()){
+                        foreach(var agents in  Creeps.GetComponentsInChildren<NavMeshAgent>()) {
                             agents.SetDestination(new Vector3(96,0,96));
                         }
                         Debug.Log("GameField::createTower(); -- Instantiate gameObject:" + gameObject);
@@ -316,7 +302,7 @@ public class GameField : MonoBehaviour {
             // }
             // GOVNO CODE
 
-//            rerouteForAllCreeps();
+            // rerouteForAllCreeps();
             gamerGold -= templateForTower.cost;
             Debug.Log("GameField::createTower(); -- Now gamerGold:" + gamerGold);
             return true;
@@ -358,6 +344,7 @@ public class GameField : MonoBehaviour {
                 for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++) {
                     field[x + tmpX, z + tmpZ].removeTower();
                     // pathFinder.getNodeMatrix()[z + tmpZ][x + tmpX].setKey('.');
+                    Debug.Log("GameField::removeTower(); -Destroy- tower.gameObject:" + tower.gameObject);
                     Destroy(tower.gameObject);
                 }
             }
@@ -367,6 +354,13 @@ public class GameField : MonoBehaviour {
         }
     }
     // ___!2!___ Towers Section ____!!!___
+
+    private void rerouteForAllCreeps() {
+        Debug.Log("GameField::rerouteForAllCreeps(); -- ");
+        // if (surface != null) {
+            surface.BuildNavMesh();
+        // }
+    }
 
     private bool cellIsEmpty(int x, int z) {
         if (x >= 0 && z >= 0) {
