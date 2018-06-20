@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEditor;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class GameScreen : MonoBehaviour  {
     // DrawCameraGrid  && WhichCell
@@ -37,6 +38,7 @@ public class GameScreen : MonoBehaviour  {
         // Debug.Log("GameScreen::OnPostRender(); -- Start!");
         drawGrid();
         // Debug.Log("GameScreen::OnPostRender(); -- test1!");
+        drawCreepsPaths();
         // drawWaveAlgorithmNumbers();
     }
 
@@ -44,6 +46,7 @@ public class GameScreen : MonoBehaviour  {
         // Debug.Log("GameScreen::OnDrawGizmos(); -- Start!");
         drawGrid();
         // Debug.Log("GameScreen::OnDrawGizmos(); -- test1!");
+        drawCreepsPaths();
         // drawWaveAlgorithmNumbers();
     }
 
@@ -70,13 +73,37 @@ public class GameScreen : MonoBehaviour  {
             }
         }
     }
-
     void drawLine(float x1, float z1, float x2, float z2) {
         GL.Begin(GL.LINES);
         gridLineMaterial.SetPass(0);
         GL.Vertex3(x1, drawOnY, z1);
         GL.Vertex3(x2, drawOnY, z2);
         GL.End();
+    }
+
+    void drawCreepsPaths() {
+        if(gameField != null && gameField.creepsManager != null) {
+            List<Creep> creeps = gameField.creepsManager.getAllCreeps();
+            foreach (Creep creep in creeps) {
+                var nav = creep.gameObject.GetComponent<NavMeshAgent>();
+                if (nav == null || nav.path == null) {
+                    return;
+                }
+                var line = creep.gameObject.GetComponent<LineRenderer>();
+                if (line == null) {
+                    line = creep.gameObject.AddComponent<LineRenderer>();
+                    line.material = new Material( Shader.Find( "Sprites/Default" ) ) { color = Color.yellow };
+                    line.SetWidth(0.5f, 0.5f);
+                    line.SetColors(Color.yellow, Color.yellow);
+                }
+                var path = nav.path;
+                line.SetVertexCount(path.corners.Length);
+                for( int i = 0; i < path.corners.Length; i++ ) {
+                    line.SetPosition(i, path.corners[i]);
+                }
+                // Debug.Log("GameScreen::OnDrawGizmosSelected(); -- creep:" + creep + " nav:" + nav + " line:" + line);
+            }
+        }
     }
 
     void drawWaveAlgorithmNumbers() {
@@ -161,6 +188,7 @@ public class GameScreen : MonoBehaviour  {
                 Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
                 Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
                 Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+                Debug.Log ("GameScreen::Update(); -- cell:" + cell);
                 if(cell != null) {
                     Debug.Log ("GameScreen::Update(); -- cell:" + ((!cell.empty) ? ("[" + cell.gameX + ", " + cell.gameZ + "])") : ("cell.empty == true")) );
                     gameField.towerActions(cell.gameX, cell.gameZ);

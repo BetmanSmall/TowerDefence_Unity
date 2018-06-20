@@ -27,6 +27,8 @@ public class Creep {
     // private Animation animation;
     // public Array<ShellEffectType> shellEffectTypes;
     public GameObject gameObject;
+    // public NavMeshAgent navMeshAgent;
+    // public LineRenderer lineRenderer;
     // public CreepAnimatorClipInfo сreepAnimatorClipInfo;
 
     public Creep(List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
@@ -94,6 +96,8 @@ public class Creep {
                 Debug.LogError("Creep::setGameObjectAndAnimation(); -- Not found animationClip:randomString:" + randomString);
             }
             return true;
+        } else {
+            Debug.LogError("Creep::setGameObjectAndAnimation(); -not null- gameObject:" + gameObject);
         }
         return false;
     }
