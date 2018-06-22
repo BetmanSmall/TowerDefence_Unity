@@ -228,8 +228,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1248742519}
-  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
-  m_LocalPosition: {x: 10, y: 20, z: -8}
+  m_LocalRotation: {x: -0.15819699, y: -0.84180266, z: 0.36477378, w: -0.3650783}
+  m_LocalPosition: {x: 59.084503, y: 67.30817, z: -9.916246}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -343,8 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Creeps: {fileID: 0}
-  Towers: {fileID: 0}
-  Cell1: {fileID: 0}
+  gamefield: {fileID: 0}
   surface: {fileID: 0}
   mapPath: maps/testMap
   sizeFieldX: 0
