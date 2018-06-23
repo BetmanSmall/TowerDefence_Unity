@@ -250,8 +250,8 @@ MonoBehaviour:
   spaceMouseDetection: 5
   cameraSpeed: 5
   mouseSensitivity: 0.05
-  distanceMin: 0
-  distanceMax: 0
+  distanceMin: 5
+  distanceMax: 40
   zoomSpeed: 100
 --- !u!1 &1286031412
 GameObject:

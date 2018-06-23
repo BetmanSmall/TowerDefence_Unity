@@ -18,8 +18,8 @@ public class GameScreen : MonoBehaviour  {
     public float mouseSensitivity = 0.05f;
     private Vector3 lastPosition;
 
-    public float distanceMin;
-    public float distanceMax;
+    public float distanceMin = 5f;
+    public float distanceMax = 40f;
     public float zoomSpeed = 1f;
 
     void Start() {
@@ -139,15 +139,20 @@ public class GameScreen : MonoBehaviour  {
 
     void Update() {
 //        Debug.Log("GameScreen::Update(); -- Start!");
-        if (Input.GetAxis("Mouse ScrollWheel") != 0f ) {
-            Debug.Log("GameScreen::Update(); -- wheel:" + Input.GetAxis("Mouse ScrollWheel"));
-            // transform.position += Input.GetAxis("Mouse ScrollWheel");
+        float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        if (mouseScrollWheel != 0f ) {
+            Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" + transform.position.y);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit point; Physics.Raycast(ray, out point, 25);
             Vector3 Scrolldirection = ray.GetPoint(5);
 
             float step = zoomSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, -(Input.GetAxis("Mouse ScrollWheel") * step));
+            if (mouseScrollWheel < 0f && transform.position.y < distanceMax) {
+                transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
+            } else if (mouseScrollWheel > 0f && transform.position.y > distanceMin) {
+                transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
+            }
+            Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" + transform.position.y);
         }
 
         if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
@@ -223,12 +228,6 @@ public class GameScreen : MonoBehaviour  {
                     gameField.createCreep(cell.gameX, cell.gameZ);
                 }
             }
-        }
-
-        float scrollDelta = Input.mouseScrollDelta.y;
-        if (scrollDelta != 0) {
-            Debug.Log ("GameScreen::Update(); -- scrollDelta:" + scrollDelta + " Need implement zoom!");
-            transform.position.Scale(transform.position*scrollDelta);
         }
         
 //        Vector3 vp = camera.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
