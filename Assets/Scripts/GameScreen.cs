@@ -18,6 +18,10 @@ public class GameScreen : MonoBehaviour  {
     public float mouseSensitivity = 0.05f;
     private Vector3 lastPosition;
 
+    public float distanceMin;
+    public float distanceMax;
+    public float zoomSpeed = 1f;
+
     void Start() {
 //        camera = GetComponent<Camera>();
         Debug.Log("GameScreen::Start(); -- Start!");
@@ -135,6 +139,17 @@ public class GameScreen : MonoBehaviour  {
 
     void Update() {
 //        Debug.Log("GameScreen::Update(); -- Start!");
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f ) {
+            Debug.Log("GameScreen::Update(); -- wheel:" + Input.GetAxis("Mouse ScrollWheel"));
+            // transform.position += Input.GetAxis("Mouse ScrollWheel");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit point; Physics.Raycast(ray, out point, 25);
+            Vector3 Scrolldirection = ray.GetPoint(5);
+
+            float step = zoomSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, -(Input.GetAxis("Mouse ScrollWheel") * step));
+        }
+
         if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
             transform.position -= new Vector3 (cameraSpeed * Time.deltaTime, 0, 0);
         }

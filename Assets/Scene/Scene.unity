@@ -229,7 +229,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1248742519}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 20, y: 20, z: -20}
+  m_LocalPosition: {x: 14.1, y: 20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -250,6 +250,9 @@ MonoBehaviour:
   spaceMouseDetection: 5
   cameraSpeed: 5
   mouseSensitivity: 0.05
+  distanceMin: 0
+  distanceMax: 0
+  zoomSpeed: 100
 --- !u!1 &1286031412
 GameObject:
   m_ObjectHideFlags: 0

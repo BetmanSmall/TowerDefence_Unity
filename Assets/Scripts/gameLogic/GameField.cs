@@ -294,7 +294,7 @@ public class GameField : MonoBehaviour {
                         gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
                         // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
                         tower.gameObject = gameObject;
-                        surface.BuildNavMesh();
+                        // surface.BuildNavMesh();
                         foreach(var agents in  Creeps.GetComponentsInChildren<NavMeshAgent>()) {
                             agents.SetDestination(new Vector3(96,0,96));
                         }
