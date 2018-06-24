@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEditor;
 
-public class Creep {
-    private List<Vector2Int> route;
-    private Vector2Int oldPosition;
-    private Vector2Int newPosition;
-    private float hp;
-    private float speed;
-    private float stepsInTime;
-    private float deathElapsedTime;
+public class Creep : MonoBehaviour {
+    public List<Vector2Int> route;
+    public Vector2Int oldPosition;
+    public Vector2Int newPosition;
+    public float hp;
+    public float speed;
+    public float stepsInTime;
+    public float deathElapsedTime;
 
     public int player; // In Future need change to enumPlayers {Computer0, Player1, Player2} and etc
     // public Vector3 currentPoint;
@@ -24,14 +25,21 @@ public class Creep {
     public TemplateForUnit templateForUnit;
 
     // public Direction direction;
-    // private Animation animation;
+    // public Animation animation;
     // public Array<ShellEffectType> shellEffectTypes;
     public GameObject gameObject;
-    // public NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
+    // public Transform transform;
+    // public float speedAgent;
+    // public Vector3 nextPosition;
     // public LineRenderer lineRenderer;
     // public CreepAnimatorClipInfo сreepAnimatorClipInfo;
 
-    public Creep(List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
+    public Creep(NavMeshAgent agent, List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
+        setCreepInfo(agent, route, templateForUnit, player);
+    }
+
+    public void setCreepInfo(NavMeshAgent agent, List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
         if(route != null) {
             this.route = route;
             this.oldPosition = route[0];
@@ -41,6 +49,11 @@ public class Creep {
             this.speed = templateForUnit.speed;
             this.stepsInTime = 0;//templateForUnit.speed; // need respawn animation
             this.deathElapsedTime = 0;
+            this.navMeshAgent = agent;
+            this.navMeshAgent.SetDestination(new Vector3(96,0,96));
+            // this.transform = navMeshAgent.transform;
+            // this.speedAgent = navMeshAgent.speed;
+            // this.nextPosition = navMeshAgent.nextPosition;
 
             this.player = player;
             // this.currentPoint = new Vector3(newPosition.getX(), newPosition.getY());
@@ -117,12 +130,14 @@ public class Creep {
 
     // TMP bad moveTo | good move simple | old code for WaveAlghoritm
     public Vector2Int moveTo(Vector2Int position, float delta) {
+        Debug.Log("Creep::moveTo(); -1- position:" + position + " delta:" + delta);
         stepsInTime += delta;
         if (stepsInTime >= speed) {
             stepsInTime = 0f;
             oldPosition = newPosition;
             newPosition = position;
         }
+        Debug.Log("Creep::moveTo(); -2- stepsInTime:" + stepsInTime + " oldPosition:" + oldPosition + " newPosition:" + newPosition);
         return newPosition;
     }
 
@@ -217,7 +232,7 @@ public class Creep {
         return false;
     }
 
-    // private bool addEffect(ShellEffectType shellEffectType) {
+    // public bool addEffect(ShellEffectType shellEffectType) {
     //     if(shellEffectType != null){
     //         if(!shellEffectTypes.contains(shellEffectType, false)) {
     //             shellEffectTypes.add(new ShellEffectType(shellEffectType));

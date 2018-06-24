@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CreepsManager {
     private List<Creep> creeps;
@@ -9,12 +10,20 @@ public class CreepsManager {
         creeps = new List<Creep>();
     }
     
-    public Creep createCreep(List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
-        Debug.Log("CreepsManager::createCreep(" + route + ", " + templateForUnit + ", " + player + "); -- ");
-        Creep newCreep = new Creep(route, templateForUnit, player);
-        creeps.Add(newCreep);
-        return newCreep;
+    public Creep addCreep(Creep creep, NavMeshAgent agent, List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
+        Debug.Log("CreepsManager::addCreep(" + creep + ", " + route + ", " + templateForUnit + ", " + player + "); -- ");
+        creep.setCreepInfo(agent, route, templateForUnit, player);
+        creeps.Add(creep);
+        return creep;
     }
+
+    // @Depricate
+    // public Creep createCreep(List<Vector2Int> route, TemplateForUnit templateForUnit, int player) {
+        // Debug.Log("CreepsManager::createCreep(" + route + ", " + templateForUnit + ", " + player + "); -- ");
+        // Creep newCreep = new Creep(route, templateForUnit, player);
+        // creeps.Add(newCreep);
+        // return newCreep;
+    // }
 
     public List<Creep> getAllCreeps() {
         return creeps;
