@@ -20,7 +20,7 @@ public class GameScreen : MonoBehaviour  {
 
     public float distanceMin = 5f;
     public float distanceMax = 40f;
-    public float zoomSpeed = 1f;
+    public float zoomSpeed = 100f;
 
     void Start() {
 //        camera = GetComponent<Camera>();

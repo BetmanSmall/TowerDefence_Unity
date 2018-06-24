@@ -230,12 +230,12 @@ public class GameField : MonoBehaviour {
         Debug.Log("GameField::towerActions(); -- x:" + x + " z:" + z);
         if (field[x, z].isEmpty()) {
             createTower(x, z, factionsManager.getRandomTemplateForTowerFromAllFaction(), 1);
-            rerouteForAllCreeps();
+            // rerouteForAllCreeps();
         } else if (field[x, z].getTower() != null) {
             removeTower(x, z);
-            rerouteForAllCreeps();
+            // rerouteForAllCreeps();
         }
-        // rerouteForAllCreeps(); // bad idea MB???
+        rerouteForAllCreeps(); // bad idea MB???
     }
 
     public bool createTower(int buildX, int buildZ, TemplateForTower templateForTower, int player) {
@@ -290,7 +290,7 @@ public class GameField : MonoBehaviour {
                         pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
                         // Vector3 scal = gameObject.transform.localScale;
                         // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
-                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, gamefield.transform);
+                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, cell.transform);
                         gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
                         // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
                         tower.gameObject = gameObject;
