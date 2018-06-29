@@ -183,13 +183,13 @@ public class GameScreen : MonoBehaviour  {
 
 
 
-//      Управление камерой при нажатой клавиши мыши           -------------------------------------------------------------------------------- 
+//      Управление камерой при нажатой клавиши мыши           --------------------------------------------------------------------------------
         if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0)) { // Работает только вместе
              lastPosition = Input.mousePosition;
              Debug.Log ("Нажали0");
         }
         if (Input.GetButton("Fire1") || Input.GetMouseButton(0)) { // Работает только вместе
-            
+
             Vector3 delta = Input.mousePosition - lastPosition;
 //            Debug.Log("GameScreen::Update(); -- delta:" + delta);
 //            transform.Translate(delta.x * mouseSensitivity, 0f, delta.y * mouseSensitivity);
@@ -229,7 +229,7 @@ public class GameScreen : MonoBehaviour  {
                 }
             }
         }
-        
+
 //        Vector3 vp = camera.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
 //        vp.x -= 0.5f;
 //        vp.y -= 0.5f;
@@ -238,7 +238,7 @@ public class GameScreen : MonoBehaviour  {
 //        vp.x += 0.5f;
 //        vp.y += 0.5f;
 //        Vector3 sp = camera.ViewportToScreenPoint(vp);
-//         
+//
 //        Vector3 v = camera.ScreenToWorldPoint(sp);
 //        transform.LookAt(v, Vector3.up);
     }
@@ -266,7 +266,7 @@ public class GameScreen : MonoBehaviour  {
 //                             cell.removeTerrain();
 //                         }
 //                     }
-//                 } 
+//                 }
 // //                else {
 // //                    if (curCell != null) {
 // //                        curCell.MouseExit();

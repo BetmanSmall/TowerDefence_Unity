@@ -7,7 +7,7 @@ public class GameField : MonoBehaviour {
 
     public GameObject Creeps;
     public GameObject gamefield;
-     
+
     public NavMeshSurface surface;
     public WaveManager waveManager; // ALL public for all || we are friendly :)
     public CreepsManager creepsManager; // For Shell
@@ -34,7 +34,7 @@ public class GameField : MonoBehaviour {
     // Use this for initialization
     void Start() {
         Debug.Log("GameField::Start(); -- Start!");
-        
+
         waveManager = new WaveManager();
         creepsManager = new CreepsManager();
         towersManager = new TowersManager();
@@ -47,7 +47,7 @@ public class GameField : MonoBehaviour {
         sizeFieldZ = int.Parse(map.properties ["height"]);
 
         // lineRenderer = gameObject.AddComponent<LineRenderer>();
-        createField(sizeFieldX, sizeFieldZ, map.mapLayers); 
+        createField(sizeFieldX, sizeFieldZ, map.mapLayers);
         Creeps = new GameObject("Creeps");
         Creeps.transform.position = new Vector3(0,10,0);
 
@@ -92,7 +92,7 @@ public class GameField : MonoBehaviour {
     //                         } else {
     //                             foreach (Material material in meshRenderer.materials) {
     // //                            Debug.Log("GameField::Start(); -- material:" + material);
-    //                                 Color color = material.color;    
+    //                                 Color color = material.color;
     //                                 /// Прозрачность
     //                                 color.a = mapLayer.opacity; // It is not WOKR!=(
     //                                 material.color = color;

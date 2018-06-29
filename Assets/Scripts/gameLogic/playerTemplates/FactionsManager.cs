@@ -168,7 +168,8 @@ public class FactionsManager {
     private string subPathToResources(string filePath) {
         // Debug.Log("FactionsManager::subPathToResources(); -- filePath:" + filePath);
         string exitStr = "";
-        string[] strs = filePath.Split('\\');
+        var DirSeparator =  System.IO.Path.DirectorySeparatorChar;
+        string[] strs = filePath.Split(DirSeparator);
         for(int k = 0; k < strs.Length; k++) {
             string str = strs[k];
             if(str.Equals("Resources")) {
