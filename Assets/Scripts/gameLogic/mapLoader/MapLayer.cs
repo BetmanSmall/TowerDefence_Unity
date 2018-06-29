@@ -26,7 +26,7 @@ public class MapLayer {
             } else if (key.Equals ("visible")) {
                 this.opacity = value.Equals("0") ? 0f : 1f;
             } else if (key.Equals ("opacity")) {
-                this.opacity = float.Parse(value); // need implement true
+                this.opacity = float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
             }
         }
     }
