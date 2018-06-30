@@ -8,32 +8,43 @@ public class AnimCol : MonoBehaviour {
     // public Animator power;
 	// public GameObject Source;
     // public GameObject Destination;
-	public float Speed;
+
 	// Use this for initialization
-	void Start () {
-		Speed = 7.0f;
-	}
+    private GameObject cripik;
 	
 	 void OnTriggerEnter(Collider other)
     {
       if(other.gameObject.transform.parent.name == "Creeps"){
+            cripik = other.gameObject;
             gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Source = gameObject.transform.Find("Head").gameObject.transform.Find("Oval").gameObject;
 			gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Destination = other.gameObject;
             gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().enabled = true;
             other.gameObject.GetComponent<Creep>().die(100);
             }
     }
-
+    // void OnTriggerStay(Collider other){
+    //     if(other == null){
+    //         gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().enabled = false;
+    //     }
+    // }
 	void OnTriggerExit(Collider other)
     {
+        
       if(other.gameObject.transform.parent.name == "Creeps"){
-            gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Source = null;
-			gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Destination = null;
             gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().enabled = false;
+            // gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Source = null;
+			// gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Destination = null;
+       
             }
     }
 		
       
+    void Update(){
+        if(cripik == null){
+            gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().enabled = false;
+	}
+    }
+}
         
 
 
@@ -55,7 +66,4 @@ public class AnimCol : MonoBehaviour {
 
 	
 
-    void Update(){
 
-	}
-}

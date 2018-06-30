@@ -359,6 +359,7 @@ void Update(){
 
     if(agentCreep.enabled == false && animation.IsPlaying(animationClipDeath.name) == false){
         animation.enabled = false;
+        Destroy(gameObject,4.0f);
     }
 
   

@@ -123,9 +123,11 @@ GameObject:
   - component: {fileID: 95413722068852516}
   - component: {fileID: 111578293205018250}
   - component: {fileID: 114194372254629346}
-  - component: {fileID: 114666752183017022}
   - component: {fileID: 135501840512417320}
   - component: {fileID: 54506268704496394}
+  - component: {fileID: 114335036035155260}
+  - component: {fileID: 114144839429881014}
+  - component: {fileID: 114164366675457708}
   m_Layer: 0
   m_Name: turret_6_Prefab
   m_TagString: Untagged
@@ -238,7 +240,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869686906412398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -413.0611, y: 96.67614, z: -43.7841}
+  m_LocalPosition: {x: 108.369064, y: -6.9213934, z: 27.8}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4083823855888002}
@@ -430,6 +432,103 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114144839429881014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869686906412398}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 0}
+  CameraMode: 0
+  UseWorldSpace: 1
+  CompensateForParentTransform: 0
+  QualitySetting: 0
+  MultiThreaded: 0
+  SoftParticlesFactor: 3
+  RenderQueue: -1
+  SortLayerName: 
+  SortOrderInLayer: 0
+  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
+    type: 2}
+  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
+    type: 2}
+  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
+  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
+    type: 3}
+  LightningOriginParticleSystem: {fileID: 0}
+  LightningDestinationParticleSystem: {fileID: 0}
+  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
+  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
+  SourceBlendMode: 5
+  DestinationBlendMode: 1
+  JitterMultiplier: 0
+  Turbulence: 0
+  TurbulenceVelocity: {x: 0, y: 0, z: 0}
+  IntervalRange:
+    Minimum: 0.05
+    Maximum: 0.1
+  CountRange:
+    Minimum: 1
+    Maximum: 1
+  CountProbabilityModifier: 1
+  DelayRange:
+    Minimum: 0
+    Maximum: 0
+  DurationRange:
+    Minimum: 0.06
+    Maximum: 0.12
+  TrunkWidthRange:
+    Minimum: 0.1
+    Maximum: 0.2
+  LifeTime: 0
+  Generations: 6
+  ChaosFactor: 0.075
+  Intensity: 1
+  GlowIntensity: 0.1
+  GlowWidthMultiplier: 4
+  Forkedness: 0.25
+  ForkLengthMultiplier: 0.6
+  ForkLengthVariance: 0.2
+  FadePercent: 0.15
+  GrowthMultiplier: 0
+  EndWidthMultiplier: 0.5
+  ForkEndWidthMultiplier: 1
+  LightParameters:
+    RenderMode: 0
+    LightColor: {r: 1, g: 1, b: 1, a: 1}
+    LightPercent: 0.000001
+    LightShadowPercent: 0
+    LightIntensity: 0.5
+    BounceIntensity: 0
+    ShadowStrength: 1
+    ShadowBias: 0.05
+    ShadowNormalBias: 0.4
+    LightRange: 0
+    CullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  MaximumLightsPerBatch: 8
+  ManualMode: 0
+  Source: {fileID: 0}
+  Destination: {fileID: 0}
+  StartVariance: {x: 0, y: 0, z: 0}
+  EndVariance: {x: 0, y: 0, z: 0}
+--- !u!114 &114164366675457708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869686906412398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114194372254629346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -445,18 +544,17 @@ MonoBehaviour:
   m_Center: {x: 0.015770495, y: 0.65803885, z: -0.05422038}
   m_Area: 1
   m_AffectedAgents: 00000000
---- !u!114 &114666752183017022
+--- !u!114 &114335036035155260
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869686906412398}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
+  m_Script: {fileID: 11500000, guid: ae45913def4614d4eade3847fa8cf9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
 --- !u!114 &114702988878535056
 MonoBehaviour:
   m_ObjectHideFlags: 1

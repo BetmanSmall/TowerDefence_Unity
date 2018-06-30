@@ -150,20 +150,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135501840512417320, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
-        type: 2}
-      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &231089015
@@ -221,7 +212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145512723}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &256744138 stripped
 GameObject:
@@ -234,103 +225,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 256744138}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
---- !u!114 &256744140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256744138}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &256744146 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
     type: 2}
   m_PrefabInternal: {fileID: 887533790}
+--- !u!4 &466398576 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557,
+    type: 2}
+  m_PrefabInternal: {fileID: 666797750}
 --- !u!1001 &481953384
 Prefab:
   m_ObjectHideFlags: 0
@@ -368,7 +277,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_Name
@@ -386,111 +295,10 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &495472440 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 41943332}
---- !u!114 &495472441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 495472440}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
---- !u!114 &495472442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 495472440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &495472448 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
@@ -533,7 +341,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_Name
@@ -551,6 +359,9 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114164366675457708, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &582061787
@@ -593,6 +404,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &666797750
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2145512723}
+    m_Modifications:
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 113.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -6.921393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 17.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753904633336750, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114429006575997760, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+    - {fileID: 114280866465548382, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 2a23338a22e38a142b7e31f3372bd557, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &887533790
 Prefab:
   m_ObjectHideFlags: 0
@@ -630,7 +485,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_Name
@@ -648,6 +503,9 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114164366675457708, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1248742519
@@ -820,92 +678,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
     type: 2}
   m_PrefabInternal: {fileID: 500901217}
---- !u!114 &1366203586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1366203585}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
 --- !u!114 &1366203587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &1366203593 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
@@ -960,7 +731,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_Name
@@ -978,6 +749,9 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114164366675457708, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1601902960
@@ -1017,7 +791,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
       propertyPath: m_Name
@@ -1035,6 +809,9 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114666752183017022, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114335036035155260, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114144839429881014, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
+    - {fileID: 114164366675457708, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1c6ef96189e0a4d42b36b94eecffb0c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1778147927 stripped
@@ -1042,92 +819,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
     type: 2}
   m_PrefabInternal: {fileID: 1528335261}
---- !u!114 &1778147928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1778147927}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
 --- !u!114 &1778147929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,7 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &1778147935 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
@@ -1150,92 +840,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
     type: 2}
   m_PrefabInternal: {fileID: 1601902960}
---- !u!114 &1808183433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1808183432}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
 --- !u!114 &1808183434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,7 +851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &1808183440 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
@@ -1304,109 +907,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1905713035 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1869686906412398, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 481953384}
---- !u!114 &1905713036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1905713035}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2014d2956fb5449a738d58a62e51ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CameraMode: 0
-  UseWorldSpace: 1
-  CompensateForParentTransform: 0
-  QualitySetting: 0
-  MultiThreaded: 0
-  SoftParticlesFactor: 3
-  RenderQueue: -1
-  SortLayerName: 
-  SortOrderInLayer: 0
-  LightningMaterialMesh: {fileID: 2100000, guid: fc8d8bbcbd7ee644084017e19d35e03e,
-    type: 2}
-  LightningMaterialMeshNoGlow: {fileID: 2100000, guid: 6b705f48d99401048b99c3067259a4db,
-    type: 2}
-  LightningTexture: {fileID: 2800000, guid: 7caf380a210cada4bbf2a6e07f3932de, type: 3}
-  LightningGlowTexture: {fileID: 2800000, guid: ce5d5403bc32864478ec2fc45230eeff,
-    type: 3}
-  LightningOriginParticleSystem: {fileID: 0}
-  LightningDestinationParticleSystem: {fileID: 0}
-  LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0.1, g: 0.2, b: 1, a: 1}
-  SourceBlendMode: 5
-  DestinationBlendMode: 1
-  JitterMultiplier: 0
-  Turbulence: 0
-  TurbulenceVelocity: {x: 0, y: 0, z: 0}
-  IntervalRange:
-    Minimum: 0.05
-    Maximum: 0.1
-  CountRange:
-    Minimum: 1
-    Maximum: 1
-  CountProbabilityModifier: 1
-  DelayRange:
-    Minimum: 0
-    Maximum: 0
-  DurationRange:
-    Minimum: 0.06
-    Maximum: 0.12
-  TrunkWidthRange:
-    Minimum: 0.1
-    Maximum: 0.2
-  LifeTime: 0
-  Generations: 6
-  ChaosFactor: 0.075
-  Intensity: 1
-  GlowIntensity: 0.1
-  GlowWidthMultiplier: 4
-  Forkedness: 0.25
-  ForkLengthMultiplier: 0.6
-  ForkLengthVariance: 0.2
-  FadePercent: 0.15
-  GrowthMultiplier: 0
-  EndWidthMultiplier: 0.5
-  ForkEndWidthMultiplier: 1
-  LightParameters:
-    RenderMode: 0
-    LightColor: {r: 1, g: 1, b: 1, a: 1}
-    LightPercent: 0.000001
-    LightShadowPercent: 0
-    LightIntensity: 0.5
-    BounceIntensity: 0
-    ShadowStrength: 1
-    ShadowBias: 0.05
-    ShadowNormalBias: 0.4
-    LightRange: 0
-    CullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  MaximumLightsPerBatch: 8
-  ManualMode: 0
-  Source: {fileID: 0}
-  Destination: {fileID: 0}
-  StartVariance: {x: 0, y: 0, z: 0}
-  EndVariance: {x: 0, y: 0, z: 0}
---- !u!114 &1905713037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1905713035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0
 --- !u!4 &1905713043 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4545096047814602, guid: 1c6ef96189e0a4d42b36b94eecffb0c8,
@@ -1437,6 +937,7 @@ Transform:
   m_LocalPosition: {x: -45.676598, y: 7.2913933, z: -1.6053727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 466398576}
   - {fileID: 495472448}
   - {fileID: 1366203593}
   - {fileID: 1905713043}
