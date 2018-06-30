@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 400008}
   - component: {fileID: 9500000}
   - component: {fileID: 65588737164909770}
-  - component: {fileID: 111859737047870740}
+  - component: {fileID: 111167084632092684}
   m_Layer: 0
   m_Name: Skeleton_archer_Prefab
   m_TagString: Untagged
@@ -1034,7 +1034,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.738, y: -1.8527572, z: 0.89222956}
+  m_LocalPosition: {x: 92.90407, y: -1.6363945, z: 26.279514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400110}
@@ -2322,10 +2322,10 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
-  m_Controller: {fileID: 9100000, guid: c7446137c811bf3409297fb4763a7f9b, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fc93e3273ef98304dabf2731fa73664f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -2606,7 +2606,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.45, y: 2.45, z: 1.45}
   m_Center: {x: -0.22036982, y: 1.1468008, z: 0.22807693}
---- !u!111 &111859737047870740
+--- !u!111 &111167084632092684
 Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2667,5 +2667,5 @@ Animation:
   - {fileID: 110800000, guid: 52f01f7da6e7efb428f251cc0b049e1e, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_CullingType: 0

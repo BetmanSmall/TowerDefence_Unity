@@ -189,15 +189,14 @@ public class GameField : MonoBehaviour {
                 Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelGameObject + " templateForUnit:" + templateForUnit.toString());
                 GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, Creeps.transform);
                 gameObject.name = templateForUnit.toString(); // mb comment!
-                NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
-                agent.SetDestination(new Vector3(96,0,96));
+             NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
                 Creep creep = gameObject.AddComponent<Creep>();
                 creepsManager.addCreep(creep, agent, route, templateForUnit, player);
                 // Creep creep = creepsManager.createCreep(route, templateForUnit, player);
                 field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
                 pos.Set(pos.x-1.5f, pos.y+0.5f, pos.z-1.5f);
-
-                creep.setGameObjectAndAnimation(gameObject);
+                creep.setGameObjectAndAnimation(gameObject);   
+                //agent.SetDestination(new Vector3(96,0,96));
                 Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject + " 4_ThisCrep:" + creep);
             } else {
                 Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");

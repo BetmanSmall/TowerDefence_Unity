@@ -13,6 +13,16 @@ public class Creep : MonoBehaviour {
     public float stepsInTime;
     public float deathElapsedTime;
 
+    public Animation animation;
+    public AnimationClip animationClipRun;
+    public AnimationClip animationClipDeath;
+    public AnimationClip animationClip;
+
+    public NavMeshAgent agentCreep;
+
+   
+
+
     public int player; // In Future need change to enumPlayers {Computer0, Player1, Player2} and etc
     // public Vector3 currentPoint;
     // public Vector3 backStepPoint;// AlexGor
@@ -50,7 +60,12 @@ public class Creep : MonoBehaviour {
             this.stepsInTime = 0;//templateForUnit.speed; // need respawn animation
             this.deathElapsedTime = 0;
             this.navMeshAgent = agent;
-            this.navMeshAgent.SetDestination(new Vector3(96,0,96));
+            agentCreep = this.navMeshAgent;
+           
+
+            // !!!Test
+ 
+            // this.navMeshAgent.SetDestination(new Vector3(96,0,96));
             // this.transform = navMeshAgent.transform;
             // this.speedAgent = navMeshAgent.speed;
             // this.nextPosition = navMeshAgent.nextPosition;
@@ -78,7 +93,7 @@ public class Creep : MonoBehaviour {
         if(this.gameObject == null) {
             this.gameObject = gameObject;
             //Animator animator = gameObject.GetComponent<Animator>();
-            Animation animation = gameObject.GetComponent<Animation>();
+            animation = gameObject.GetComponent<Animation>();
             Debug.Log("Creep::setGameObjectAndAnimation(); -- animation:" + animation);
             if(animation == null) {
                 // animator = gameObject.AddComponent<Animator>();
@@ -92,21 +107,27 @@ public class Creep : MonoBehaviour {
             // this.сreepAnimatorClipInfo = new CreepAnimatorClipInfo(gameObject);
 
             Debug.Log("Creep::setGameObjectAndAnimation(); -- templateForUnit.animationsName.Count:" + templateForUnit.animationsName.Count);
-            int randomInt = Random.Range(0, templateForUnit.animationsName.Count);
-            Debug.Log("Creep::setGameObjectAndAnimation(); -- randomInt:" + randomInt);
-            string randomString = templateForUnit.animationsName[randomInt];
-            Debug.Log("Creep::setGameObjectAndAnimation(); -- randomString:" + randomString);
-            AnimationClip animationClip = animation.GetClip(randomString);
+            // // int randomInt = Random.Range(0, templateForUnit.animationsName.Count);
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -- randomInt:" + randomInt);
+            // string randomString = templateForUnit.animationsName[randomInt];
+            // Debug.Log("Creep::setGameObjectAndAnimation(); -- randomString:" + randomString);
+            //AnimationClip animationClip = animation.GetClip(randomString);
+            animationClip = animation.GetClip("Skeleton_waking_up");
+            animationClipRun = animation.GetClip("Skeleton_Run");
+            animationClipDeath = animation.GetClip("Skeleton_Dying");
             Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip:" + (animationClip == true) );
             if(animationClip != null) {
                 Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip:" + animationClip );
                 Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip.name:" + animationClip.name);
                 string playAnimCurr = animationClip.name;
-                Debug.Log("Creep::setGameObjectAndAnimation(); -- playAnimCurr:" + playAnimCurr + " randomInt:" + randomInt);
+               
+                // Debug.Log("Creep::setGameObjectAndAnimation(); -- playAnimCurr:" + playAnimCurr + " randomInt:" + randomInt);
                 // animator.Play(playAnimCurr);
                 animation.Play(playAnimCurr);
+               
+
             } else {
-                Debug.LogError("Creep::setGameObjectAndAnimation(); -- Not found animationClip:randomString:" + randomString);
+                // Debug.LogError("Creep::setGameObjectAndAnimation(); -- Not found animationClip:randomString:" + randomString);
             }
             return true;
         } else {
@@ -222,10 +243,15 @@ public class Creep : MonoBehaviour {
             hp -= damage;
             // addEffect(shellEffectType);
             if(hp <= 0) {
-                deathElapsedTime = 0;
-                // setAnimation("death_");
+                deathElapsedTime = 0;  //??????????
+                string playAnimCurrDeath = animationClipDeath.name;
+                animation.Play(playAnimCurrDeath);
+                agentCreep.enabled = false;
+               
                 Debug.Log("Creep::die(" + damage + "); -- setAnimation.(death_)");
                 return true;
+
+              
             }
             return false;
         }
@@ -322,4 +348,24 @@ public class Creep : MonoBehaviour {
 //         sb.append("]");
 //         return sb.toString();
 //     }
+
+void Update(){
+    
+    if(animation.isPlaying == false && agentCreep.enabled == true){
+        string playAnimCurrRun = animationClipRun.name;
+        animation.Play(playAnimCurrRun);
+        agentCreep.SetDestination(new Vector3(96,0,24));
+        }
+
+    if(agentCreep.enabled == false && animation.IsPlaying(animationClipDeath.name) == false){
+        animation.enabled = false;
+    }
+
+  
+    }
+
+
 }
+
+
+

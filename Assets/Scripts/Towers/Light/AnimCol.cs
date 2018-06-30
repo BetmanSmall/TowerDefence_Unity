@@ -20,6 +20,7 @@ public class AnimCol : MonoBehaviour {
             gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Source = gameObject.transform.Find("Head").gameObject.transform.Find("Oval").gameObject;
 			gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Destination = other.gameObject;
             gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().enabled = true;
+            other.gameObject.GetComponent<Creep>().die(100);
             }
     }
 

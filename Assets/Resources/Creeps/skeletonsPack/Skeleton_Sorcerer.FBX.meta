@@ -142,7 +142,7 @@ ModelImporter:
     7400050: Skeleton_Sneaking
     7400052: Skeleton_Run
     7400054: Skeleton_Jump_runing
-    7400056: 'Skeleton_Dying_A:'
+    7400056: Skeleton_Dying
     7400058: Skeleton_walk
     7400060: M_skeleton_combat_mode_A
     7400062: M_skeleton_dodge_to_left
@@ -195,20 +195,12 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
-      does not match position in animation file:\n\t'Bip01 L Thigh' : position error
-      = 105.168137 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Bip01 Spine' has translation animation that
-      will be discarded.\n\t'Bip01 Spine' is inbetween humanoid transforms and has
-      rotation animation that will be discarded.\n\t'Bip01 Neck' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -974,7 +966,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: 'Skeleton_Dying_A:'
+      name: Skeleton_Dying
       takeName: 
       firstFrame: 1719
       lastFrame: 1784
