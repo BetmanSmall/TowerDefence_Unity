@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc174d85587c2f449d9a8c1a5e21614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pula: {fileID: 100002, guid: 98822bf5a08d6ab4fb726433ebb65886, type: 2}
 --- !u!114 &114169220134902358
 MonoBehaviour:
   m_ObjectHideFlags: 1

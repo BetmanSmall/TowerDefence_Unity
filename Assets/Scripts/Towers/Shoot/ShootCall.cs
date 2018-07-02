@@ -41,10 +41,8 @@ public class ShootCall : MonoBehaviour {
         float Speed = 3.0f;
         Vector3 newDir = -Vector3.RotateTowards(gameObject.transform.forward, direction,angle,0.0f);
         gameObject.transform.rotation = Quaternion.LookRotation(newDir);
-        GameObject patron1 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.position, Quaternion.identity);
-        patron1.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.forward*speed;
-        GameObject patron2 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.position, Quaternion.identity);
-        patron2.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.forward*speed;
+        Pulemet();
+        // InvokeRepeating("Pulemet",0.3f,2.0f);
         
         // fire.SetActive(true);
         // firesmall.SetActive(false);
@@ -57,12 +55,18 @@ public class ShootCall : MonoBehaviour {
     }
 
     void Pulemet(){
-        GameObject patron1 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.position, Quaternion.identity);
-        patron1.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.forward*speed;
-        GameObject patron2 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.position, Quaternion.identity);
-        patron2.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.forward*speed;
-        Destroy(patron1,2.0f);
-        Destroy(patron2,2.0f);
+        GameObject patron1 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.position, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.rotation);
+        // patron1.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.forward*speed;
+        GameObject patron2 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.position, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.rotation);
+        // patron2.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.forward*speed;
+
+
+        // GameObject patron1 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.position, Quaternion.identity);
+        // patron1.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.forward*speed;
+        // GameObject patron2 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.position, Quaternion.identity);
+        // patron2.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.forward*speed;
+        // Destroy(patron1,2.0f);
+        // Destroy(patron2,2.0f);
     }
     
     void OnTriggerStay(Collider other)
@@ -70,10 +74,13 @@ public class ShootCall : MonoBehaviour {
 
          if(other.gameObject.transform.parent.name == "Creeps"){
         animator.SetBool("Shoot",true);
-        NowTime = DateTime.Now - time;
-        if(NowTime.Seconds/2 ==0){
-        Invoke("Pulemet",1.0f);
-        }
+        Pulemet();
+        // InvokeRepeating("Pulemet",0.5f,2.0f);
+        // NowTime = DateTime.Now - time;
+        // Debug.Log(NowTime.Milliseconds);
+        // if(NowTime.Milliseconds/2 == 0){
+        //  Pulemet();
+        // }
         // fire.SetActive(true);
         // firesmall.SetActive(false);
 			// gameObject.transform.Find("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript>().Destination = other.gameObject;
@@ -88,6 +95,7 @@ public class ShootCall : MonoBehaviour {
 	void OnTriggerExit(Collider other)
     {
          animator.SetBool("Shoot",false);
+         CancelInvoke();
          
         // fire.SetActive(false);
         // firesmall.SetActive(true);
@@ -103,6 +111,7 @@ public class ShootCall : MonoBehaviour {
     void Update(){
        if(cripik == null){
            animator.SetBool("Shoot",false);
+           CancelInvoke();
 	}
 	}
 }

@@ -20,6 +20,8 @@ public class Creep : MonoBehaviour {
 
     public NavMeshAgent agentCreep;
 
+    public Vector3 EndPoint;
+
    
 
 
@@ -61,7 +63,7 @@ public class Creep : MonoBehaviour {
             this.deathElapsedTime = 0;
             this.navMeshAgent = agent;
             agentCreep = this.navMeshAgent;
-           
+            EndPoint = new Vector3(96,0,24);
 
             // !!!Test
  
@@ -354,7 +356,7 @@ void Update(){
     if(animation.isPlaying == false && agentCreep.enabled == true){
         string playAnimCurrRun = animationClipRun.name;
         animation.Play(playAnimCurrRun);
-        agentCreep.SetDestination(new Vector3(96,0,24));
+        agentCreep.SetDestination(EndPoint);
         }
 
     if(agentCreep.enabled == false && animation.IsPlaying(animationClipDeath.name) == false){
@@ -362,8 +364,11 @@ void Update(){
         Destroy(gameObject,4.0f);
     }
 
-  
+
     }
+
+  
+    
 
 
 }
