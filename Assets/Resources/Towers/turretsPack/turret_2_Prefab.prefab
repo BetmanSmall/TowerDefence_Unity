@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 111956844073595536}
   - component: {fileID: 65462660441637502}
   - component: {fileID: 114554188287146872}
-  - component: {fileID: 114676462669722756}
+  - component: {fileID: 114812214605779398}
   m_Layer: 0
   m_Name: turret_2_Prefab
   m_TagString: Untagged
@@ -88,9 +88,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1859369183141498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.127709, y: 10.101744, z: -2.1651702}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 128.3, y: -6.921393, z: 40.27}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4791381037481416}
   - {fileID: 4684795834221514}
@@ -117,13 +117,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160761897402808}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000007450581, y: 0.6820341, z: 0.0004019551}
+  m_LocalRotation: {x: -0.13201365, y: 0.6397774, z: 0.112810075, w: 0.74868625}
+  m_LocalPosition: {x: 0, y: 0.7011709, z: 0.009251913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4388863836624614}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -20, y: 81.03, z: 0}
 --- !u!4 &4791381037481416
 Transform:
   m_ObjectHideFlags: 1
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 0.474113, z: -0.012899041}
   m_Area: 1
   m_AffectedAgents: 00000000
---- !u!114 &114676462669722756
+--- !u!114 &114812214605779398
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1859369183141498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f5494fa4777faa468a7a7f5b490fa61, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fb173e6cf05f12448459d7999f48560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: {fileID: 0}
+  roket: {fileID: 1530665020632176, guid: 0b8785a1199aa4c4185dc28157b77102, type: 2}

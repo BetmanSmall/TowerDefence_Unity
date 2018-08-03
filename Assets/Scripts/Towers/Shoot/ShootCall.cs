@@ -65,8 +65,8 @@ public class ShootCall : MonoBehaviour {
         // patron1.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_1").gameObject.transform.Find("Right").gameObject.transform.forward*speed;
         // GameObject patron2 = Instantiate(pula, gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.position, Quaternion.identity);
         // patron2.GetComponent<Rigidbody>().velocity = gameObject.transform.Find("Head").gameObject.transform.Find("Cannon_2").gameObject.transform.Find("Left").gameObject.transform.forward*speed;
-        // Destroy(patron1,2.0f);
-        // Destroy(patron2,2.0f);
+        Destroy(patron1,0.25f);
+        Destroy(patron2,0.25f);
     }
     
     void OnTriggerStay(Collider other)
