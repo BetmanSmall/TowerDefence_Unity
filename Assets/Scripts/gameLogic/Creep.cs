@@ -12,19 +12,12 @@ public class Creep : MonoBehaviour {
     public float speed;
     public float stepsInTime;
     public float deathElapsedTime;
-
     public Animation animation;
     public AnimationClip animationClipRun;
     public AnimationClip animationClipDeath;
     public AnimationClip animationClip;
-
     public NavMeshAgent agentCreep;
-
     public Vector3 EndPoint;
-
-   
-
-
     public int player; // In Future need change to enumPlayers {Computer0, Player1, Player2} and etc
     // public Vector3 currentPoint;
     // public Vector3 backStepPoint;// AlexGor
@@ -35,7 +28,6 @@ public class Creep : MonoBehaviour {
     public Vector2 velocity;
     public Vector2 displacement;
     public TemplateForUnit templateForUnit;
-
     // public Direction direction;
     // public Animation animation;
     // public Array<ShellEffectType> shellEffectTypes;
@@ -64,14 +56,6 @@ public class Creep : MonoBehaviour {
             this.navMeshAgent = agent;
             agentCreep = this.navMeshAgent;
             EndPoint = new Vector3(96,0,24);
-
-            // !!!Test
- 
-            // this.navMeshAgent.SetDestination(new Vector3(96,0,96));
-            // this.transform = navMeshAgent.transform;
-            // this.speedAgent = navMeshAgent.speed;
-            // this.nextPosition = navMeshAgent.nextPosition;
-
             this.player = player;
             // this.currentPoint = new Vector3(newPosition.getX(), newPosition.getY());
             // this.backStepPoint = new Vector3(oldPosition.getX(), oldPosition.getY());
@@ -79,9 +63,7 @@ public class Creep : MonoBehaviour {
             // this.circle2 = new Circle();
             // this.circle3 = new Circle();
             // this.circle4 = new Circle();
-
             this.templateForUnit = templateForUnit;
-
             // this.direction = Direction.UP;
             // setAnimation("walk_");
             // this.shellEffectTypes = new Array<ShellEffectType>();
@@ -122,12 +104,9 @@ public class Creep : MonoBehaviour {
                 Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip:" + animationClip );
                 Debug.Log("Creep::setGameObjectAndAnimation(); -- animationClip.name:" + animationClip.name);
                 string playAnimCurr = animationClip.name;
-               
                 // Debug.Log("Creep::setGameObjectAndAnimation(); -- playAnimCurr:" + playAnimCurr + " randomInt:" + randomInt);
                 // animator.Play(playAnimCurr);
                 animation.Play(playAnimCurr);
-               
-
             } else {
                 // Debug.LogError("Creep::setGameObjectAndAnimation(); -- Not found animationClip:randomString:" + randomString);
             }
@@ -146,11 +125,9 @@ public class Creep : MonoBehaviour {
         // direction = null;
         // animation = null;
     }
-    
     // // Update is called once per frame
     // void Update () {
     // }
-
     // TMP bad moveTo | good move simple | old code for WaveAlghoritm
     public Vector2Int moveTo(Vector2Int position, float delta) {
         Debug.Log("Creep::moveTo(); -1- position:" + position + " delta:" + delta);
@@ -249,11 +226,8 @@ public class Creep : MonoBehaviour {
                 string playAnimCurrDeath = animationClipDeath.name;
                 animation.Play(playAnimCurrDeath);
                 agentCreep.enabled = false;
-               
                 Debug.Log("Creep::die(" + damage + "); -- setAnimation.(death_)");
                 return true;
-
-              
             }
             return false;
         }
@@ -288,7 +262,6 @@ public class Creep : MonoBehaviour {
     public Vector2Int getNewPosition() {
         return newPosition;
     }
-
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -301,21 +274,18 @@ public class Creep : MonoBehaviour {
         }
         return hp > 0 ? true : false;
     }
-
     public void setSpeed(float speed) {
         this.speed = speed;
     }
     public float getSpeed() {
         return speed;
     }
-
     public void setStepsInTime(float stepsInTime) {
         this.stepsInTime = stepsInTime;
     }
     public float getStepsInTime() {
         return stepsInTime;
     }
-
     public void setRoute(List<Vector2Int> route) {
         this.route = route;
     }
@@ -353,7 +323,7 @@ public class Creep : MonoBehaviour {
 
 void Update(){
     
-    if(animation.isPlaying == false && agentCreep.enabled == true){
+    if(animation.isPlaying == false && agentCreep.enabled == true) {
         string playAnimCurrRun = animationClipRun.name;
         animation.Play(playAnimCurrRun);
         agentCreep.SetDestination(EndPoint);
@@ -363,14 +333,7 @@ void Update(){
         animation.enabled = false;
         Destroy(gameObject,4.0f);
     }
-
-
     }
-
-  
-    
-
-
 }
 
 
