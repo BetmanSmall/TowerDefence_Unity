@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -53,17 +53,4 @@ public class CreepsManager {
     public void removeCreep(Creep creep) {
         creeps.Remove(creep);
     }
-
-    // public bool setRouteForCreeps(PathFinder pathFinder, Vector2Int exitPoint) {
-    //     for (int i = 0; i < creeps.size; i++) {
-    //         List<Vector2Int> adv = pathFinder.route(new int[]{creeps.get(i).getNewPosition().getX(), creeps.get(i).getNewPosition().getY()},
-    //                 new int[]{exitPoint.x, exitPoint.y}, Options.ASTAR, Options.EUCLIDEAN_HEURISTIC, true);
-    //         if (adv != null) {
-    //             creeps.get(i).setRoute(adv);
-    //         } else {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
 }

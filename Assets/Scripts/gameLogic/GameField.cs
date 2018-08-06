@@ -1,4 +1,4 @@
-п»їusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,11 +14,9 @@ public class GameField : MonoBehaviour {
     public FactionsManager factionsManager;
     public TowersManager towersManager;
     public string mapPath = "maps/arena0";
-
     public int sizeFieldX, sizeFieldZ;
     public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map
     public Cell[,] field;
-
     // GAME INTERFACE ZONE1
     // public WhichCell whichCell;
     public bool gamePaused;
@@ -30,11 +28,9 @@ public class GameField : MonoBehaviour {
     // public int missedCreepsForPlayer1;
     // GAME INTERFACE ZONE2
     // LineRenderer lineRenderer;
-
     // Use this for initialization
     void Start() {
         Debug.Log("GameField::Start(); -- Start!");
-
         waveManager = new WaveManager();
         creepsManager = new CreepsManager();
         towersManager = new TowersManager();
@@ -42,15 +38,12 @@ public class GameField : MonoBehaviour {
         factionsManager.loadFactions();
         gamefield = GameObject.Find("GameField");
         Map map = new MapLoader().loadMap(mapPath);
-
         sizeFieldX = int.Parse(map.properties ["width"]);
         sizeFieldZ = int.Parse(map.properties ["height"]);
-
         // lineRenderer = gameObject.AddComponent<LineRenderer>();
         createField(sizeFieldX, sizeFieldZ, map.mapLayers);
         Creeps = new GameObject("Creeps");
         Creeps.transform.position = new Vector3(0,10,0);
-
         GameObject NavMesh = new GameObject("NavMesh");
         NavMesh.AddComponent<NavMeshSurface>();
      //   var geo = NavMesh.GetComponent<NavMeshSurface>();
@@ -58,7 +51,6 @@ public class GameField : MonoBehaviour {
       //  geo.tileSize = 64;
         //geo.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
-
         surface.BuildNavMesh();
         WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
@@ -76,7 +68,7 @@ public class GameField : MonoBehaviour {
                     for (int x = 0; x < sizeFieldX; x++) {
                         TileModel tileModel = mapLayer.tileModels[x, z];
                         if (tileModel != null) {
-                            Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // РІСЃРµ С‚СѓС‚ РЅСѓР¶РЅРѕ РїРѕРЅСЏС‚СЊ
+                            Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
                             GameObject newCellGameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
                             //Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
                             Cell cell = newCellGameObject.AddComponent<Cell>();
@@ -86,14 +78,14 @@ public class GameField : MonoBehaviour {
                                 cell.setTerrain();
                             }
                             field[x, z] = cell;
-    //                         MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Р”РёРєРёРµ РЅРµ РїРѕРЅСЏС‚РєРё СЃРѕ РІСЃРµРј СЌС‚РёРј!
+    //                         MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
     //                         if (mapLayer.opacity == 0f) {
     //                             meshRenderer.enabled = false;
     //                         } else {
     //                             foreach (Material material in meshRenderer.materials) {
     // //                            Debug.Log("GameField::Start(); -- material:" + material);
     //                                 Color color = material.color;
-    //                                 /// РџСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ
+    //                                 /// Прозрачность
     //                                 color.a = mapLayer.opacity; // It is not WOKR!=(
     //                                 material.color = color;
     // //                            Debug.Log("GameField::Start(); -- material.color:" + material.color);
@@ -135,7 +127,6 @@ public class GameField : MonoBehaviour {
         waveManager.setExitPoint(new Vector2Int(x, y));
         // rerouteForAllCreeps(new Vector2Int(x, y));
     }
-
     // ___!1!___ Creeps Section ____!!!___
     public void spawnCreepFromUser(TemplateForUnit templateForUnit) {
         Debug.Log("GameField::spawnCreepFromUser(); -- templateForUnit:" + templateForUnit);
@@ -244,7 +235,7 @@ public class GameField : MonoBehaviour {
             int towerSize = templateForTower.size;
             int startX = 0, startZ = 0, finishX = 0, finishZ = 0;
             if (towerSize != 1) {
-                // РќРёР¶РЅСЏСЏ РєР°СЂС‚Р°
+                // Нижняя карта
                 if (towerSize % 2 == 0) {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
@@ -256,7 +247,7 @@ public class GameField : MonoBehaviour {
                     finishX = (towerSize / 2);
                     finishZ = (towerSize / 2);
                 }
-                // РџСЂР°РІР°СЏ РєР°СЂС‚Р°
+                // Правая карта
 //                if (towerSize % 2 == 0) {
 //                    startX = -(towerSize / 2);
 //                    startZ = -((towerSize / 2) - 1);
