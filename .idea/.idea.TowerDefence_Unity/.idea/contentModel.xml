@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\betma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\betma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-632949189.00" t="ExcludeRecursive" />
+    <e p="D:\Unity\Projects\TowerDefence_Unity" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="AdditionalExamples" t="Include">
+          <e p="SphereIllusion" t="Include">
+            <e p="SphereIllusion.cs" t="Include" />
+          </e>
+        </e>
+        <e p="NavMeshComponents" t="Include">
+          <e p="Editor" t="Include">
+            <e p="NavMeshComponentsGUIUtility.cs" t="Include" />
+            <e p="NavMeshLinkEditor.cs" t="Include" />
+            <e p="NavMeshModifierEditor.cs" t="Include" />
+            <e p="NavMeshModifierVolumeEditor.cs" t="Include" />
+            <e p="NavMeshSurfaceEditor.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="NavMeshLink.cs" t="Include" />
+            <e p="NavMeshModifier.cs" t="Include" />
+            <e p="NavMeshModifierVolume.cs" t="Include" />
+            <e p="NavMeshSurface.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Resources" t="Include">
+          <e p="maps" t="Include">
+            <e p="arena0.xml" t="Include" />
+            <e p="arena01.xml" t="Include" />
+            <e p="factions" t="Include">
+              <e p="humans_faction.xml" t="Include" />
+              <e p="orcs_faction.xml" t="Include" />
+              <e p="Towers" t="Include">
+                <e p="tower1_turret_1.xml" t="Include" />
+                <e p="tower1_turret_2.xml" t="Include" />
+                <e p="tower1_turret_3.xml" t="Include" />
+                <e p="tower1_turret_4.xml" t="Include" />
+                <e p="tower1_turret_5.xml" t="Include" />
+                <e p="tower1_turret_6.xml" t="Include" />
+              </e>
+              <e p="units" t="Include">
+                <e p="unit1_Skeleton_archer.xml" t="Include" />
+                <e p="unit2_Skeleton_footman.xml" t="Include" />
+                <e p="unit3_skeleton_Lying.xml" t="Include" />
+                <e p="unit5_skeleton_Sitting.xml" t="Include" />
+                <e p="unit6_Skeleton_Sorcerer.xml" t="Include" />
+                <e p="unit7_skeleton_Standing.xml" t="Include" />
+                <e p="unit8_skeleton_T_pose.xml" t="Include" />
+                <e p="unit9_Skeleton_warlord.xml" t="Include" />
+              </e>
+            </e>
+            <e p="other" t="Include">
+              <e p="unityModels.xml" t="Include" />
+            </e>
+            <e p="testMap.xml" t="Include" />
+            <e p="testMap2.xml" t="Include" />
+          </e>
+          <e p="Materials" t="Include">
+            <e p="Fire" t="Include">
+              <e p="GlowAdditiveTwoColor.shader" t="Include" />
+            </e>
+          </e>
+          <e p="Towers" t="Include">
+            <e p="Sci Fi Assets" t="Include">
+              <e p="Simple SciFi Gun Turret Set" t="Include">
+                <e p="Read Me.txt" t="Include" />
+                <e p="Scripts" t="Include">
+                  <e p="CameraMouseDrag.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="turretsPack" t="Include">
+              <e p="Materials" t="Include">
+                <e p="Shaders" t="Include">
+                  <e p="LightningBoltShaderMesh.shader" t="Include" />
+                  <e p="LightningBoltShaderMeshNoGlow.shader" t="Include" />
+                  <e p="ParticleAdd.shader" t="Include" />
+                  <e p="ParticleAddNoSmooth.shader" t="Include" />
+                  <e p="Particles.shader" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scene" t="Include">
+          <e p="TEST SCENE" t="Include">
+            <e p="Unit.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="EndPoint.cs" t="Include" />
+          <e p="gameLogic" t="Include">
+            <e p="Cell.cs" t="Include" />
+            <e p="Creep.cs" t="Include" />
+            <e p="CreepsManager.cs" t="Include" />
+            <e p="GameField.cs" t="Include" />
+            <e p="mapLoader" t="Include">
+              <e p="AnimReaderEditor.cs" t="Include" />
+              <e p="CreepAnimatorClipInfo.cs" t="Include" />
+              <e p="Map.cs" t="Include" />
+              <e p="MapLayer.cs" t="Include" />
+              <e p="MapLoader.cs" t="Include" />
+              <e p="TileModel.cs" t="Include" />
+              <e p="TileSetOrModelsSet.cs" t="Include" />
+            </e>
+            <e p="pathfinderAlgorithms" t="Include">
+              <e p="WaveAlgorithm.cs" t="Include" />
+              <e p="WaveAlgorithm2.cs" t="Include" />
+            </e>
+            <e p="playerTemplates" t="Include">
+              <e p="Direction.cs" t="Include" />
+              <e p="Faction.cs" t="Include" />
+              <e p="FactionsManager.cs" t="Include" />
+              <e p="TemplateForTower.cs" t="Include" />
+              <e p="TemplateForUnit.cs" t="Include" />
+            </e>
+            <e p="Tower.cs" t="Include" />
+            <e p="TowersManager.cs" t="Include" />
+            <e p="Wave.cs" t="Include" />
+            <e p="WaveManager.cs" t="Include" />
+          </e>
+          <e p="GameScreen.cs" t="Include" />
+          <e p="GameServerConnection.cs" t="Include" />
+          <e p="MapEditor" t="Include">
+            <e p="CameraEditor.cs" t="Include" />
+            <e p="MainPanel.cs" t="Include" />
+          </e>
+          <e p="RaketaScript.cs" t="Include" />
+          <e p="Towers" t="Include">
+            <e p="Fire" t="Include">
+              <e p="FireCall.cs" t="Include" />
+            </e>
+            <e p="Light" t="Include">
+              <e p="AnimCol.cs" t="Include" />
+              <e p="LightningBoltDataStructures.cs" t="Include" />
+              <e p="LightningBoltPrefabScript.cs" t="Include" />
+              <e p="LightningBoltScript.cs" t="Include" />
+              <e p="LightningEditorUtilities.cs" t="Include" />
+              <e p="LightningGenerator.cs" t="Include" />
+              <e p="PathGenerator.cs" t="Include" />
+            </e>
+            <e p="ParticleSystemScale.cs" t="Include" />
+            <e p="Rocket" t="Include">
+              <e p="TowerRocket.cs" t="Include" />
+            </e>
+            <e p="Shoot" t="Include">
+              <e p="ShootCall.cs" t="Include" />
+            </e>
+          </e>
+          <e p="voxelGanerator" t="Include">
+            <e p="VoxelDirection.cs" t="Include" />
+            <e p="VoxelTile.cs" t="Include" />
+            <e p="VoxelTilePlacerSimple.cs" t="Include" />
+            <e p="VoxelTilePlacerWfc.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="NavMeshComponents.csproj" t="IncludeRecursive" />
+      <e p="NavMeshComponentsEditor.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="TowerDefence_Unity.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

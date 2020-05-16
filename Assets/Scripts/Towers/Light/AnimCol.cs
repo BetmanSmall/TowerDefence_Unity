@@ -26,7 +26,7 @@ public class AnimCol : MonoBehaviour {
 
     void Update () {
         if (cripik == null) {
-            gameObject.transform.Find ("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript> ().enabled = false;
+            // gameObject.transform.Find ("LightningBoltPrefab").GetComponent<LightningBoltPrefabScript> ().enabled = false;
         }
     }
 }
