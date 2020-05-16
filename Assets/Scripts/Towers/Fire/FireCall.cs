@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using DigitalRuby.ThunderAndLightning;
+// using System.Collections;
+// using System.Collections.Generic;
+// using DigitalRuby.ThunderAndLightning;
 using UnityEngine;
 
 public class FireCall : MonoBehaviour {

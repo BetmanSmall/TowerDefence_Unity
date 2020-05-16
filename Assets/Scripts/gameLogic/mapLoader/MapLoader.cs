@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using System.Xml;
 
@@ -24,6 +25,12 @@ public class MapLoader {
     public Map loadMap(string mapPath) {
         Debug.Log("MapLoader::loadMap(" + mapPath + "); -- Start!");
         this.mapPath = mapPath;
+        if (mapPath.Contains(".tmx")) {
+            // string[] strings = Directory.GetFiles("Assets/Resources/maps");
+            // mapPath = mapPath.Substring(0, mapPath.IndexOf(".tmx"));
+            mapPath = mapPath.Replace(".tmx", "");
+            File.Copy("Assets/Resources/" + mapPath + ".tmx", "Assets/Resources/" + mapPath + ".xml", true);
+        }
         TextAsset textAsset = Resources.Load<TextAsset>(mapPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
         Debug.Log("MapLoader::loadMap(); -- textAsset:" + textAsset);
         if (textAsset == null) {
@@ -79,9 +86,13 @@ public class MapLoader {
         if (tileSetNode.Name.Equals ("tileset")) {
             string source;
             if(tileSetNode.Attributes["source"] != null) {
-            // if (source != null) {
                 source = tileSetNode.Attributes["source"].Value;
                 string tsxPath = findFile(mapPath, source);
+                if (tsxPath.Contains(".tsx")) {
+                    // tsxPath = tsxPath.Substring(0, tsxPath.IndexOf(".tsx"));
+                    tsxPath = tsxPath.Replace(".tsx", "");
+                    File.Copy("Assets/Resources/" + tsxPath + ".tsx", "Assets/Resources/" + tsxPath + ".xml", true);
+                }
                 TextAsset textAsset = Resources.Load<TextAsset>(tsxPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
                 Debug.Log("MapLoader::loadTileSet(); -- textAsset:" + textAsset);
                 if (textAsset == null) {

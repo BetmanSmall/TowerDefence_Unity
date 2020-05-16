@@ -68,7 +68,7 @@ public class GameField : MonoBehaviour {
                     for (int x = 0; x < sizeFieldX; x++) {
                         TileModel tileModel = mapLayer.tileModels[x, z];
                         if (tileModel != null) {
-                            Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
+                            Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // РІСЃРµ С‚СѓС‚ РЅСѓР¶РЅРѕ РїРѕРЅСЏС‚СЊ
                             GameObject newCellGameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
                             //Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
                             Cell cell = newCellGameObject.AddComponent<Cell>();
@@ -78,14 +78,14 @@ public class GameField : MonoBehaviour {
                                 cell.setTerrain();
                             }
                             field[x, z] = cell;
-    //                         MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
+    //                         MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Р”РёРєРёРµ РЅРµ РїРѕРЅСЏС‚РєРё СЃРѕ РІСЃРµРј СЌС‚РёРј!
     //                         if (mapLayer.opacity == 0f) {
     //                             meshRenderer.enabled = false;
     //                         } else {
     //                             foreach (Material material in meshRenderer.materials) {
     // //                            Debug.Log("GameField::Start(); -- material:" + material);
     //                                 Color color = material.color;
-    //                                 /// Прозрачность
+    //                                 /// РџСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ
     //                                 color.a = mapLayer.opacity; // It is not WOKR!=(
     //                                 material.color = color;
     // //                            Debug.Log("GameField::Start(); -- material.color:" + material.color);
@@ -235,7 +235,7 @@ public class GameField : MonoBehaviour {
             int towerSize = templateForTower.size;
             int startX = 0, startZ = 0, finishX = 0, finishZ = 0;
             if (towerSize != 1) {
-                // Нижняя карта
+                // РќРёР¶РЅСЏСЏ РєР°СЂС‚Р°
                 if (towerSize % 2 == 0) {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
@@ -247,7 +247,7 @@ public class GameField : MonoBehaviour {
                     finishX = (towerSize / 2);
                     finishZ = (towerSize / 2);
                 }
-                // Правая карта
+                // РџСЂР°РІР°СЏ РєР°СЂС‚Р°
 //                if (towerSize % 2 == 0) {
 //                    startX = -(towerSize / 2);
 //                    startZ = -((towerSize / 2) - 1);
