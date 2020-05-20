@@ -37,11 +37,7 @@ public class GameField : MonoBehaviour {
         factionsManager = new FactionsManager(1f);
         factionsManager.loadFactions();
         gamefield = GameObject.Find("GameField");
-        Map map = new MapLoader().loadMap(mapPath);
-        sizeFieldX = int.Parse(map.properties ["width"]);
-        sizeFieldZ = int.Parse(map.properties ["height"]);
-        // lineRenderer = gameObject.AddComponent<LineRenderer>();
-        createField(sizeFieldX, sizeFieldZ, map.mapLayers);
+        MapLoad();
         Creeps = new GameObject("Creeps");
         Creeps.transform.position = new Vector3(0,10,0);
         GameObject NavMesh = new GameObject("NavMesh");
@@ -54,6 +50,14 @@ public class GameField : MonoBehaviour {
         surface.BuildNavMesh();
         WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
+    }
+
+    public void MapLoad() {
+        Map map = new MapLoader().loadMap(mapPath);
+        sizeFieldX = int.Parse(map.properties ["width"]);
+        sizeFieldZ = int.Parse(map.properties ["height"]);
+        // lineRenderer = gameObject.AddComponent<LineRenderer>();
+        createField(sizeFieldX, sizeFieldZ, map.mapLayers);
     }
 
     private void createField(int sizeFieldX, int sizeFieldZ, Dictionary<int, MapLayer> mapLayers) {

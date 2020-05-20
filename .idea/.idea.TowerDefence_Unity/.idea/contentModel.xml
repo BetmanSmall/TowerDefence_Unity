@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\betma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\betma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-632949189.00" t="ExcludeRecursive" />
-    <e p="D:\Unity\Projects\TowerDefence_Unity" t="IncludeRecursive">
+    <e p="C:\Users\ART\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\ART\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-525325795.00" t="ExcludeRecursive" />
+    <e p="P:\Unity\TowerDefence_Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="NavMeshComponents" t="Include">
@@ -21,6 +21,7 @@
             <e p="NavMeshSurface.cs" t="Include" />
           </e>
         </e>
+        <e p="PacketObjectManager.cs" t="Include" />
         <e p="Resources" t="Include">
           <e p="maps" t="Include">
             <e p="arena0.xml" t="Include" />
@@ -91,6 +92,7 @@
             <e p="Cell.cs" t="Include" />
             <e p="Creep.cs" t="Include" />
             <e p="CreepsManager.cs" t="Include" />
+            <e p="Explorer.cs" t="Include" />
             <e p="GameField.cs" t="Include" />
             <e p="mapLoader" t="Include">
               <e p="AnimReaderEditor.cs" t="Include" />
