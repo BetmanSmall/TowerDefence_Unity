@@ -21,6 +21,7 @@ public class GameScreen : MonoBehaviour  {
     public float distanceMin = 5f;
     public float distanceMax = 40f;
     public float zoomSpeed = 100f;
+    public bool isScroll;
 
     void Start() {
 //        camera = GetComponent<Camera>();
@@ -138,94 +139,138 @@ public class GameScreen : MonoBehaviour  {
     }
 
     void Update() {
+        if (!isScroll)
+        {
 //        Debug.Log("GameScreen::Update(); -- Start!");
-        float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
-        if (mouseScrollWheel != 0f ) {
-            Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" + transform.position.y);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit point; Physics.Raycast(ray, out point, 25);
-            Vector3 Scrolldirection = ray.GetPoint(5);
+            float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+            if (mouseScrollWheel != 0f)
+            {
+                Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" +
+                          transform.position.y);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit point;
+                Physics.Raycast(ray, out point, 25);
+                Vector3 Scrolldirection = ray.GetPoint(5);
 
-            float step = zoomSpeed * Time.deltaTime;
-            if (mouseScrollWheel < 0f && transform.position.y < distanceMax) {
-                transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
-            } else if (mouseScrollWheel > 0f && transform.position.y > distanceMin) {
-                transform.position = Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
+                float step = zoomSpeed * Time.deltaTime;
+                if (mouseScrollWheel < 0f && transform.position.y < distanceMax)
+                {
+                    transform.position =
+                        Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
+                }
+                else if (mouseScrollWheel > 0f && transform.position.y > distanceMin)
+                {
+                    transform.position =
+                        Vector3.MoveTowards(transform.position, Scrolldirection, mouseScrollWheel * step);
+                }
+
+                Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" +
+                          transform.position.y);
             }
-            Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" + transform.position.y);
-        }
 
-        if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection) {
-            transform.position -= new Vector3 (cameraSpeed * Time.deltaTime, 0, 0);
-        }
-        if ((Screen.width-spaceMouseDetection) < Input.mousePosition.x && Input.mousePosition.x < Screen.width) {
-            transform.position += new Vector3 (cameraSpeed * Time.deltaTime, 0, 0);
-        }
-        if (0f < Input.mousePosition.y && Input.mousePosition.y < spaceMouseDetection) {
-            transform.position -= new Vector3 (0, 0, cameraSpeed * Time.deltaTime);
-        }
-        if ((Screen.height-spaceMouseDetection) < Input.mousePosition.y && Input.mousePosition.y < Screen.height) {
-            transform.position += new Vector3 (0, 0, cameraSpeed * Time.deltaTime);
-        }
+            if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection)
+            {
+                transform.position -= new Vector3(cameraSpeed * Time.deltaTime, 0, 0);
+            }
 
-        if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-            transform.Translate(new Vector3(cameraSpeed*Time.deltaTime, 0, 0));
-        }
-        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-            transform.Translate(new Vector3((-cameraSpeed*Time.deltaTime), 0, 0));
-        }
-        if(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
-            transform.Translate(new Vector3(0, -(cameraSpeed*Time.deltaTime), 0));
-        }
-        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-            transform.Translate(new Vector3(0, cameraSpeed*Time.deltaTime, 0));
-        }
+            if ((Screen.width - spaceMouseDetection) < Input.mousePosition.x && Input.mousePosition.x < Screen.width)
+            {
+                transform.position += new Vector3(cameraSpeed * Time.deltaTime, 0, 0);
+            }
+
+            if (0f < Input.mousePosition.y && Input.mousePosition.y < spaceMouseDetection)
+            {
+                transform.position -= new Vector3(0, 0, cameraSpeed * Time.deltaTime);
+            }
+
+            if ((Screen.height - spaceMouseDetection) < Input.mousePosition.y && Input.mousePosition.y < Screen.height)
+            {
+                transform.position += new Vector3(0, 0, cameraSpeed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(new Vector3(cameraSpeed * Time.deltaTime, 0, 0));
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(new Vector3((-cameraSpeed * Time.deltaTime), 0, 0));
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(new Vector3(0, -(cameraSpeed * Time.deltaTime), 0));
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            {
+                transform.Translate(new Vector3(0, cameraSpeed * Time.deltaTime, 0));
+            }
 
 
 
 //      Управление камерой при нажатой клавиши мыши           --------------------------------------------------------------------------------
-        if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0)) { // Работает только вместе
-             lastPosition = Input.mousePosition;
-             Debug.Log ("Нажали0");
-        }
-        if (Input.GetButton("Fire1") || Input.GetMouseButton(0)) { // Работает только вместе
+            if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0))
+            {
+                // Работает только вместе
+                lastPosition = Input.mousePosition;
+                Debug.Log("Нажали0");
+            }
 
-            Vector3 delta = Input.mousePosition - lastPosition;
+            if (Input.GetButton("Fire1") || Input.GetMouseButton(0))
+            {
+                // Работает только вместе
+
+                Vector3 delta = Input.mousePosition - lastPosition;
 //            Debug.Log("GameScreen::Update(); -- delta:" + delta);
 //            transform.Translate(delta.x * mouseSensitivity, 0f, delta.y * mouseSensitivity);
-            Vector3 olsPos = transform.position;
-            Vector3 newPos = new Vector3 (olsPos.x - (delta.x * mouseSensitivity), olsPos.y, olsPos.z - (delta.y * mouseSensitivity));
-            transform.position = newPos;
-            lastPosition = Input.mousePosition;
-        }
+                Vector3 olsPos = transform.position;
+                Vector3 newPos = new Vector3(olsPos.x - (delta.x * mouseSensitivity), olsPos.y,
+                    olsPos.z - (delta.y * mouseSensitivity));
+                transform.position = newPos;
+                lastPosition = Input.mousePosition;
+            }
 //----------------------------------------------------------------------------------------------------------------------------------------------
 
-        if (Input.GetMouseButtonUp(0)) {
-            Debug.Log ("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(0));
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit)) {
-                Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
-                Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
-                Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
-                Debug.Log ("GameScreen::Update(); -- cell:" + cell);
-                if(cell != null) {
-                    Debug.Log ("GameScreen::Update(); -- cell:" + ((!cell.empty) ? ("[" + cell.gameX + ", " + cell.gameZ + "])") : ("cell.empty == true")) );
-                    gameField.towerActions(cell.gameX, cell.gameZ);
+            if (Input.GetMouseButtonUp(0))
+            {
+                Debug.Log("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(0));
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+                    Debug.Log("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+                    Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+                    Debug.Log("GameScreen::Update(); -- cell:" + cell);
+                    if (cell != null)
+                    {
+                        Debug.Log("GameScreen::Update(); -- cell:" + ((!cell.empty)
+                            ? ("[" + cell.gameX + ", " + cell.gameZ + "])")
+                            : ("cell.empty == true")));
+                        gameField.towerActions(cell.gameX, cell.gameZ);
+                    }
                 }
             }
-        }
-        if (Input.GetMouseButtonUp(1)) {
-            Debug.Log ("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(1));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                Debug.Log ("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
-                Debug.Log ("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
-                Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
-                if(cell != null) {
-                    Debug.Log ("GameScreen::Update(); -- cell:" + ((!cell.empty) ? ("[" + cell.gameX + ", " + cell.gameZ + "])") : ("cell.empty == true")) );
-                    gameField.createCreep(cell.gameX, cell.gameZ);
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                Debug.Log("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(1));
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
+                    Debug.Log("GameScreen::Update(); -- hit.transform.position:" + hit.transform.position);
+                    Cell cell = hit.collider.gameObject.GetComponentInParent<Cell>();
+                    if (cell != null)
+                    {
+                        Debug.Log("GameScreen::Update(); -- cell:" + ((!cell.empty)
+                            ? ("[" + cell.gameX + ", " + cell.gameZ + "])")
+                            : ("cell.empty == true")));
+                        gameField.createCreep(cell.gameX, cell.gameZ);
+                    }
                 }
             }
         }
