@@ -146,7 +146,7 @@ public class WaveAlgorithm {
             for (int tmpY = 0; tmpY < sizeY; tmpY++) {
                 // mapWithSteps.Add(0); // КОСТЫЛЬ МАТЬ ЕГО!!!!!
                 // Debug.Log("WaveAlgorithm::clearStepsOnWaveAlgorithm(); -- tmpX:" + tmpX + " sizeX * tmpY:" + sizeX * tmpY + " tmpY:" + tmpY);
-                field[tmpX, tmpY].numberByWaveAlgorithm = 0;
+                // field[tmpX, tmpY].numberByWaveAlgorithm = 0;
             }
         }
         Debug.Log("WaveAlgorithm::clearStepsOnWaveAlgorithm(); -- End!");
