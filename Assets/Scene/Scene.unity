@@ -8047,6 +8047,7 @@ MonoBehaviour:
   distanceMin: 5
   distanceMax: 40
   zoomSpeed: 100
+  isScroll: 0
 --- !u!1 &1286031412
 GameObject:
   m_ObjectHideFlags: 0
@@ -14268,7 +14269,7 @@ MonoBehaviour:
   Creeps: {fileID: 0}
   gamefield: {fileID: 0}
   surface: {fileID: 0}
-  mapPath: maps/testMap.tmx
+  mapPath: maps/3dArena0.tmx
   sizeFieldX: 0
   sizeFieldZ: 0
   sizeCellX: 3
