@@ -1,72 +1,621 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="20" height="30" tilewidth="128" tileheight="64" nextobjectid="1">
- <tileset firstgid="1" source="other/iso-128x128-models-tileset.tsx"/>
- <layer name="background" width="20" height="30">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="128" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" name="iso-128x128-models-tileset" tilewidth="128" tileheight="128" tilecount="190" columns="10">
+  <properties>
+   <property name="modelsPath" value="textures/fieldModels"/>
+  </properties>
+  <image source="textures/iso-128x128-models-tileset.png" trans="ffffff" width="1280" height="2432"/>
+  <tile id="0">
+   <properties>
+    <property name="modelName" value="naturePack_001"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="modelName" value="naturePack_002"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="modelName" value="naturePack_003"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="modelName" value="naturePack_004"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="modelName" value="naturePack_005"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="modelName" value="naturePack_006"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="modelName" value="naturePack_007"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="modelName" value="naturePack_008"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="modelName" value="naturePack_009"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="modelName" value="naturePack_010"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="modelName" value="naturePack_011"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="modelName" value="naturePack_012"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="modelName" value="naturePack_013"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="modelName" value="naturePack_014"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="modelName" value="naturePack_015"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="modelName" value="naturePack_016"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="modelName" value="naturePack_017"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="modelName" value="naturePack_018"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="modelName" value="naturePack_019"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="modelName" value="naturePack_020"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="modelName" value="naturePack_021"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="modelName" value="naturePack_022"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="modelName" value="naturePack_023"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="modelName" value="naturePack_024"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="modelName" value="naturePack_025"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="modelName" value="naturePack_026"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="modelName" value="naturePack_027"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="modelName" value="naturePack_028"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="modelName" value="naturePack_029"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="modelName" value="naturePack_030"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="modelName" value="naturePack_031"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="modelName" value="naturePack_032"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="modelName" value="naturePack_033"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="modelName" value="naturePack_034"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="modelName" value="naturePack_035"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="modelName" value="naturePack_036"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="modelName" value="naturePack_037"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="modelName" value="naturePack_038"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="modelName" value="naturePack_039"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="modelName" value="naturePack_040"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="modelName" value="naturePack_041"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="modelName" value="naturePack_042"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="modelName" value="naturePack_043"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="modelName" value="naturePack_044"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="modelName" value="naturePack_045"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="45">
+   <properties>
+    <property name="modelName" value="naturePack_046"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="46">
+   <properties>
+    <property name="modelName" value="naturePack_047"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="modelName" value="naturePack_048"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="modelName" value="naturePack_049"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="modelName" value="naturePack_050"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="modelName" value="naturePack_051"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="modelName" value="naturePack_052"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="modelName" value="naturePack_053"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="modelName" value="naturePack_054"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="modelName" value="naturePack_055"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="modelName" value="naturePack_056"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="modelName" value="naturePack_057"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="modelName" value="naturePack_058"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="modelName" value="naturePack_059"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="modelName" value="naturePack_060"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="modelName" value="naturePack_061"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="modelName" value="naturePack_062"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="modelName" value="naturePack_063"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="modelName" value="naturePack_064"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="modelName" value="naturePack_065"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="modelName" value="naturePack_066"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="modelName" value="naturePack_067"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="modelName" value="naturePack_068"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="modelName" value="naturePack_069"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="modelName" value="naturePack_070"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="70">
+   <properties>
+    <property name="modelName" value="naturePack_071"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="71">
+   <properties>
+    <property name="modelName" value="naturePack_072"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="72">
+   <properties>
+    <property name="modelName" value="naturePack_073"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="73">
+   <properties>
+    <property name="modelName" value="naturePack_074"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="74">
+   <properties>
+    <property name="modelName" value="naturePack_075"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="75">
+   <properties>
+    <property name="modelName" value="naturePack_076"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="76">
+   <properties>
+    <property name="modelName" value="naturePack_077"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="77">
+   <properties>
+    <property name="modelName" value="naturePack_078"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="modelName" value="naturePack_079"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="79">
+   <properties>
+    <property name="modelName" value="naturePack_080"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="modelName" value="naturePack_081"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="modelName" value="naturePack_082"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="82">
+   <properties>
+    <property name="modelName" value="naturePack_083"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="83">
+   <properties>
+    <property name="modelName" value="naturePack_084"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="84">
+   <properties>
+    <property name="modelName" value="naturePack_085"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="85">
+   <properties>
+    <property name="modelName" value="naturePack_086"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="86">
+   <properties>
+    <property name="modelName" value="naturePack_087"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="87">
+   <properties>
+    <property name="modelName" value="naturePack_088"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="88">
+   <properties>
+    <property name="modelName" value="naturePack_089"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="89">
+   <properties>
+    <property name="modelName" value="naturePack_090"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="90">
+   <properties>
+    <property name="modelName" value="naturePack_091"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="91">
+   <properties>
+    <property name="modelName" value="naturePack_092"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="92">
+   <properties>
+    <property name="modelName" value="naturePack_093"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="93">
+   <properties>
+    <property name="modelName" value="naturePack_094"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="94">
+   <properties>
+    <property name="modelName" value="naturePack_095"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="95">
+   <properties>
+    <property name="modelName" value="naturePack_096"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="96">
+   <properties>
+    <property name="modelName" value="naturePack_097"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="modelName" value="naturePack_098"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="modelName" value="naturePack_099"/>
+    <property name="terrain" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="20" height="20">
   <data encoding="csv">
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="foreground" width="20" height="30">
+ <layer name="foreground" width="20" height="20">
   <data encoding="csv">
-31,32,33,34,35,36,37,38,39,40,0,0,0,0,0,0,0,0,0,0,
-41,42,43,44,45,46,47,48,49,50,31,32,33,34,35,36,37,38,39,40,
-51,52,53,54,55,56,57,58,59,60,0,0,0,0,0,0,0,0,0,0,
-61,62,63,64,65,66,67,68,69,70,41,42,43,44,45,46,47,48,49,50,
-71,72,73,74,75,76,77,78,79,80,0,0,0,0,0,0,0,0,0,0,
-81,82,83,84,85,86,87,88,89,90,51,52,53,54,55,56,57,58,59,60,
-91,92,93,94,95,96,97,98,99,100,0,0,0,0,0,0,0,0,0,0,
-101,102,103,104,105,106,107,108,109,110,61,62,63,64,65,66,67,68,69,70,
-111,112,113,114,115,116,117,118,119,120,0,0,0,0,0,0,0,0,0,0,
-121,122,123,124,125,126,127,128,129,130,71,72,73,74,75,76,77,78,79,80,
-131,132,133,134,135,136,137,138,139,140,0,0,0,0,0,0,0,0,0,0,
-141,142,143,144,145,146,147,148,149,150,81,82,83,84,85,86,87,88,89,90,
-151,152,153,154,155,156,157,158,159,160,0,0,0,0,0,0,0,0,0,0,
-161,162,163,164,165,166,167,168,169,170,91,92,93,94,95,96,97,98,99,100,
-171,172,173,174,175,176,177,178,179,180,0,0,0,0,0,0,0,0,0,0,
-181,182,183,184,185,186,187,188,189,190,101,102,103,104,105,106,107,108,109,110,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,111,112,113,114,115,116,117,118,119,120,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,121,122,123,124,125,126,127,128,129,130,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,131,132,133,134,135,136,137,138,139,140,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,141,142,143,144,145,146,147,148,149,150,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,151,152,153,154,155,156,157,158,159,160,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,161,162,163,164,165,166,167,168,169,170,
-181,182,183,184,185,186,187,188,189,190,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,171,172,173,174,175,176,177,178,179,180
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,85,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,0,94,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>
