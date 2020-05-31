@@ -152,6 +152,7 @@
           <e p="voxelGanerator" t="Include">
             <e p="VoxelDirection.cs" t="Include" />
             <e p="VoxelTile.cs" t="Include" />
+            <e p="VoxelTileGenerator.cs" t="Include" />
             <e p="VoxelTilePlacerSimple.cs" t="Include" />
             <e p="VoxelTilePlacerWfc.cs" t="Include" />
           </e>
