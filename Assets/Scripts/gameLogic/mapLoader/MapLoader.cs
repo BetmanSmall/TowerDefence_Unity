@@ -6,7 +6,8 @@ using System.Xml;
 
 public class MapLoader {
     string mapPath;
-    public MapLoader(/*WaveManager waveManager*/) {
+
+    public MapLoader( /*WaveManager waveManager*/) {
         Debug.Log("MapLoader::MapLoader(//*waveManager*//); -- Start!");
     }
 
@@ -42,19 +43,20 @@ public class MapLoader {
         xmlDoc.LoadXml(textAsset.text);
         XmlNodeList docChilds = xmlDoc.ChildNodes;
         foreach (XmlNode docChild in docChilds) {
-            if (docChild.LocalName.Equals ("map")) {
-                map.properties.Add ("width", docChild.Attributes ["width"].Value);
-                map.properties.Add ("height", docChild.Attributes ["height"].Value);
+            if (docChild.LocalName.Equals("map")) {
+                map.properties.Add("width", docChild.Attributes["width"].Value);
+                map.properties.Add("height", docChild.Attributes["height"].Value);
 //                sizeFieldX = int.Parse(mapProperties["width"]);
 //                sizeFieldZ = int.Parse(mapProperties["height"]);
 //                Debug.Log("MapLoader::loadMap(); -- sizeFieldX:" + sizeFieldX + " sizeFieldZ:" + sizeFieldZ);
                 XmlNodeList mapNodeList = docChild.ChildNodes;
                 foreach (XmlNode mapChildNode in mapNodeList) {
-                    if (mapChildNode.Name.Equals ("properties")) {
+                    if (mapChildNode.Name.Equals("properties")) {
                         loadProperties(mapChildNode, map.properties);
-                    } else if (mapChildNode.Name.Equals ("tileset")) { // in future need change "tileset" to "modelsSet" or another
+                    } else if (mapChildNode.Name.Equals("tileset")) {
+                        // in future need change "tileset" to "modelsSet" or another
                         loadTileSet(map, mapChildNode);
-                    } else if (mapChildNode.Name.Equals ("layer")) {
+                    } else if (mapChildNode.Name.Equals("layer")) {
                         loadMapLayer(map, mapChildNode);
                     }
                 }
@@ -62,7 +64,7 @@ public class MapLoader {
         }
 
         Debug.Log("MapLoader::loadMap(); -- map.properties.Count:" + map.properties.Count);
-        foreach(KeyValuePair<string, string> property in map.properties) {
+        foreach (KeyValuePair<string, string> property in map.properties) {
             Debug.Log("MapLoader::loadMap(); -- property.Key[" + property.Key + "]:" + property.Value);
         }
         Debug.Log("MapLoader::loadMap(); -- End! return map:" + map);
@@ -70,10 +72,10 @@ public class MapLoader {
     }
 
     public static void loadProperties(XmlNode propertiesNode, Dictionary<string, string> properties) {
-        if(propertiesNode.Name.Equals("properties")) {
+        if (propertiesNode.Name.Equals("properties")) {
             XmlNodeList nodeList = propertiesNode.ChildNodes;
-            foreach(XmlNode propertyNode in nodeList) {
-                if(propertyNode.Name.Equals("property")) {
+            foreach (XmlNode propertyNode in nodeList) {
+                if (propertyNode.Name.Equals("property")) {
                     string key = propertyNode.Attributes["name"].Value;
                     string value = propertyNode.Attributes["value"].Value;
                     properties.Add(key, value);
@@ -82,10 +84,11 @@ public class MapLoader {
         }
     }
 
-    private void loadTileSet(Map map, XmlNode tileSetNode) { // in future need change "tileset" to "modelsSet" or another
-        if (tileSetNode.Name.Equals ("tileset")) {
+    private void loadTileSet(Map map, XmlNode tileSetNode) {
+        // in future need change "tileset" to "modelsSet" or another
+        if (tileSetNode.Name.Equals("tileset")) {
             string source;
-            if(tileSetNode.Attributes["source"] != null) {
+            if (tileSetNode.Attributes["source"] != null) {
                 source = tileSetNode.Attributes["source"].Value;
                 string tsxPath = findFile(mapPath, source);
                 if (tsxPath.Contains(".tsx")) {
@@ -104,38 +107,38 @@ public class MapLoader {
                 tileSetNode = tsxDoc.ChildNodes[1]; // XML is Bad. In xmlDox first child in not index 0 / tsxDoc.firstChild() not work!
             }
             string modelsPath = null;
-            string name = tileSetNode.Attributes ["name"].Value;
+            string name = tileSetNode.Attributes["name"].Value;
             TileSetOrModelsSet tileSetOrModelsSet = new TileSetOrModelsSet(name);
-            tileSetOrModelsSet.properties.Add ("firstgid", tileSetNode.Attributes ["firstgid"].Value);
+            tileSetOrModelsSet.properties.Add("firstgid", tileSetNode.Attributes["firstgid"].Value);
             XmlNodeList tilesetNodeList = tileSetNode.ChildNodes;
             foreach (XmlNode tilesetChildNode in tilesetNodeList) {
-                if (tilesetChildNode.Name.Equals ("properties")) {
-                    loadProperties (tilesetChildNode, tileSetOrModelsSet.properties);
-                    modelsPath = (string)tileSetOrModelsSet.properties["modelsPath"];
+                if (tilesetChildNode.Name.Equals("properties")) {
+                    loadProperties(tilesetChildNode, tileSetOrModelsSet.properties);
+                    modelsPath = (string) tileSetOrModelsSet.properties["modelsPath"];
                     if (modelsPath == null) {
                         Debug.Log("MapLoader::loadTileSet(); -- not found modelsPath on properties node in tileset:" + name);
                         return;
                     }
-                } else if (tilesetChildNode.Name.Equals ("tile")) {
-                    int tileId = int.Parse (tilesetChildNode.Attributes ["id"].Value);
+                } else if (tilesetChildNode.Name.Equals("tile")) {
+                    int tileId = int.Parse(tilesetChildNode.Attributes["id"].Value);
                     XmlNodeList tileNodeList = tilesetChildNode.ChildNodes;
                     foreach (XmlNode tileChildNode in tileNodeList) {
-                        if (tileChildNode.Name.Equals ("properties")) {
-                            Dictionary<string, string> tileProperty = new Dictionary<string, string> ();
-                            loadProperties (tileChildNode, tileProperty);
-                            string modelName = (string)tileProperty ["modelName"];
+                        if (tileChildNode.Name.Equals("properties")) {
+                            Dictionary<string, string> tileProperty = new Dictionary<string, string>();
+                            loadProperties(tileChildNode, tileProperty);
+                            string modelName = (string) tileProperty["modelName"];
 //                            Debug.Log("MapLoader::loadMap(); -- modelsPath:" + modelsPath + "/" + modelName);
-                            Object modelObject = Resources.Load<Object> ("maps/" + modelsPath + "/" + modelName); // or GameObject?
+                            Object modelObject = Resources.Load<Object>("maps/" + modelsPath + "/" + modelName); // or GameObject?
 //                            Debug.Log("MapLoader::loadMap(); -- modelObject:" + modelObject);
-                            TileModel tileModel = new TileModel (tileId, modelObject);
+                            TileModel tileModel = new TileModel(tileId, modelObject);
                             tileModel.properties = tileProperty;
-                            tileSetOrModelsSet.tileModels.Add (tileId, tileModel);
+                            tileSetOrModelsSet.tileModels.Add(tileId, tileModel);
                         }
                     }
                 }
             }
             Debug.Log("MapLoader::loadTileSet(); -- map.tileSetsOrModelsSets.Add(" + map.tileSetsOrModelsSets.Count + ", " + tileSetOrModelsSet + ");");
-            map.tileSetsOrModelsSets.Add (map.tileSetsOrModelsSets.Count, tileSetOrModelsSet);
+            map.tileSetsOrModelsSets.Add(map.tileSetsOrModelsSets.Count, tileSetOrModelsSet);
         }
     }
 
@@ -150,16 +153,16 @@ public class MapLoader {
             XmlNodeList layerNodeList = layerNode.ChildNodes;
             foreach (XmlNode layerChildNode in layerNodeList) {
                 if (layerChildNode.Name.Equals("properties")) {
-                    loadProperties (layerChildNode, mapLayer.properties);
+                    loadProperties(layerChildNode, mapLayer.properties);
                 } else if (layerChildNode.Name.Equals("data")) {
                     string[] ids = layerChildNode.InnerText.Split(','); // need implement getTileIds();
 //                    Debug.Log("MapLoader::loadMapLayer(); -- ids.Length:" + ids.Length);
 //                    int x = 0, z = 0;
 //                    for (int k = 0; k < array.Length; k++) {
-                    for(int z = 0; z < height; z++) {
+                    for (int z = 0; z < height; z++) {
                         for (int x = 0; x < width; x++) {
                             int firstgid = 0;
-                            if(map.tileSetsOrModelsSets[0].properties["firstgid"] != null) {
+                            if (map.tileSetsOrModelsSets[0].properties["firstgid"] != null) {
                                 firstgid = int.Parse(map.tileSetsOrModelsSets[0].properties["firstgid"]);
                             }
                             int id = int.Parse(ids[z * width + x]) - firstgid; // not good | in future not only one!
@@ -167,7 +170,7 @@ public class MapLoader {
                                 // Debug.Log("MapLoader::loadMapLayer(); -- id:" + id + " firstgid:" + firstgid);
                                 TileModel tileModel = map.tileSetsOrModelsSets[0].tileModels[id]; // need create TileSets class and getTile();
 //                                Debug.Log("MapLoader::loadMapLayer(); -- tileModels[" + x + "," + z + "]:" + tileModel);
-                                mapLayer.tileModels [x, z] = tileModel;
+                                mapLayer.tileModels[x, z] = tileModel;
 //                            } else {
 //                                Debug.Log("MapLoader::loadMapLayer(); -- In " + mapLayer.name + "[" + x + "," + z + "] not set tileModel!");
                             }
@@ -188,7 +191,7 @@ public class MapLoader {
         Debug.Log(spaces + xmlNode.Name + " : " + xmlNode.LocalName);
         XmlNodeList childs = xmlNode.ChildNodes;
         foreach (XmlNode xmlChildNode in childs) {
-            readNodes (xmlChildNode, space++);
+            readNodes(xmlChildNode, space++);
         }
     }
 
@@ -200,22 +203,22 @@ public class MapLoader {
             bool finished = false;
             do {
                 // Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " finished:" + finished);
-                if(result.Length == 0) {
+                if (result.Length == 0) {
                     result = filePath;
                     break;
                 }
                 int slashIndex = filePath.IndexOf("/");
-                if(slashIndex == -1) {
+                if (slashIndex == -1) {
                     // Debug.Log("MapLoader::findFile(); -1- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
                     result = result + "/" + filePath;
                     finished = true;
                 } else {
                     // Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " slashIndex:" + slashIndex);
                     string token = filePath.Substring(0, slashIndex);
-                    filePath = filePath.Substring(slashIndex+1);
-                    if(token == "..") {
+                    filePath = filePath.Substring(slashIndex + 1);
+                    if (token == "..") {
                         int lastSlashIndex = result.LastIndexOf("/");
-                        if(lastSlashIndex == -1) {
+                        if (lastSlashIndex == -1) {
                             result = "";
                         } else {
                             result = result.Substring(0, result.LastIndexOf("/"));
@@ -226,13 +229,14 @@ public class MapLoader {
                 }
                 // Debug.Log("MapLoader::findFile(); -2- result:" + result + " filePath:" + filePath + " finished:" + finished);
             } while (!finished);
-            if(result.Contains(".xml")) {
+            if (result.Contains(".xml")) {
                 result = result.Replace(".xml", "");
                 // result = result.Substring(0, result.LastIndexOf(".xml"));
             }
             Debug.Log("MapLoader::findFile(); -- Exit result:" + result);
             return result;
-        } catch(System.Exception exp) {
+        }
+        catch (System.Exception exp) {
             Debug.LogError("MapLoader::findFile(); -- exp:" + exp);
             return null;
         }

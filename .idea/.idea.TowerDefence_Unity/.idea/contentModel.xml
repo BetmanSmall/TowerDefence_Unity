@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\UnityProjects\TowerDefence_Unity" t="IncludeRecursive">
+    <e p="C:\Users\betma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\betma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-632949189.00" t="ExcludeRecursive" />
+    <e p="D:\Unity\Projects\TowerDefence_Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="NavMeshComponents" t="Include">
@@ -162,7 +164,5 @@
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="TowerDefence_Unity.sln" t="IncludeFlat" />
     </e>
-    <e p="C:\Users\VR1-PC\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\VR1-PC\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_TowerDefence_Unity.-397211772.00" t="ExcludeRecursive" />
   </component>
 </project>

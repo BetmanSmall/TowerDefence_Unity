@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="RIDER_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8" />
-    <content url="file://$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ide.vscode@1.1.4" />
-    <content url="file://$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.test-framework@1.1.11" />
-    <content url="file://$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xr.legacyinputhelpers@1.3.8" />
     <content url="file://$MODULE_DIR$/../.." />
+    <content url="file://$MODULE_DIR$/../../../../Users/VR1-PC/AppData/local/Unity/cache/Packages/packages.unity.com/com.unity.ads@2.0.8" />
+    <content url="file://$MODULE_DIR$/../../../../Users/VR1-PC/AppData/local/Unity/cache/Packages/packages.unity.com/com.unity.ide.vscode@1.1.4" />
+    <content url="file://$MODULE_DIR$/../../../../Users/VR1-PC/AppData/local/Unity/cache/Packages/packages.unity.com/com.unity.test-framework@1.1.11" />
+    <content url="file://$MODULE_DIR$/../../../../Users/VR1-PC/AppData/local/Unity/cache/Packages/packages.unity.com/com.unity.xr.legacyinputhelpers@1.3.8" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.2d.sprite/Editor" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.2d.tilemap/Editor" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Editor/EventSystem" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Editor/Properties" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Editor/UI" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/Properties" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Animation" />
+    <content url="file://D:/UnityEditors/2019.3.3f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

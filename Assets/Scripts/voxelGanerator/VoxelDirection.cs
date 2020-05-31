@@ -1,5 +1,4 @@
-public enum VoxelDirection
-{
+public enum VoxelDirection {
     LEFT,
     RIGHT,
     DOWN,
