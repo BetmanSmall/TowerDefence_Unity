@@ -20,7 +20,7 @@ public class Explorer : MonoBehaviour
            
             Debug.Log("Path");
             gameObject.GetComponent<GameField>().mapPath = path;
-            gameObject.GetComponent<GameField>().MapLoad();
+            //gameObject.GetComponent<GameField>().MapLoad();
         }
         else
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,6 +22,7 @@ public class GameField : MonoBehaviour {
     public bool gamePaused;
     public float gameSpeed;
     public static int gamerGold = 1000000; // For Shell
+
     // public int maxOfMissedCreepsForComputer0;
     // public int missedCreepsForComputer0;
     // public int maxOfMissedCreepsForPlayer1;
@@ -30,6 +31,7 @@ public class GameField : MonoBehaviour {
     // LineRenderer lineRenderer;
     // Use this for initialization
     void Start() {
+
         Debug.Log("GameField::Start(); -- Start!");
         waveManager = new WaveManager();
         creepsManager = new CreepsManager();
@@ -37,7 +39,6 @@ public class GameField : MonoBehaviour {
         factionsManager = new FactionsManager(1f);
         factionsManager.loadFactions();
         gamefield = GameObject.Find("GameField");
-        MapLoad();
         Creeps = new GameObject("Creeps");
         Creeps.transform.position = new Vector3(0,10,0);
         GameObject NavMesh = new GameObject("NavMesh");
@@ -52,7 +53,10 @@ public class GameField : MonoBehaviour {
         Debug.Log("GameField::Start(); -- End!");
     }
 
-    public void MapLoad() {
+    public void MapLoad(String mapName) {
+        if (mapName != null) {
+            mapPath = "maps/" + mapName;
+        }
         Map map = new MapLoader().loadMap(mapPath);
         sizeFieldX = int.Parse(map.properties ["width"]);
         sizeFieldZ = int.Parse(map.properties ["height"]);
