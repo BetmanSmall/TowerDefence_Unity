@@ -7,7 +7,7 @@ public class Explorer : MonoBehaviour
 {
     public string path;
     // Start is called before the first frame update
-    public void OpenExplorer()
+    public void OpenExplorer() 
     {
         EditorUtility.OpenFilePanel("Panel", "", "tmx");
         GetImage();

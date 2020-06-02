@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\betma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\betma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-632949189.00" t="ExcludeRecursive" />
-    <e p="D:\Unity\Projects\TowerDefence_Unity" t="IncludeRecursive">
+    <e p="C:\Users\ART\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\ART\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TowerDefence_Unity.-525325795.00" t="ExcludeRecursive" />
+    <e p="P:\Unity\TowerDefence_Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="CanvasItemManager.cs" t="Include" />
+        <e p="ClckRender.cs" t="Include" />
         <e p="NavMeshComponents" t="Include">
           <e p="Editor" t="Include">
             <e p="NavMeshComponentsGUIUtility.cs" t="Include" />
