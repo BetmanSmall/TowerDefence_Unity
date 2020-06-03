@@ -14,6 +14,7 @@ public class GameField : MonoBehaviour {
     public FactionsManager factionsManager;
     public TowersManager towersManager;
     public string mapPath = "maps/arena0";
+    public Map map;
     public int sizeFieldX, sizeFieldZ;
     public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map
     public Cell[,] field;
@@ -30,6 +31,7 @@ public class GameField : MonoBehaviour {
     // GAME INTERFACE ZONE2
     // LineRenderer lineRenderer;
     // Use this for initialization
+    
     void Start() {
 
         Debug.Log("GameField::Start(); -- Start!");
@@ -43,13 +45,9 @@ public class GameField : MonoBehaviour {
         Creeps.transform.position = new Vector3(0,10,0);
         GameObject NavMesh = new GameObject("NavMesh");
         NavMesh.AddComponent<NavMeshSurface>();
-     //   var geo = NavMesh.GetComponent<NavMeshSurface>();
-      //  geo.overrideTileSize = true;
-      //  geo.tileSize = 64;
-        //geo.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
         surface.BuildNavMesh();
-        WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
+        // WaveAlgorithm waveAlgorithm = new WaveAlgorithm(sizeFieldX, sizeFieldZ, 30, 30, field);
         Debug.Log("GameField::Start(); -- End!");
     }
 
@@ -57,7 +55,7 @@ public class GameField : MonoBehaviour {
         if (mapName != null) {
             mapPath = "maps/" + mapName;
         }
-        Map map = new MapLoader().loadMap(mapPath);
+        map = new MapLoader().loadMap(mapPath);
         sizeFieldX = int.Parse(map.properties ["width"]);
         sizeFieldZ = int.Parse(map.properties ["height"]);
         // lineRenderer = gameObject.AddComponent<LineRenderer>();

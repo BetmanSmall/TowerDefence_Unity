@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using System.Xml;
+using Object = UnityEngine.Object;
 
 public class MapLoader {
     string mapPath;
@@ -87,9 +88,23 @@ public class MapLoader {
     private void loadTileSet(Map map, XmlNode tileSetNode) {
         // in future need change "tileset" to "modelsSet" or another
         if (tileSetNode.Name.Equals("tileset")) {
-            string source;
-            if (tileSetNode.Attributes["source"] != null) {
-                source = tileSetNode.Attributes["source"].Value;
+            string name = tileSetNode.Attributes["name"].Value;
+            int firstgid = int.Parse(tileSetNode.Attributes["firstgid"].Value);
+            int tilewidth = int.Parse(tileSetNode.Attributes["tilewidth"].Value);
+            int tileheight = int.Parse(tileSetNode.Attributes["tileheight"].Value);
+            int spacing = (tileSetNode.Attributes["spacing"] != null) ? int.Parse(tileSetNode.Attributes["spacing"].Value) : 0;
+            int margin = (tileSetNode.Attributes["margin"] != null) ? int.Parse(tileSetNode.Attributes["margin"].Value) : 0;
+            string source = (tileSetNode.Attributes["source"] != null) ? tileSetNode.Attributes["source"].Value : null;
+            
+
+            int offsetX = 0;
+            int offsetY = 0;
+            
+            int imageWidth = 0, imageHeight = 0;
+            string imageSource = "";
+            string imagePath = null;
+            
+            if (source != null) {
                 string tsxPath = findFile(mapPath, source);
                 if (tsxPath.Contains(".tsx")) {
                     // tsxPath = tsxPath.Substring(0, tsxPath.IndexOf(".tsx"));
@@ -105,11 +120,16 @@ public class MapLoader {
                 XmlDocument tsxDoc = new XmlDocument();
                 tsxDoc.LoadXml(textAsset.text);
                 tileSetNode = tsxDoc.ChildNodes[1]; // XML is Bad. In xmlDox first child in not index 0 / tsxDoc.firstChild() not work!
+                name = tileSetNode.Attributes["name"].Value;
+                firstgid = int.Parse(tileSetNode.Attributes["firstgid"].Value);
+                tilewidth = int.Parse(tileSetNode.Attributes["tilewidth"].Value);
+                tileheight = int.Parse(tileSetNode.Attributes["tileheight"].Value);
+                spacing = int.Parse(tileSetNode.Attributes["spacing"].Value);
+                margin = int.Parse(tileSetNode.Attributes["margin"].Value);
             }
             string modelsPath = null;
-            string name = tileSetNode.Attributes["name"].Value;
             TileSetOrModelsSet tileSetOrModelsSet = new TileSetOrModelsSet(name);
-            tileSetOrModelsSet.properties.Add("firstgid", tileSetNode.Attributes["firstgid"].Value);
+            tileSetOrModelsSet.properties.Add("firstgid", firstgid.ToString());
             XmlNodeList tilesetNodeList = tileSetNode.ChildNodes;
             foreach (XmlNode tilesetChildNode in tilesetNodeList) {
                 if (tilesetChildNode.Name.Equals("properties")) {
@@ -119,8 +139,35 @@ public class MapLoader {
                         Debug.Log("MapLoader::loadTileSet(); -- not found modelsPath on properties node in tileset:" + name);
                         return;
                     }
+                } else if (tilesetChildNode.Name.Equals("image")) {
+                    imageSource = tilesetChildNode.Attributes["source"].Value;
+                    imagePath = findFile(mapPath, imageSource);
+                    tileSetOrModelsSet.properties.Add("imageSource", imageSource);
+
+                    imagePath = imagePath.Substring(0, imagePath.LastIndexOf("."));
+                    Texture2D texture = Resources.Load<Texture2D>(imagePath);
+                    Debug.Log("texture:" + texture);
+                    Debug.Log("texture.width:" + texture.width);
+                    Debug.Log("texture.height:" + texture.height);
+
+                    int stopWidth = texture.width - tilewidth;
+                    int stopHeight = texture.height - tileheight;
+
+                    int id = 0;
+
+                    for (int y = margin; y <= stopHeight; y += tileheight + spacing) {
+                        for (int x = margin; x <= stopWidth; x += tilewidth + spacing) {
+                            // Color[] tilePix = texture.GetPixels(x, y, tilewidth, tileheight);
+                            Sprite sprite = Sprite.Create(texture, new Rect(x, y, tilewidth, tileheight), Vector2.one * 0.5f);
+                            TileModel tileModel = new TileModel(id, sprite);
+                            tileSetOrModelsSet.tileModels.Add(id++, tileModel);
+                        }
+                    }
+
                 } else if (tilesetChildNode.Name.Equals("tile")) {
-                    int tileId = int.Parse(tilesetChildNode.Attributes["id"].Value);
+                    int localtid = int.Parse(tilesetChildNode.Attributes["id"].Value);
+                    Debug.Log("firstgid + localtid:" + (firstgid + localtid) + ":" + tileSetOrModelsSet.tileModels.Keys.Contains(firstgid + localtid));
+                    TileModel tileModel = tileSetOrModelsSet.tileModels[firstgid + localtid];
                     XmlNodeList tileNodeList = tilesetChildNode.ChildNodes;
                     foreach (XmlNode tileChildNode in tileNodeList) {
                         if (tileChildNode.Name.Equals("properties")) {
@@ -130,9 +177,8 @@ public class MapLoader {
 //                            Debug.Log("MapLoader::loadMap(); -- modelsPath:" + modelsPath + "/" + modelName);
                             Object modelObject = Resources.Load<Object>("maps/" + modelsPath + "/" + modelName); // or GameObject?
 //                            Debug.Log("MapLoader::loadMap(); -- modelObject:" + modelObject);
-                            TileModel tileModel = new TileModel(tileId, modelObject);
                             tileModel.properties = tileProperty;
-                            tileSetOrModelsSet.tileModels.Add(tileId, tileModel);
+                            tileModel.modelObject = modelObject;
                         }
                     }
                 }
