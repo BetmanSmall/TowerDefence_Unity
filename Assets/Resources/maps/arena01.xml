@@ -3,7 +3,7 @@
  <properties>
   <property name="gamerGold" type="int" value="500"/>
  </properties>
- <tileset source="other/unityModels"/>
+ <tileset firstgid="1" source="other/unityModels.tsx"/>
  <layer name="layer0" width="64" height="64">
   <properties>
    <property name="background" value="ground"/>

@@ -62,7 +62,7 @@ public class ChooseFileScript : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i <= GF.transform.GetChildCount(); i++)
+            for (int i = 0; i <= GF.transform.childCount; i++)
             {
                 GF.gameObject.transform.GetChild(i).SetParent(MapListsInUnity.transform);
             }

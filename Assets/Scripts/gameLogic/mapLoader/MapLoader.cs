@@ -25,13 +25,9 @@ public class MapLoader {
 //    }
     public Map loadMap(string mapPath) {
         Debug.Log("MapLoader::loadMap(" + mapPath + "); -- Start!");
+        mapPath = mapPath.Replace(".tmx", "");
+        File.Copy("Assets/Resources/" + mapPath + ".tmx", "Assets/Resources/" + mapPath + ".xml", true);
         this.mapPath = mapPath;
-        if (mapPath.Contains(".tmx")) {
-            // string[] strings = Directory.GetFiles("Assets/Resources/maps");
-            // mapPath = mapPath.Substring(0, mapPath.IndexOf(".tmx"));
-            mapPath = mapPath.Replace(".tmx", "");
-            File.Copy("Assets/Resources/" + mapPath + ".tmx", "Assets/Resources/" + mapPath + ".xml", true);
-        }
         TextAsset textAsset = Resources.Load<TextAsset>(mapPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
         Debug.Log("MapLoader::loadMap(); -- textAsset:" + textAsset);
         if (textAsset == null) {
@@ -85,8 +81,7 @@ public class MapLoader {
     }
     private void loadTileSet(Map map, XmlNode tileSetNode) {
         // in future need change "tileset" to "modelsSet" or another
-        if (tileSetNode.Name.Equals("tileset"))
-        {
+        if (tileSetNode.Name.Equals("tileset")) {
             string name = (tileSetNode.Attributes["name"] != null) ? tileSetNode.Attributes["name"].Value : null;
             int firstgid = (tileSetNode.Attributes["firstgid"] != null) ? int.Parse(tileSetNode.Attributes["firstgid"].Value) : 0;
             int tilewidth = (tileSetNode.Attributes["tilewidth"] != null) ? int.Parse(tileSetNode.Attributes["tilewidth"].Value) : 0;
@@ -94,7 +89,6 @@ public class MapLoader {
             int spacing = (tileSetNode.Attributes["spacing"] != null) ? int.Parse(tileSetNode.Attributes["spacing"].Value) : 0;
             int margin = (tileSetNode.Attributes["margin"] != null) ? int.Parse(tileSetNode.Attributes["margin"].Value) : 0;
             string source = (tileSetNode.Attributes["source"] != null) ? tileSetNode.Attributes["source"].Value : null;
-            
 
             int offsetX = 0;
             int offsetY = 0;
@@ -105,11 +99,8 @@ public class MapLoader {
             
             if (source != null) {
                 string tsxPath = findFile(mapPath, source);
-                if (tsxPath.Contains(".tsx")) {
-                    // tsxPath = tsxPath.Substring(0, tsxPath.IndexOf(".tsx"));
-                    tsxPath = tsxPath.Replace(".tsx", "");
-                    File.Copy("Assets/Resources/" + tsxPath + ".tsx", "Assets/Resources/" + tsxPath + ".xml", true);
-                }
+                tsxPath = tsxPath.Replace(".tsx", "");
+                File.Copy("Assets/Resources/" + tsxPath + ".tsx", "Assets/Resources/" + tsxPath + ".xml", true);
                 TextAsset textAsset = Resources.Load<TextAsset>(tsxPath); // Не может загрузить TextAsset с расширением tmx только xml и другое гавно!
                 Debug.Log("MapLoader::loadTileSet(); -- textAsset:" + textAsset);
                 if (textAsset == null) {
@@ -121,7 +112,7 @@ public class MapLoader {
                 tileSetNode = tsxDoc.ChildNodes[1]; // XML is Bad. In xmlDox first child in not index 0 / tsxDoc.firstChild() not work!
                 
                 name = (tileSetNode.Attributes["name"] != null) ? tileSetNode.Attributes["name"].Value : null;
-                firstgid = (tileSetNode.Attributes["firstgid"] != null) ? int.Parse(tileSetNode.Attributes["firstgid"].Value) : 0;
+                // firstgid = (tileSetNode.Attributes["firstgid"] != null) ? int.Parse(tileSetNode.Attributes["firstgid"].Value) : 0;
                 tilewidth = (tileSetNode.Attributes["tilewidth"] != null) ? int.Parse(tileSetNode.Attributes["tilewidth"].Value) : 0;
                 tileheight = (tileSetNode.Attributes["tileheight"] != null) ? int.Parse(tileSetNode.Attributes["tileheight"].Value) : 0;
                 spacing = (tileSetNode.Attributes["spacing"] != null) ? int.Parse(tileSetNode.Attributes["spacing"].Value) : 0;
@@ -141,24 +132,27 @@ public class MapLoader {
                     }
                 } else if (tilesetChildNode.Name.Equals("image")) {
                     imageSource = tilesetChildNode.Attributes["source"].Value;
-                    imagePath = findFile(mapPath, imageSource);
                     tileSetOrModelsSet.properties.Add("imageSource", imageSource);
+                    imagePath = findFile(mapPath, imageSource);
+                    Debug.Log("1imagePath:" + imagePath);
 
-                    imagePath = imagePath.Substring(0, imagePath.LastIndexOf("."));
-                    Texture2D texture = null;
-                    byte[] fileData;
-                    fileData = File.ReadAllBytes("Assets/Resources/" + imagePath + ".png");
-                    texture = new Texture2D(2, 2);
-                    texture.LoadImage(fileData); //..this will auto-resize the texture dimensions.
-                    
+                    // imagePath = imagePath.Substring(0, imagePath.LastIndexOf("."));
+                    imagePath = !imagePath.Contains("maps") ? "maps/" + imagePath : imagePath;
+                    imagePath = "Assets/Resources/" + imagePath;// + ".png";
+                    Debug.Log("2imagePath:" + imagePath);
                     //Texture2D texture = Resources.Load<Texture2D>(imagePath);
-
-                    if (texture == null) {
-                        Debug.LogError("Image path: " + imagePath);
-                        return;
+                    Texture2D texture = null;
+                    texture = new Texture2D(2, 2);
+                    byte[] fileData = File.ReadAllBytes(imagePath);
+                    if (fileData != null) {
+                        texture.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+                        if (texture == null) {
+                            Debug.LogError("0imagePath:" + imagePath);
+                            return;
+                        }
                     }
 
-                    Debug.Log("Image path: " + imagePath);
+                    Debug.Log("3imagePath:" + imagePath);
                     Debug.Log("texture:" + texture);
                     Debug.Log("texture.width:" + texture.width);
                     Debug.Log("texture.height:" + texture.height);
@@ -179,8 +173,11 @@ public class MapLoader {
 
                 } else if (tilesetChildNode.Name.Equals("tile")) {
                     int localtid = int.Parse(tilesetChildNode.Attributes["id"].Value);
-                    Debug.Log("firstgid + localtid:" + (firstgid + localtid) + ":" + tileSetOrModelsSet.tileModels.Keys.Contains(firstgid + localtid));
-                    TileModel tileModel = tileSetOrModelsSet.tileModels[firstgid + localtid];
+                    int tileIndex = (firstgid + localtid) - 1;
+                    // Debug.Log("firstgid:" + firstgid);
+                    // Debug.Log("localtid:" + localtid);
+                    // Debug.Log("tileIndex:" + tileIndex + ":" + tileSetOrModelsSet.tileModels.Keys.Contains(tileIndex));
+                    TileModel tileModel = tileSetOrModelsSet.tileModels[tileIndex];
                     XmlNodeList tileNodeList = tilesetChildNode.ChildNodes;
                     foreach (XmlNode tileChildNode in tileNodeList) {
                         if (tileChildNode.Name.Equals("properties")) {

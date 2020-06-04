@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset firstgid="1" name="iso-128x128-models-tileset" tilewidth="128" tileheight="128" tilecount="190" columns="10">
- <image source="../textures/iso-128x128-models-tileset.png" trans="ffffff" width="1280" height="2432"/>
+<tileset name="iso-128x128-models-tileset" tilewidth="128" tileheight="128" tilecount="190" columns="10">
  <properties>
   <property name="modelsPath" value="textures/fieldModels"/>
  </properties>
+ <image source="../textures/iso-128x128-models-tileset.png" trans="ffffff" width="1280" height="2432"/>
  <tile id="0">
   <properties>
    <property name="modelName" value="naturePack_001"/>

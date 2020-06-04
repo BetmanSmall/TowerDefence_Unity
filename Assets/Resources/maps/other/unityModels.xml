@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset firstgid="1" name="unityModels" tilewidth="64" tileheight="64" tilecount="190" columns="10">
-  <image source="../textures/iso-64x64-outside.png" width="640" height="1024"/>
+<tileset name="unityModels" tilewidth="64" tileheight="64" tilecount="190" columns="10">
  <properties>
   <property name="modelsPath" value="textures/fieldModels"/>
  </properties>
+ <image source="../textures/iso-64x64-outside-640x1216.png" width="640" height="1216"/>
  <tile id="0">
   <properties>
    <property name="modelName" value="naturePack_001"/>

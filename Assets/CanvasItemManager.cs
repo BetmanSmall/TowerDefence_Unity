@@ -12,7 +12,7 @@ public class CanvasItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 1; i <= Container.transform.GetChildCount(); i++)
+        for (int i = 1; i <= Container.transform.childCount; i++)
         {
             Container.transform.GetChild(i - 1).localScale = new Vector3(40, 40, 40);
             Container.transform.GetChild(i - 1).transform.localRotation = new Quaternion(-1 ,0, 0, transform.rotation.w);
@@ -21,7 +21,7 @@ public class CanvasItemManager : MonoBehaviour
         }
         
         
-        for (int i = 1; i <= Container.transform.GetChildCount(); i++)
+        for (int i = 1; i <= Container.transform.childCount; i++)
         {
             //Container.transform.GetChild(i - 1).transform.position = new Vector3(0,Container.transform.GetChild(i - 1).transform.position.y,0);
         }
