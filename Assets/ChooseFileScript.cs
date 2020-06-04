@@ -48,7 +48,7 @@ public class ChooseFileScript : MonoBehaviour
         }
 
         DropDown.GetComponentInChildren<Text>().text = mapsName[0];
-        for (int i = 0; i <= mapsName.Length; i++) {
+        for (int i = 0; i < mapsName.Length; i++) {
             M_DropDown.options.Add(new Dropdown.OptionData(mapsName[i]));
             FullPath.text = "Full Path: " + mapsLinkList[M_DropDown.value];
         }

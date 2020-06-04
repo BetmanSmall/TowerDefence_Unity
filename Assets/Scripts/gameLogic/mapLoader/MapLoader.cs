@@ -23,7 +23,6 @@ public class MapLoader {
 //            }
 //        }
 //    }
-
     public Map loadMap(string mapPath) {
         Debug.Log("MapLoader::loadMap(" + mapPath + "); -- Start!");
         this.mapPath = mapPath;
@@ -84,14 +83,14 @@ public class MapLoader {
             }
         }
     }
-
     private void loadTileSet(Map map, XmlNode tileSetNode) {
         // in future need change "tileset" to "modelsSet" or another
-        if (tileSetNode.Name.Equals("tileset")) {
-            string name = tileSetNode.Attributes["name"].Value;
-            int firstgid = int.Parse(tileSetNode.Attributes["firstgid"].Value);
-            int tilewidth = int.Parse(tileSetNode.Attributes["tilewidth"].Value);
-            int tileheight = int.Parse(tileSetNode.Attributes["tileheight"].Value);
+        if (tileSetNode.Name.Equals("tileset"))
+        {
+            string name = (tileSetNode.Attributes["name"] != null) ? tileSetNode.Attributes["name"].Value : null;
+            int firstgid = (tileSetNode.Attributes["firstgid"] != null) ? int.Parse(tileSetNode.Attributes["firstgid"].Value) : 0;
+            int tilewidth = (tileSetNode.Attributes["tilewidth"] != null) ? int.Parse(tileSetNode.Attributes["tilewidth"].Value) : 0;
+            int tileheight = (tileSetNode.Attributes["tileheight"] != null)  ? int.Parse(tileSetNode.Attributes["tileheight"].Value) : 0;
             int spacing = (tileSetNode.Attributes["spacing"] != null) ? int.Parse(tileSetNode.Attributes["spacing"].Value) : 0;
             int margin = (tileSetNode.Attributes["margin"] != null) ? int.Parse(tileSetNode.Attributes["margin"].Value) : 0;
             string source = (tileSetNode.Attributes["source"] != null) ? tileSetNode.Attributes["source"].Value : null;
@@ -120,12 +119,13 @@ public class MapLoader {
                 XmlDocument tsxDoc = new XmlDocument();
                 tsxDoc.LoadXml(textAsset.text);
                 tileSetNode = tsxDoc.ChildNodes[1]; // XML is Bad. In xmlDox first child in not index 0 / tsxDoc.firstChild() not work!
-                name = tileSetNode.Attributes["name"].Value;
-                firstgid = int.Parse(tileSetNode.Attributes["firstgid"].Value);
-                tilewidth = int.Parse(tileSetNode.Attributes["tilewidth"].Value);
-                tileheight = int.Parse(tileSetNode.Attributes["tileheight"].Value);
-                spacing = int.Parse(tileSetNode.Attributes["spacing"].Value);
-                margin = int.Parse(tileSetNode.Attributes["margin"].Value);
+                
+                name = (tileSetNode.Attributes["name"] != null) ? tileSetNode.Attributes["name"].Value : null;
+                firstgid = (tileSetNode.Attributes["firstgid"] != null) ? int.Parse(tileSetNode.Attributes["firstgid"].Value) : 0;
+                tilewidth = (tileSetNode.Attributes["tilewidth"] != null) ? int.Parse(tileSetNode.Attributes["tilewidth"].Value) : 0;
+                tileheight = (tileSetNode.Attributes["tileheight"] != null) ? int.Parse(tileSetNode.Attributes["tileheight"].Value) : 0;
+                spacing = (tileSetNode.Attributes["spacing"] != null) ? int.Parse(tileSetNode.Attributes["spacing"].Value) : 0;
+                margin = (tileSetNode.Attributes["margin"] != null) ? int.Parse(tileSetNode.Attributes["margin"].Value) : 0;
             }
             string modelsPath = null;
             TileSetOrModelsSet tileSetOrModelsSet = new TileSetOrModelsSet(name);
@@ -145,7 +145,20 @@ public class MapLoader {
                     tileSetOrModelsSet.properties.Add("imageSource", imageSource);
 
                     imagePath = imagePath.Substring(0, imagePath.LastIndexOf("."));
-                    Texture2D texture = Resources.Load<Texture2D>(imagePath);
+                    Texture2D texture = null;
+                    byte[] fileData;
+                    fileData = File.ReadAllBytes("Assets/Resources/" + imagePath + ".png");
+                    texture = new Texture2D(2, 2);
+                    texture.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+                    
+                    //Texture2D texture = Resources.Load<Texture2D>(imagePath);
+
+                    if (texture == null) {
+                        Debug.LogError("Image path: " + imagePath);
+                        return;
+                    }
+
+                    Debug.Log("Image path: " + imagePath);
                     Debug.Log("texture:" + texture);
                     Debug.Log("texture.width:" + texture.width);
                     Debug.Log("texture.height:" + texture.height);

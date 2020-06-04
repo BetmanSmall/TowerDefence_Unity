@@ -52,6 +52,7 @@
                 <e p="unit9_Skeleton_warlord.xml" t="Include" />
               </e>
             </e>
+            <e p="Info.xml" t="Include" />
             <e p="other" t="Include">
               <e p="iso-128x128-models-tileset.xml" t="Include" />
               <e p="unityModels.xml" t="Include" />
