@@ -12,7 +12,7 @@ public class GameScreen : MonoBehaviour  {
     private GameObject gameFieldObject;
     private GameField gameField;
 
-//    Camera camera;
+//   OLD Camera camera;
     public float spaceMouseDetection = 5f;
     public float cameraSpeed = 5.0f;
     public float mouseSensitivity = 0.05f;
@@ -22,6 +22,14 @@ public class GameScreen : MonoBehaviour  {
     public float distanceMax = 40f;
     public float zoomSpeed = 100f;
     public bool isScroll;
+    
+    //NEW CAMERA
+    float mainSpeed = 100.0f; //regular speed
+    float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
+    float maxShift = 1000.0f; //Maximum speed when holdin gshift
+    float camSens = 0.25f; //How sensitive it with mouse
+    private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
+    private float totalRun= 1.0f;
 
     void Start() {
 //        camera = GetComponent<Camera>();
@@ -167,7 +175,8 @@ public class GameScreen : MonoBehaviour  {
                 Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" +
                           transform.position.y);
             }
-
+            
+            /* TODO OLD CAM MOOVER
             if (0f < Input.mousePosition.x && Input.mousePosition.x < spaceMouseDetection)
             {
                 transform.position -= new Vector3(cameraSpeed * Time.deltaTime, 0, 0);
@@ -207,6 +216,66 @@ public class GameScreen : MonoBehaviour  {
             {
                 transform.Translate(new Vector3(0, cameraSpeed * Time.deltaTime, 0));
             }
+           TODO NEW CAM MOOVER */
+            if (Input.GetMouseButton(1))
+            {
+                lastMouse = Input.mousePosition - lastMouse;
+                lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
+                lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y,
+                    0);
+                transform.eulerAngles = lastMouse;
+                lastMouse = Input.mousePosition;
+                //Mouse  camera angle done.  
+
+                //Keyboard commands
+                float f = 0.0f;
+                Vector3 p = GetBaseInput();
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    totalRun += Time.deltaTime;
+                    p = p * totalRun * shiftAdd;
+                    p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
+                    p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
+                    p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
+                }
+                else if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    totalRun += Time.deltaTime;
+                    p = p * totalRun * 50f;
+                    p.x = Mathf.Clamp(p.x, -500, 500);
+                    p.y = Mathf.Clamp(p.y, -500, 500);
+                    p.z = Mathf.Clamp(p.z, -500, 500);
+                }
+                else
+                {
+                    totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+                    p = p * mainSpeed;
+                }
+
+                p = p * Time.deltaTime;
+                Vector3 newPosition = transform.position;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    //If player wants to move on X and Z axis only
+                    transform.Translate(p);
+                    newPosition.x = transform.position.x;
+                    newPosition.z = transform.position.z;
+                    transform.position = newPosition;
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    transform.Translate(Vector3.up * 20 * Time.deltaTime);
+                }
+                else if (Input.GetKey(KeyCode.E))
+                {
+                    transform.Translate(Vector3.down * 20 * Time.deltaTime);
+                }
+                else
+                {
+                    transform.Translate(p);
+                }
+            }
+
 
 
 
@@ -273,6 +342,29 @@ public class GameScreen : MonoBehaviour  {
                     }
                 }
             }
+        }
+        Vector3 GetBaseInput() { //returns the basic values, if it's 0 than it's not active.
+            Vector3 p_Velocity = new Vector3();
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                {
+                    p_Velocity += new Vector3(0, 0, 1);
+                }
+
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                {
+                    p_Velocity += new Vector3(0, 0, -1);
+                }
+
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    p_Velocity += new Vector3(-1, 0, 0);
+                }
+
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    p_Velocity += new Vector3(1, 0, 0);
+                }
+                return p_Velocity;
         }
 
 //        Vector3 vp = camera.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
