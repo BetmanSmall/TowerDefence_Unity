@@ -61,6 +61,7 @@ public class ChooseFileScript : MonoBehaviour
     }
     
     public void LoadTileSet() {
+        float objectSize = 80f;
         float interval = 0;
         GameObject goGameField = GameObject.Find("GameField");
         GameObject Container = GameObject.Find("Container");
@@ -70,23 +71,40 @@ public class ChooseFileScript : MonoBehaviour
             for (int i = 0; i < Container.transform.childCount; i++) {
                 Destroy(Container.gameObject.transform.GetChild(i).gameObject);
             }
-            
             GameField gameField = goGameField.GetComponent<GameField>();
+            Scrollbar scrollbar = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
+            scrollbar.value = 1;
+            RectTransform rectTransform = Container.gameObject.GetComponent<RectTransform>();
+            if (rectTransform != null) {
+                rectTransform.sizeDelta = new Vector2(138, (objectSize*3f) * gameField.map.tileSetsOrModelsSets[0].tileModels.Count);
+            }
+
+            float containerHalfHeight = ((objectSize * 3f) * gameField.map.tileSetsOrModelsSets[0].tileModels.Count) / 2f;
+            
             foreach (KeyValuePair<int,TileSetOrModelsSet> valuePair in gameField.map.tileSetsOrModelsSets) {
                 TileSetOrModelsSet tileSetOrModelsSet = valuePair.Value;
                 if (tileSetOrModelsSet != null) {
                     foreach (KeyValuePair<int, TileModel> keyValuePair in tileSetOrModelsSet.tileModels) {
                         TileModel tileModel = keyValuePair.Value;
-                        if (tileModel != null && tileModel.sprite != null) {
+                        if (tileModel != null && tileModel.sprite != null && tileModel.modelObject != null) {
                             GameObject newGameObject = (GameObject)Instantiate(tileModel.modelObject, Container.transform.position, Quaternion.identity);
                             // GameObject newGameObject = new GameObject(tileModel.id + "");
                             // SpriteRenderer spriteRenderer = newGameObject.AddComponent<SpriteRenderer>();
                             // spriteRenderer.sprite = tileModel.sprite;
                             newGameObject.transform.SetParent(Container.transform, true);
-                            newGameObject.transform.localScale = new Vector3(40, 40, 40);
+                            newGameObject.transform.localScale = new Vector3(objectSize/3, objectSize/3, objectSize/3);
                             newGameObject.transform.localRotation = new Quaternion(-1, 0, 0, Container.transform.rotation.w);
-                            newGameObject.transform.position = new Vector3(newGameObject.transform.position.x, newGameObject.transform.position.y - interval, newGameObject.transform.position.z);
-                            interval += 5;
+                            // newGameObject.transform.localPosition = new Vector3(newGameObject.transform.position.x, newGameObject.transform.position.y - interval, newGameObject.transform.position.z);
+                            newGameObject.transform.localPosition = new Vector3(0, interval+containerHalfHeight, 0);
+                            MeshRenderer meshRenderer = gameObject.GetComponentsInChildren<MeshRenderer>()[0];
+                            if (meshRenderer != null) {
+                                // interval -= meshRenderer.bounds.size.z * (objectSize*3f);
+                                interval -= objectSize*3f;
+                            }
+                        } else {
+                            Debug.Log("tileModel:" + tileModel);
+                            Debug.Log("tileModel.sprite:" + tileModel.sprite);
+                            Debug.Log("tileModel.modelObject:" + tileModel.modelObject);
                         }
                     }
                 }
