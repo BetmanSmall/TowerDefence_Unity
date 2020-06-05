@@ -57,7 +57,43 @@ public class ChooseFileScript : MonoBehaviour
     public void StartEditing()
     {
         GF.GetComponent<GameField>().MapLoad(mapsName[M_DropDown.value]);
+        LoadTileSet();
     }
+    
+    public void LoadTileSet() {
+        float interval = 0;
+        GameObject goGameField = GameObject.Find("GameField");
+        GameObject Container = GameObject.Find("Container");
+        if (goGameField != null) {
+            Debug.Log("Container.transform:" + Container.transform);
+            Debug.Log("Container.transform.childCount:" + Container.transform.childCount);
+            for (int i = 0; i < Container.transform.childCount; i++) {
+                Destroy(Container.gameObject.transform.GetChild(i).gameObject);
+            }
+            
+            GameField gameField = goGameField.GetComponent<GameField>();
+            foreach (KeyValuePair<int,TileSetOrModelsSet> valuePair in gameField.map.tileSetsOrModelsSets) {
+                TileSetOrModelsSet tileSetOrModelsSet = valuePair.Value;
+                if (tileSetOrModelsSet != null) {
+                    foreach (KeyValuePair<int, TileModel> keyValuePair in tileSetOrModelsSet.tileModels) {
+                        TileModel tileModel = keyValuePair.Value;
+                        if (tileModel != null && tileModel.sprite != null) {
+                            GameObject newGameObject = (GameObject)Instantiate(tileModel.modelObject, Container.transform.position, Quaternion.identity);
+                            // GameObject newGameObject = new GameObject(tileModel.id + "");
+                            // SpriteRenderer spriteRenderer = newGameObject.AddComponent<SpriteRenderer>();
+                            // spriteRenderer.sprite = tileModel.sprite;
+                            newGameObject.transform.SetParent(Container.transform, true);
+                            newGameObject.transform.localScale = new Vector3(40, 40, 40);
+                            newGameObject.transform.localRotation = new Quaternion(-1, 0, 0, Container.transform.rotation.w);
+                            newGameObject.transform.position = new Vector3(newGameObject.transform.position.x, newGameObject.transform.position.y - interval, newGameObject.transform.position.z);
+                            interval += 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     public void Back()
     {
         while (true)
