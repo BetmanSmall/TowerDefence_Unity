@@ -20,6 +20,8 @@ public class ChooseFileScript : MonoBehaviour
 
     [SerializeField]
     GameObject MapListsInUnity;
+    [SerializeField] 
+    private GameObject DropDownLayers;
 
     public void Start()
     {
@@ -38,6 +40,7 @@ public class ChooseFileScript : MonoBehaviour
     public void GetItemList()
     {
         M_DropDown.options.Clear();
+        DropDownLayers.GetComponent<Dropdown>().options.Clear();
         mapsLinkList = Directory.GetFiles(Directory.GetCurrentDirectory() + "/Assets/Resources/maps/", "*.tmx",
             SearchOption.AllDirectories);
         mapsName = new String[mapsLinkList.Length];
@@ -52,7 +55,7 @@ public class ChooseFileScript : MonoBehaviour
             M_DropDown.options.Add(new Dropdown.OptionData(mapsName[i]));
             FullPath.text = "Full Path: " + mapsLinkList[M_DropDown.value];
         }
-        
+
     }
     public void StartEditing()
     {
@@ -115,11 +118,15 @@ public class ChooseFileScript : MonoBehaviour
                             }
                         } else {
                             Debug.Log("tileModel:" + tileModel);
-                            Debug.Log("tileModel.sprite:" + tileModel.sprite);
+                            Debug.Log("tileModel.sprite:" + tileModel.sаШprite);
                             Debug.Log("tileModel.modelObject:" + tileModel.modelObject);
                         }
                     }
                 }
+            }
+            foreach (KeyValuePair<int, MapLayer> layer in GF.GetComponent<GameField>().map.mapLayers) {
+                Debug.Log("MapLoader::loadMap(); -- property.Key[" + layer.Key + "]:" + layer.Value + " ForEach");
+                DropDownLayers.GetComponent<Dropdown>().options.Add(new Dropdown.OptionData(layer.Value.name));
             }
         }
     }
