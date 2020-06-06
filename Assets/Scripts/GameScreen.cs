@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameScreen : MonoBehaviour  {
     // DrawCameraGrid  && WhichCell
@@ -31,6 +32,16 @@ public class GameScreen : MonoBehaviour  {
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun= 1.0f;
 
+    public float rayDistance;
+    [SerializeField]
+    Text nameTile;
+
+    [SerializeField] 
+    private GameObject previewTileModel;
+    
+    public LayerMask layerMaskTileModel;
+    
+
     void Start() {
 //        camera = GetComponent<Camera>();
         Debug.Log("GameScreen::Start(); -- Start!");
@@ -45,6 +56,8 @@ public class GameScreen : MonoBehaviour  {
             gameField = gameFieldObject.GetComponent<GameField>();
             Debug.Log("GameScreen::Start(); -- gameField:" + gameField);
         }
+
+        //layerMaskTileModel = LayerMask.GetMask("FloorTileModel");
     }
 
     void OnPostRender() {
@@ -147,6 +160,7 @@ public class GameScreen : MonoBehaviour  {
     }
 
     void Update() {
+        Ray ray;
         if (!isScroll)
         {
 //        Debug.Log("GameScreen::Update(); -- Start!");
@@ -155,7 +169,7 @@ public class GameScreen : MonoBehaviour  {
             {
                 Debug.Log("GameScreen::Update(); -- mouseScrollWheel:" + mouseScrollWheel + " transform.position.y:" +
                           transform.position.y);
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit point;
                 Physics.Raycast(ray, out point, 25);
                 Vector3 Scrolldirection = ray.GetPoint(5);
@@ -304,9 +318,10 @@ public class GameScreen : MonoBehaviour  {
 
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(0));
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //Debug.Log("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(0));
+                //RaycastHit hit;
+                //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                /*
                 if (Physics.Raycast(ray, out hit))
                 {
                     Debug.Log("GameScreen::Update(); -- hit.collider.gameObject:" + hit.collider.gameObject);
@@ -321,12 +336,13 @@ public class GameScreen : MonoBehaviour  {
                         gameField.towerActions(cell.gameX, cell.gameZ);
                     }
                 }
+                */
             }
 
             if (Input.GetMouseButtonUp(1))
             {
                 Debug.Log("GameScreen::Update(); -- Input.GetMouseButtonUp(1):" + Input.GetMouseButtonUp(1));
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -365,6 +381,58 @@ public class GameScreen : MonoBehaviour  {
                     p_Velocity += new Vector3(1, 0, 0);
                 }
                 return p_Velocity;
+        }
+
+        Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(transform.position, raycast.direction * rayDistance);
+        RaycastHit hitcast;
+        if (Input.GetMouseButtonUp(0))
+        {
+            string selectedTileModel = "";
+            if (Physics.Raycast(raycast, out hitcast))
+            {
+                Debug.Log(hitcast);
+                Debug.Log(hitcast.collider);
+                Debug.Log(hitcast.transform);
+                Debug.Log(hitcast.collider.gameObject);
+                Debug.Log("GameScreen::Update(); -- hitcast.transform.parent.name: " + hitcast.transform.parent.name);
+                nameTile.text = "Name: " + hitcast.transform.parent.name;
+                var o = hitcast.collider.gameObject;
+                selectedTileModel = hitcast.transform.parent.name;
+
+                var gameObject1 = o.transform.parent.gameObject;
+                var rotation = gameObject1.transform.rotation;
+                for (int i = 0; i < previewTileModel.transform.childCount; i++)
+                {
+                    Destroy(previewTileModel.transform.GetChild(0).gameObject);
+                }
+                GameObject go = Instantiate(gameObject1, previewTileModel.transform.position,
+                    Quaternion.Euler(rotation.x,rotation.y,rotation.z));
+                
+                go.GetComponent<Transform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+                go.transform.SetParent(previewTileModel.transform);
+                
+                
+
+            }
+            if (Physics.Raycast(raycast, out hitcast))
+            {
+                /*
+                Debug.Log("GameScreen::Update(); -- hit.collider.gameObject:" + hitcast.collider.gameObject);
+                Debug.Log("GameScreen::Update(); -- hit.transform.position:" + hitcast.transform.position);
+                Cell cell = hitcast.collider.gameObject.GetComponentInParent<Cell>();
+                Debug.Log("GameScreen::Update(); -- cell:" + cell);
+                if (cell != null)
+                {
+                    Debug.Log("GameScreen::Update(); -- cell:" + ((!cell.empty)
+                        ? ("[" + cell.gameX + ", " + cell.gameZ + "])")
+                        : ("cell.empty == true")));
+                    gameField.towerActions(cell.gameX, cell.gameZ);
+                }
+                */
+                
+
+            }
         }
 
 //        Vector3 vp = camera.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));

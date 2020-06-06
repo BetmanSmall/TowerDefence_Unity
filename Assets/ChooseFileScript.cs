@@ -88,6 +88,18 @@ public class ChooseFileScript : MonoBehaviour
                         TileModel tileModel = keyValuePair.Value;
                         if (tileModel != null && tileModel.sprite != null && tileModel.modelObject != null) {
                             GameObject newGameObject = (GameObject)Instantiate(tileModel.modelObject, Container.transform.position, Quaternion.identity);
+                            //if (!newGameObject.GetComponent<MeshCollider>())
+                            //{
+                            //    newGameObject.AddComponent<MeshCollider>();
+                            //}
+                            if (newGameObject.transform.GetChild(0) != null)
+                            {
+                                newGameObject.transform.GetChild(0).gameObject.AddComponent<MeshCollider>();
+                            }
+
+                            newGameObject.layer = 8;
+                            newGameObject.transform.GetChild(0).gameObject.layer = 8;
+
                             // GameObject newGameObject = new GameObject(tileModel.id + "");
                             // SpriteRenderer spriteRenderer = newGameObject.AddComponent<SpriteRenderer>();
                             // spriteRenderer.sprite = tileModel.sprite;
@@ -114,18 +126,14 @@ public class ChooseFileScript : MonoBehaviour
     
     public void Back()
     {
-        while (true)
+        for (int b = 0; b < 1000; b++)
         {
             for (int i = 0; i <= GF.transform.childCount; i++)
             {
-                GF.gameObject.transform.GetChild(i).SetParent(MapListsInUnity.transform);
-            }
-
-            if (Time.time > 10)
-            {
-                break;
+                Destroy(GF.gameObject.transform.GetChild(i));
             }
         }
+        
     }
 
     void DropdownValueChanged(Dropdown change)
