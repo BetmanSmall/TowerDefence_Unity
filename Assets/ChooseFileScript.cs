@@ -118,7 +118,7 @@ public class ChooseFileScript : MonoBehaviour
                             }
                         } else {
                             Debug.Log("tileModel:" + tileModel);
-                            Debug.Log("tileModel.sprite:" + tileModel.sаШprite);
+                            Debug.Log("tileModel.sprite:" + tileModel.sprite);
                             Debug.Log("tileModel.modelObject:" + tileModel.modelObject);
                         }
                     }
