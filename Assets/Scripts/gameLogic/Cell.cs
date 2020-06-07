@@ -11,7 +11,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
     public List<Creep> creeps;
     public int gameX, layerY, gameZ;
     public Vector3 graphicCoordinates;
-    // TileModel tileModel;
+    // public TileModel tileModel;
     // GameObject gameObjectModel;
     public int numberByWaveAlgorithm;
     
@@ -40,9 +40,9 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         // setDebugLineRender();
     }
 
-    public Cell(int gameX, int layerY, int gameZ, Vector3 graphicCoordinates) {
+    public Cell(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
         // Debug.Log("Cell::Cell(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
-        setBasicValues(gameX, layerY, gameZ, graphicCoordinates);
+        setBasicValues(gameX, layerY, gameZ, /*tileModel,*/ graphicCoordinates);
 //        this.gameObjectModel = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
 //        MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> ();
 //        foreach (Material material in meshRenderer.materials) {
@@ -55,6 +55,7 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         // setDebugLineRender();
     }
 
+
     public void setBasicValues(int gameX, int layerY, int gameZ, /*TileModel tileModel,*/ Vector3 graphicCoordinates) {
         // Debug.Log("Cell::setBasicValues(); -- gameX:" + gameX + " layerY:" + layerY + " gameZ:" + gameZ + " graphicCoordinates:" + graphicCoordinates);
         this.gameX = gameX;
@@ -63,7 +64,6 @@ public class Cell : MonoBehaviour { // пиздеЦЦЦ!!!
         // this.tileModel = tileModel;
         this.graphicCoordinates = graphicCoordinates;
     }
-
     // public void setDebugLineRender(LineRenderer lineRenderer) {
     //     // this.gameObject.AddComponent<LineRenderer>();
     //     // lineRenderer = gameObject.GetComponentInParent<LineRenderer>();

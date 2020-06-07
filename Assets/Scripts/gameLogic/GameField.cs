@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = UnityEngine.Object;
 
 public class GameField : MonoBehaviour {
-
     public GameObject Creeps;
-    public GameObject gamefield;
 
     public NavMeshSurface surface;
     public WaveManager waveManager; // ALL public for all || we are friendly :)
@@ -16,8 +15,10 @@ public class GameField : MonoBehaviour {
     public string mapPath = "maps/arena0";
     public Map map;
     public int sizeFieldX, sizeFieldZ;
-    public float sizeCellX=3f, sizeCellY=0.3f, sizeCellZ=3f; // need change, load from map
+    public float sizeCellX = 3f, sizeCellY = 0.3f, sizeCellZ = 3f; // need change, load from map
+
     public Cell[,] field;
+
     // GAME INTERFACE ZONE1
     // public WhichCell whichCell;
     public bool gamePaused;
@@ -31,18 +32,16 @@ public class GameField : MonoBehaviour {
     // GAME INTERFACE ZONE2
     // LineRenderer lineRenderer;
     // Use this for initialization
-    
-    void Start() {
 
+    void Start() {
         Debug.Log("GameField::Start(); -- Start!");
         waveManager = new WaveManager();
         creepsManager = new CreepsManager();
         towersManager = new TowersManager();
         factionsManager = new FactionsManager(1f);
         factionsManager.loadFactions();
-        gamefield = GameObject.Find("GameField");
         Creeps = new GameObject("Creeps");
-        Creeps.transform.position = new Vector3(0,10,0);
+        Creeps.transform.position = new Vector3(0, 10, 0);
         GameObject NavMesh = new GameObject("NavMesh");
         NavMesh.AddComponent<NavMeshSurface>();
         surface = GameObject.Find("NavMesh").GetComponent<NavMeshSurface>();
@@ -56,53 +55,60 @@ public class GameField : MonoBehaviour {
             mapPath = "maps/" + mapName;
         }
         map = new MapLoader().loadMap(mapPath);
-        sizeFieldX = int.Parse(map.properties ["width"]);
-        sizeFieldZ = int.Parse(map.properties ["height"]);
+        sizeFieldX = int.Parse(map.properties["width"]);
+        sizeFieldZ = int.Parse(map.properties["height"]);
         // lineRenderer = gameObject.AddComponent<LineRenderer>();
         createField(sizeFieldX, sizeFieldZ, map.mapLayers);
     }
 
     private void createField(int sizeFieldX, int sizeFieldZ, Dictionary<int, MapLayer> mapLayers) {
-    Debug.Log("GameField::createField(" + sizeFieldX + ", " + sizeFieldZ + ", " + mapLayers + "); -- field:" + field);
+        Debug.Log("GameField::createField(" + sizeFieldX + ", " + sizeFieldZ + ", " + mapLayers + "); -- field:" + field);
         if (field == null) {
             field = new Cell[sizeFieldX, sizeFieldZ];
             //foreach (MapLayer mapLayer in mapLayers.Values) {
             for (int layerY = 0; layerY < mapLayers.Count; layerY++) {
-                MapLayer mapLayer = mapLayers [layerY];
+                MapLayer mapLayer = mapLayers[layerY];
                 Debug.Log("GameField::Start(); -- mapLayer.opacity:" + mapLayer.opacity);
                 for (int z = 0; z < sizeFieldZ; z++) {
                     for (int x = 0; x < sizeFieldX; x++) {
                         TileModel tileModel = mapLayer.tileModels[x, z];
                         if (tileModel != null) {
-                            Vector3 graphicCoordinates = new Vector3 (x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
-                            GameObject newCellGameObject = (GameObject)Instantiate(tileModel.modelObject, graphicCoordinates, Quaternion.identity, this.transform);
-                            //Cell cell = new Cell (x, layerY, z, tileModel, graphicCoordinates);
-                            Cell cell = newCellGameObject.AddComponent<Cell>();
-                            cell.setBasicValues(x, layerY, z, /*tileModel,*/ graphicCoordinates);
-                            // cell.setDebugLineRender(lineRenderer);
-                            if(tileModel.properties.ContainsKey("terrain")) {
-                                cell.setTerrain();
-                            }
-                            field[x, z] = cell;
-    //                         MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer> (); // Дикие не понятки со всем этим!
-    //                         if (mapLayer.opacity == 0f) {
-    //                             meshRenderer.enabled = false;
-    //                         } else {
-    //                             foreach (Material material in meshRenderer.materials) {
-    // //                            Debug.Log("GameField::Start(); -- material:" + material);
-    //                                 Color color = material.color;
-    //                                 /// Прозрачность
-    //                                 color.a = mapLayer.opacity; // It is not WOKR!=(
-    //                                 material.color = color;
-    // //                            Debug.Log("GameField::Start(); -- material.color:" + material.color);
-    //                             }
-    //                         }
-                            // gameObject.transform.SetParent (this.transform);
+                            Vector3 graphicCoordinates = new Vector3(x * sizeCellX + sizeCellX, layerY * sizeCellY, z * sizeCellZ + sizeCellZ); // все тут нужно понять
+                            createTileGameObjectCell(tileModel.modelObject, graphicCoordinates, x, layerY, z);
                         }
                     }
                 }
             }
         }
+    }
+
+    public GameObject createTileGameObjectCell(Object modelObject, Vector3 graphicCoordinates, int x, int layerY, int z) {
+        GameObject newCellGameObject = (GameObject) Instantiate(modelObject, graphicCoordinates, Quaternion.identity, transform);
+        if (newCellGameObject.transform.GetChild(0) != null) {
+            newCellGameObject.transform.GetChild(0).gameObject.AddComponent<MeshCollider>();
+        }
+        Cell cell = newCellGameObject.AddComponent<Cell>();
+        cell.setBasicValues(x, layerY, z, /*tileModel,*/ graphicCoordinates);
+        // cell.setDebugLineRender(lineRenderer);
+        // if (tileModel.properties.ContainsKey("terrain")) {
+        //     cell.setTerrain();
+        // }
+        field[x, z] = cell;
+        // MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>(); // Дикие не понятки со всем этим!
+        // if (mapLayer.opacity == 0f) {
+        //     meshRenderer.enabled = false;
+        // } else {
+        //     foreach (Material material in meshRenderer.materials) {
+        //         Debug.Log("GameField::Start(); -- material:" + material);
+        //         Color color = material.color;
+        //         /// Прозрачность
+        //         color.a = mapLayer.opacity; // It is not WOKR!=(
+        //         material.color = color;
+        //         Debug.Log("GameField::Start(); -- material.color:" + material.color);
+        //     }
+        // }
+        // gameObject.transform.SetParent(this.transform);
+        return newCellGameObject;
     }
 
     // Update is called once per frame
@@ -133,6 +139,7 @@ public class GameField : MonoBehaviour {
         waveManager.setExitPoint(new Vector2Int(x, y));
         // rerouteForAllCreeps(new Vector2Int(x, y));
     }
+
     // ___!1!___ Creeps Section ____!!!___
     public void spawnCreepFromUser(TemplateForUnit templateForUnit) {
         Debug.Log("GameField::spawnCreepFromUser(); -- templateForUnit:" + templateForUnit);
@@ -174,7 +181,8 @@ public class GameField : MonoBehaviour {
             // exitPoint = waveManager.lastExitPoint;
             exitPoint = spawnPoint; // need change in future! TODO
         }
-        if (spawnPoint != Vector2Int.zero && exitPoint != Vector2Int.zero) { // && pathFinder != null) {
+        if (spawnPoint != Vector2Int.zero && exitPoint != Vector2Int.zero) {
+            // && pathFinder != null) {
 //            pathFinder.loadCharMatrix(getCharMatrix());
             // List<Vector2Int> route = pathFinder.route(spawnPoint.x, spawnPoint.y, exitPoint.x, exitPoint.y);
             List<Vector2Int> route = new List<Vector2Int>();
@@ -184,20 +192,20 @@ public class GameField : MonoBehaviour {
             if (route != null) {
                 Vector3 pos = field[spawnPoint.x, spawnPoint.y].graphicCoordinates;
                 Debug.Log("GameField::createCreep(); -- templateForUnit.modelObject:" + templateForUnit.modelGameObject + " templateForUnit:" + templateForUnit.toString());
-                GameObject gameObject = (GameObject)Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, Creeps.transform);
+                GameObject gameObject = (GameObject) Instantiate(templateForUnit.modelGameObject, pos, Quaternion.identity, Creeps.transform);
                 gameObject.name = templateForUnit.toString(); // mb comment!
-             NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
+                NavMeshAgent agent = gameObject.AddComponent<NavMeshAgent>();
                 Creep creep = gameObject.AddComponent<Creep>();
                 creepsManager.addCreep(creep, agent, route, templateForUnit, player);
                 // Creep creep = creepsManager.createCreep(route, templateForUnit, player);
                 field[spawnPoint.x, spawnPoint.y].setCreep(creep); // TODO field maybe out array | NO, we have WaveManager.validationPoints()
-                pos.Set(pos.x-1.5f, pos.y+0.5f, pos.z-1.5f);
-                creep.setGameObjectAndAnimation(gameObject);   
+                pos.Set(pos.x - 1.5f, pos.y + 0.5f, pos.z - 1.5f);
+                creep.setGameObjectAndAnimation(gameObject);
                 //agent.SetDestination(new Vector3(96,0,96));
                 Debug.Log("GameField::createCreep(); -- Instantiate gameObject:" + gameObject + " 4_ThisCrep:" + creep);
             } else {
                 Debug.Log("GameField::createCreep(); -- Not found route for createCreep!");
-                if(towersManager.amountTowers() > 0) {
+                if (towersManager.amountTowers() > 0) {
                     Debug.Log("GameField::createCreep(); -- Remove one last tower! And retry call createCreep()");
                     removeLastTower();
                     createCreep(spawnPoint, templateForUnit, exitPoint, player);
@@ -245,8 +253,8 @@ public class GameField : MonoBehaviour {
                 if (towerSize % 2 == 0) {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
-                    finishX = (towerSize / 2)-1;
-                    finishZ = (towerSize / 2)-1;
+                    finishX = (towerSize / 2) - 1;
+                    finishZ = (towerSize / 2) - 1;
                 } else {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
@@ -266,38 +274,38 @@ public class GameField : MonoBehaviour {
 //                    finishZ = (towerSize / 2);
 //                }
             }
-        // Debug.Log("GameField::createTower(); -- test1");
+            // Debug.Log("GameField::createTower(); -- test1");
             for (int tmpX = startX; tmpX <= finishX; tmpX++)
-                for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++)
-                    if (!cellIsEmpty(buildX + tmpX, buildZ + tmpZ))
-                        return false;
+            for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++)
+                if (!cellIsEmpty(buildX + tmpX, buildZ + tmpZ))
+                    return false;
 
-        // Debug.Log("GameField::createTower(); -- test2");
+            // Debug.Log("GameField::createTower(); -- test2");
             // GOVNO CODE
             Vector2Int position = new Vector2Int(buildX, buildZ);
             Tower tower = towersManager.createTower(position, templateForTower, player);
-        // Debug.Log("GameField::createTower(); -- test3 tower:" + tower);
+            // Debug.Log("GameField::createTower(); -- test3 tower:" + tower);
             // Debug.Log("GameField::createTower()", "-- templateForTower.towerAttackType:" + templateForTower.towerAttackType);
             // if (templateForTower.towerAttackType != TowerAttackType.Pit) {
-                for (int tmpX = startX; tmpX <= finishX; tmpX++) {
-                    for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++) {
-                        Cell cell = field[buildX + tmpX, buildZ + tmpZ];
-                        cell.setTower(tower);
-                        Vector3 pos = field[buildX + tmpX, buildZ + tmpZ].graphicCoordinates;
-                        pos.Set(pos.x-1.5f, pos.y, pos.z-1.5f);
-                        // Vector3 scal = gameObject.transform.localScale;
-                        // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
-                        GameObject gameObject = (GameObject)Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, cell.transform);
-                        gameObject.transform.localScale = new Vector3(3.0f,3.0f,3.0f);
-                        // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
-                        tower.gameObject = gameObject;
-                        // surface.BuildNavMesh();
-                        foreach(var agents in  Creeps.GetComponentsInChildren<NavMeshAgent>()) {
-                            agents.SetDestination(new Vector3(96,0,96));
-                        }
-                        Debug.Log("GameField::createTower(); -- Instantiate gameObject:" + gameObject);
+            for (int tmpX = startX; tmpX <= finishX; tmpX++) {
+                for (int tmpZ = startZ; tmpZ <= finishZ; tmpZ++) {
+                    Cell cell = field[buildX + tmpX, buildZ + tmpZ];
+                    cell.setTower(tower);
+                    Vector3 pos = field[buildX + tmpX, buildZ + tmpZ].graphicCoordinates;
+                    pos.Set(pos.x - 1.5f, pos.y, pos.z - 1.5f);
+                    // Vector3 scal = gameObject.transform.localScale;
+                    // gameObject.transform.localScale.Set(scal.x*2f, scal.y*2f, scal.z*2f);
+                    GameObject gameObject = (GameObject) Instantiate(tower.getTemplateForTower().modelObject, pos, Quaternion.identity, cell.transform);
+                    gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+                    // pathFinder.nodeMatrix[buildZ + tmpZ][buildX + tmpX].setKey('T');
+                    tower.gameObject = gameObject;
+                    // surface.BuildNavMesh();
+                    foreach (var agents in Creeps.GetComponentsInChildren<NavMeshAgent>()) {
+                        agents.SetDestination(new Vector3(96, 0, 96));
                     }
+                    Debug.Log("GameField::createTower(); -- Instantiate gameObject:" + gameObject);
                 }
+            }
             // }
             // GOVNO CODE
 
@@ -312,9 +320,9 @@ public class GameField : MonoBehaviour {
 
     public void removeLastTower() {
 //        if(towersManager.amountTowers() > 0) {
-            Tower tower = towersManager.getTower(towersManager.amountTowers() - 1);
-            Vector2Int pos = tower.getPosition();
-            removeTower(pos.x, pos.y); // ?? SUKA UNITY WHY!?!??!  ||1||
+        Tower tower = towersManager.getTower(towersManager.amountTowers() - 1);
+        Vector2Int pos = tower.getPosition();
+        removeTower(pos.x, pos.y); // ?? SUKA UNITY WHY!?!??!  ||1||
 //        }
     }
 
@@ -329,8 +337,8 @@ public class GameField : MonoBehaviour {
                 if (towerSize % 2 == 0) {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
-                    finishX = (towerSize / 2)-1;
-                    finishZ = (towerSize / 2)-1;
+                    finishX = (towerSize / 2) - 1;
+                    finishZ = (towerSize / 2) - 1;
                 } else {
                     startX = -(towerSize / 2);
                     startZ = -(towerSize / 2);
@@ -349,7 +357,7 @@ public class GameField : MonoBehaviour {
             }
             towersManager.removeTower(tower);
             // rerouteForAllCreeps();
-            gamerGold += tower.getTemplateForTower().cost;//*0.5;
+            gamerGold += tower.getTemplateForTower().cost; //*0.5;
         }
     }
     // ___!2!___ Towers Section ____!!!___
@@ -357,7 +365,7 @@ public class GameField : MonoBehaviour {
     private void rerouteForAllCreeps() {
         Debug.Log("GameField::rerouteForAllCreeps(); -- ");
         // if (surface != null) {
-            surface.BuildNavMesh();
+        surface.BuildNavMesh();
         // }
     }
 

@@ -18,4 +18,26 @@ public class Map {
 //        tileSetsOrModelsSets = new ArrayList();
         mapLayers = new Dictionary<int, MapLayer>();
     }
+
+    public TileModel getTileModel(int id) {
+        foreach (TileSetOrModelsSet tileSetOrModelsSet in tileSetsOrModelsSets.Values) {
+            foreach (TileModel tileModel in tileSetOrModelsSet.tileModels.Values) {
+                if (tileModel.id.Equals(id)) {
+                    return tileModel;
+                }
+            }
+        }
+        return null;
+    }
+
+    public TileModel getTileModel(string tileName) {
+        foreach (TileSetOrModelsSet tileSetOrModelsSet in tileSetsOrModelsSets.Values) {
+            foreach (TileModel tileModel in tileSetOrModelsSet.tileModels.Values) {
+                if (tileModel.modelObject.name.Equals(tileName)) {
+                    return tileModel;
+                }
+            }
+        }
+        return null;
+    }
 }
