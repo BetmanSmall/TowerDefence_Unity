@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using System.Xml;
 using UnityEditor;
+using Object = UnityEngine.Object;
 
 /**
  * Created by betmansmall on 09.02.2016.
@@ -95,7 +98,8 @@ public class TemplateForUnit {
                             } else if (key.Equals("name")) {
                                 this.name = value;
                             } else if (key.Equals("speed")) {
-                                this.speed = float.Parse(value);
+                                // double single = Convert.ToDouble(value);
+                                this.speed = float.Parse(value, CultureInfo.InvariantCulture);
                             } else if (key.Equals("healthPoints")) {
                                 this.healthPoints = int.Parse(value);
                             } else if (key.Equals("cost")) {
@@ -126,7 +130,7 @@ public class TemplateForUnit {
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -1- mainAnimation.GetClipCount():" + ( (mainAnimation!=null)?(mainAnimation.GetClipCount()):0 ) );
 
                         modelGameObject = Resources.Load(modelSource) as GameObject; // or GameObject?
-                        modelGameObject.AddComponent<Animation>();
+                        // modelGameObject.AddComponent<Animation>();
                         Animation animationClip = modelGameObject.GetComponent<Animation>();                                     
                         string modelSourceFBX = modelSource.Replace("_Prefab","");
                         Debug.Log("TemplateForUnit::TemplateForUnit(); -- modelObject:" + modelGameObject);

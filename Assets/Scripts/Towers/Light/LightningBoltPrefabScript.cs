@@ -272,31 +272,31 @@ namespace DigitalRuby.ThunderAndLightning
         [Tooltip("X, Y and Z for variance from the end point. Use positive values.")]
         public Vector3 EndVariance;
 
-#if UNITY_EDITOR
-
-        protected override void OnDrawGizmos()
-        {
-            base.OnDrawGizmos();
-
-            if (Source != null)
-            {
-                Gizmos.DrawIcon(Source.transform.position, "LightningPathStart.png");
-            }
-            if (Destination != null)
-            {
-                Gizmos.DrawIcon(Destination.transform.position, "LightningPathNext.png");
-            }
-            if (Source != null && Destination != null)
-            {
-                Gizmos.DrawLine(Source.transform.position, Destination.transform.position);
-                Vector3 direction = (Destination.transform.position - Source.transform.position);
-                Vector3 center = (Source.transform.position + Destination.transform.position) * 0.5f;
-                float arrowSize = Mathf.Min(2.0f, direction.magnitude);
-                UnityEditor.Handles.ArrowCap(0, center, Quaternion.LookRotation(direction), arrowSize);
-            }
-        }
-
-#endif
+// #if UNITY_EDITOR
+//
+//         protected override void OnDrawGizmos()
+//         {
+//             base.OnDrawGizmos();
+//
+//             if (Source != null)
+//             {
+//                 Gizmos.DrawIcon(Source.transform.position, "LightningPathStart.png");
+//             }
+//             if (Destination != null)
+//             {
+//                 Gizmos.DrawIcon(Destination.transform.position, "LightningPathNext.png");
+//             }
+//             if (Source != null && Destination != null)
+//             {
+//                 Gizmos.DrawLine(Source.transform.position, Destination.transform.position);
+//                 Vector3 direction = (Destination.transform.position - Source.transform.position);
+//                 Vector3 center = (Source.transform.position + Destination.transform.position) * 0.5f;
+//                 float arrowSize = Mathf.Min(2.0f, direction.magnitude);
+//                 // UnityEditor.Handles.ArrowCap(0, center, Quaternion.LookRotation(direction), arrowSize);
+//             }
+//         }
+//
+// #endif
 
         public override void CreateLightningBolt(LightningBoltParameters parameters)
         {
