@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using System.IO;
+using System.Threading;
 using System.Xml;
 
 public class FactionsManager {
@@ -11,6 +13,7 @@ public class FactionsManager {
     public FactionsManager(float levelOfDifficulty) {
         this.factions = new List<Faction>();
         this.levelOfDifficulty = levelOfDifficulty;
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
     }
 
     public void addUnitToFaction(TemplateForUnit unit) {
